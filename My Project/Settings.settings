@@ -1,0 +1,39 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="pathTo33" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo32" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo36" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo14" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo13" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo12" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo11" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo21" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo31" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="pathTo34" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\GENIE2K\CONFILES</Value>
+    </Setting>
+    <Setting Name="currentVersion" Type="System.String" Scope="User">
+      <Value Profile="(Default)">656</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
