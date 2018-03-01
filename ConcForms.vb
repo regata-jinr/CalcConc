@@ -2,6 +2,7 @@
 Imports ClosedXML.Excel
 Imports System.ComponentModel
 Imports File = System.IO.File
+Imports System.Globalization
 Module ConcForms
     Sub ElementsSort()
         Try
@@ -267,6 +268,7 @@ Module ConcForms
 
             Dim conc, err, lim As Decimal
             Dim rown As Integer
+            Dim decimalSeparator As String = Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
             For Each key As String In Form_Main.conDict.Keys
 
                 nucl = Split(key, "_")(3)
@@ -285,9 +287,16 @@ Module ConcForms
                 Debug.WriteLine(key & " parse into " & "|" & conFileName & "|" & elemName & "|" & nucl & "_" & type)
                 rown = Form_Main.rowMap(elemName)
                 Try
-                    conc = Double.Parse(Form_Main.conDict(key)(1).ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
-                    err = Math.Ceiling(Double.Parse(Form_Main.conDict(key)(2).ToString.Replace(".", ","), System.Globalization.NumberStyles.Any))
-                    lim = Double.Parse(Form_Main.conDict(key)(3).ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
+                    If decimalSeparator = "." Then
+                        conc = Double.Parse(Form_Main.conDict(key)(1).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo)
+                        err = Math.Ceiling(Double.Parse(Form_Main.conDict(key)(2).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo))
+                        lim = Double.Parse(Form_Main.conDict(key)(3).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo)
+                    Else
+                        conc = Double.Parse(Form_Main.conDict(key)(1).ToString, CultureInfo.CurrentCulture)
+                        err = Math.Ceiling(Double.Parse(Form_Main.conDict(key)(2).ToString, CultureInfo.CurrentCulture))
+                        lim = Double.Parse(Form_Main.conDict(key)(3).ToString, CultureInfo.CurrentCulture)
+                    End If
+
                     Debug.WriteLine("conc err lim: " & "|" & conc & "|" & err & "|" & lim)
                 Catch ex As OverflowException
                     MsgBox("Perhaps NaN in file: " & conFileName)

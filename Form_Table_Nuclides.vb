@@ -124,7 +124,7 @@ Public Class Form_Table_Nuclides
 
     Public Sub ButRestoreDefaults_Click(sender As Object, e As EventArgs) Handles ButRestoreDefaults.Click
 
-        File.Delete("C:\WORKPROG\saved_table_nuclides.txt")
+        File.Delete("C:\\WORKPROG\\saved_table_nuclides.txt")
         Form_Main.NuclidFromTableFill()
         Form_Table_Nuclides_Load(sender, e)
 

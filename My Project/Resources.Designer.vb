@@ -105,7 +105,12 @@ Namespace My.Resources
         '''MO-99_LLI-1
         '''MO-101_-
         '''RU-97_-
-        '''RU-103_LLI-2        ''' [rest of string was truncated]&quot;;.
+        '''RU-103_LLI-2
+        '''RH-104m_-
+        '''PD-109m_-
+        '''AG-108_-
+        '''AG-110m_LLI-2
+        '''C [rest of string was truncated]&quot;;.
         '''</summary>
         Public ReadOnly Property table_nuclides_def() As String
             Get

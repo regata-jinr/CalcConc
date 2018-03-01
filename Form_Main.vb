@@ -507,7 +507,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         values.Add(Split(line, vbTab)(0))
                         values.Add(Split(line, vbTab)(1))
                         For coln As Integer = 2 To Split(line, vbTab).Count - 1
-                            values.Add(Double.Parse(Split(line, vbTab)(coln).Replace(".", ",")))
+                            values.Add(Double.Parse(Split(line, vbTab)(coln), CultureInfo.InvariantCulture))
                         Next
 
                         If Split(line, "_").Count = 7 Then
@@ -929,9 +929,11 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             ' Debug.WriteLine(line)
                             nuclid = elem.Match(line).Value
                             relInd = Convert.ToDouble(req.Match(line).Value, CultureInfo.InvariantCulture)
+                            'relInd = Double.Parse(req.Match(line).Value, System.Globalization.NumberStyles.Any)
                             meanAct = Convert.ToDouble(act.Match(line).Value, CultureInfo.InvariantCulture)
-
+                            'meanAct = Double.Parse(act.Match(line).Value.ToString, System.Globalization.NumberStyles.Any)
                             std = 100 * Convert.ToDouble(act.Matches(line).Item(1).Value, CultureInfo.InvariantCulture) / Convert.ToDouble(act.Match(line).Value, CultureInfo.InvariantCulture)
+                            'std = 100 * Double.Parse(act.Matches(line).Item(1).Value.ToString, System.Globalization.NumberStyles.Any) / meanAct
                             nuclNum = Convert.ToInt16(num.Match(line).Value)
                             Try
                                 rptTablePeaks.Rows.Add(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid, NameSamp, nuclid, relInd, meanAct, std, nuclNum)
@@ -950,10 +952,15 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             nuclid = elem.Match(line.Substring(0, 7)).Value
                             'Debug.WriteLine("1  " & nuclid)
                             energy = Convert.ToDouble(enrg_otpt.Matches(line).Item(0).Value, CultureInfo.InvariantCulture)
+                            ' energy = Double.Parse(enrg_otpt.Matches(line).Item(0).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             output = Convert.ToDouble(enrg_otpt.Matches(line).Item(1).Value, CultureInfo.InvariantCulture)
+                            ' output = Double.Parse(enrg_otpt.Matches(line).Item(1).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             MdaLine = Convert.ToDouble(mdln_act.Matches(line).Item(0).Value, CultureInfo.InvariantCulture)
+                            ' MdaLine = Double.Parse(mdln_act.Matches(line).Item(0).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             MdaNucl = Convert.ToDouble(mdncl.Match(line, 42).Value, CultureInfo.InvariantCulture)
+                            ' MdaNucl = Double.Parse(mdncl.Match(line, 42).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             Activity = Convert.ToDouble(mdln_act.Matches(line).Item(1).Value, CultureInfo.InvariantCulture)
+                            ' Activity = Double.Parse(mdln_act.Matches(line).Item(1).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             ' Debug.WriteLine(nuclid & "__" & energy & "__" & output & "__" & MdaLine & "__" & MdaNucl & "__" & Activity)
                             Try
                                 rptTableMda.Rows.Add(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid, NameSamp, nuclid, energy, output, MdaLine, MdaNucl, Activity)
@@ -979,7 +986,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         If lineref.Length <> 1 Then
                             nuclid = lineref.Substring(0, 3).Trim
                             PasConc = Convert.ToDouble(ppm.Match(lineref).Value, CultureInfo.InvariantCulture)
+                            ' PasConc = Double.Parse(ppm.Match(lineref).Value, System.Globalization.NumberStyles.Any)
                             PassErr = Convert.ToDouble(err.Match(lineref).Value, CultureInfo.InvariantCulture)
+                            'PassErr = Double.Parse(err.Match(lineref).Value, System.Globalization.NumberStyles.Any)
                             Try
                                 refTable.Rows.Add(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid, NameSamp, nuclid, PasConc, PassErr)
                                 'Debug.WriteLine(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid & "_" & NameSamp & "_" & nuclid & "_" & PasConc & "_" & PassErr)
@@ -1895,7 +1904,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                     Try
                         conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & elemName & "_" & type & "_" & values(0), values)
                         Debug.WriteLine("DataFromCON " & elemName & "_" & type & "_" & values(0) & "_" & values(1) & "_" & values(2) & "_" & values(3))
-                        conc = Double.Parse(values(1).Replace(".", ","), System.Globalization.NumberStyles.Any)
+                        conc = Double.Parse(values(1), CultureInfo.InvariantCulture)
                         If type = "LLI-1" Then
                             If values(0) = "NA-24" Then yNA24LLI1.Add(elemName, conc)
                             If values(0) = "SB-122" Then xSB122LLI1.Add(elemName, conc)
@@ -2315,32 +2324,41 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Try
             NuclidFromTable.Clear()
             Debug.WriteLine("Nuclids table parsing:")
-            If File.Exists("C:\WORKPROG\saved_table_nuclides.txt") And File.ReadAllText("C:\WORKPROG\saved_table_nuclides.txt").Length <> 0 Then
-                For Each line As String In File.ReadLines("C:\WORKPROG\saved_table_nuclides.txt", System.Text.Encoding.UTF8)
-                    '  NuclidFromTable.Add(Split(line, "_")(0) & "_" & TypeEngRu(Split(line, "_")(1)))
-                    Debug.WriteLine(Split(line, "_")(0) & "_" & Split(line, "_")(1))
-                    NuclidFromTable.Add(Split(line, "_")(0) & "_" & Split(line, "_")(1))
-                Next
+            If File.Exists("C:\\WORKPROG\\saved_table_nuclides.txt") Then
+                If File.ReadAllText("C:\WORKPROG\saved_table_nuclides.txt").Length <> 0 Then
+                    For Each line As String In File.ReadLines("C:\WORKPROG\saved_table_nuclides.txt", System.Text.Encoding.UTF8)
+                        '  NuclidFromTable.Add(Split(line, "_")(0) & "_" & TypeEngRu(Split(line, "_")(1)))
+                        Debug.WriteLine(Split(line, "_")(0) & "_" & Split(line, "_")(1))
+                        NuclidFromTable.Add(Split(line, "_")(0) & "_" & Split(line, "_")(1))
+                    Next
+                Else
+
+                    My.Computer.FileSystem.WriteAllText("C:\\WORKPROG\\saved_table_nuclides.txt", "", False)
+                    'fixme: добавляет конец строки в начале каждого элемента lines кроме первого решил через костыль if-else
+                    For Each line As String In My.Resources.table_nuclides_def.Split(CChar(Environment.NewLine))
+
+                        If line <> My.Resources.table_nuclides_def.Split(CChar(Environment.NewLine))(0) Then
+                            line = line.Substring(1)
+                        End If
+                        ' NuclidFromTable.Add(Split(line, "_")(0) & "_" & TypeEngRu(Split(line, "_")(1)))
+                        NuclidFromTable.Add(Split(line, "_")(0) & "_" & Split(line, "_")(1))
+                    Next
+                End If
             Else
-
-                My.Computer.FileSystem.WriteAllText("C:\WORKPROG\saved_table_nuclides.txt", "", False)
-                'fixme: добавляет конец строки в начале каждого элемента lines кроме первого решил через костыль if-else
-                For Each line As String In My.Resources.table_nuclides_def.Split(CChar(Environment.NewLine))
-
-                    If line <> My.Resources.table_nuclides_def.Split(CChar(Environment.NewLine))(0) Then
-                        line = line.Substring(1)
-                    End If
-                    ' NuclidFromTable.Add(Split(line, "_")(0) & "_" & TypeEngRu(Split(line, "_")(1)))
-                    NuclidFromTable.Add(Split(line, "_")(0) & "_" & Split(line, "_")(1))
-                Next
-
-                My.Computer.FileSystem.WriteAllText("C:\WORKPROG\saved_table_nuclides.txt", My.Resources.table_nuclides_def, True)
-
+                Debug.WriteLine("New file was created;")
+                My.Computer.FileSystem.WriteAllText("C:\\WORKPROG\\saved_table_nuclides.txt", My.Resources.table_nuclides_def, False)
+                NuclidFromTableFill()
             End If
+        Catch fnf As FileNotFoundException
+            Debug.WriteLine(fnf.ToString)
+            '  File.CreateText("C:\\WORKPROG\\saved_table_nuclides.txt")
+
+            '  My.Computer.FileSystem.WriteAllText("C:\\WORKPROG\\saved_table_nuclides.txt", "", False)
+            ' NuclidFromTableFill()
         Catch ex As Exception
-            My.Computer.FileSystem.WriteAllText("C:\WORKPROG\saved_table_nuclides.txt", "", False)
-            NuclidFromTableFill()
-            ' MsgBox(ex.ToString)
+            '   My.Computer.FileSystem.WriteAllText("C:\\WORKPROG\\saved_table_nuclides.txt", "", False)
+            '  NuclidFromTableFill()
+            MsgBox(ex.ToString)
         End Try
 
     End Sub
