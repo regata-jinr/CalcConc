@@ -477,8 +477,10 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
     Function DataFromGrs(ByVal GrsName As String) As DataTable
         Try
-
+            Debug.WriteLine($"GRS {GrsName} parsing:")
+            Debug.WriteLine("{SRMName}|{elemName}|{RelInd}|{Act}|{ErrAct}|{Conc}|{ConcErr}|{StdErr}|{Num}")
             Dim rown As Integer = 1
+            Dim RelInd, Act, ErrAct, Conc, ConcErr, StdErr As Double
             If grsTable.Columns.Count = 0 Then
                 Dim grsKeys(0) As DataColumn
                 Dim grsKeyColumn As New DataColumn()
@@ -498,10 +500,10 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 grsTable.Columns.Add("stdEr/Act", GetType(Double))
                 'grsTable.Columns.Add("Расчетная концентрация, mg/kg", GetType(Double))
             End If
-
             For Each line As String In File.ReadLines(GrsName, System.Text.Encoding.Default)
                 Try
                     If IsNumeric(Convert.ToDouble(Split(line, vbTab)(2), CultureInfo.InvariantCulture)) Then
+                        line = line.Replace(",", ".")
                         Dim values As New ArrayList
                         values.Add(Split(line, vbTab)(0) & "_" & Split(line, vbTab)(1))
                         values.Add(Split(line, vbTab)(0))
@@ -521,6 +523,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             values.Add(Integer.Parse(Split(values(2).ToString.Substring(0, values(2).ToString.Length - 1), "-")(1)))
                             values.Add(values(8) / values(4))
                         End If
+                        Debug.WriteLine($"{values(0)}, {values(1)}, {values(2)}, {values(3)}, {values(4)}, {values(5)}, {values(6)}, {values(7)}, {values(8)}, {values(9)}, {values(10)}")
                         grsTable.Rows.Add(values(0), values(1), values(2), values(3), values(4), values(5), values(6), values(7), values(8), values(9), values(10))
                     End If
 
@@ -537,7 +540,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
     End Function
 
     Private Sub B_calc_conc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_calc_conc.Click
-
+        Debug.WriteLine("B_calc_conc click")
         rptTableMda.Clear()
         rptTablePeaks.Clear()
         grsTable.Clear()
@@ -628,19 +631,21 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
                         'MsgBox(rptTableMda.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(6))
                         'концентрацияОбразца=K*концентрацияЭталона*АктивностьОбразца/АктивностьЭталона
-                        '  Debug.WriteLine($"Coef * row(6) * rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & row(2))(4) / row(4)")
+                        Debug.WriteLine($"conc: {Coef}_{row(6)}_{rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & row(2))(4) / row(4)}")
                         conc = Coef * row(6) * rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & row(2))(4) / row(4)
                     Catch ex As NullReferenceException
                         conc = 0
                     End Try
                     Try
                         'погрешность=100*корень_квадр(квадрат(погрешность_активности_образца/активность_образца)+квадрат(погрешность/100)+квадрат(погрешность_из_REF/100)+квадрат(систематическая_погрешность/100))
+                        Debug.WriteLine($"err: {rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(5)}_{row(7)}_{row(5)}{system_Pogr}")
                         concErr = 100 * Math.Sqrt((rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(5) / 100) ^ 2 + (row(7) / 100) ^ 2 + (row(5) / 100) ^ 2 + (system_Pogr / 100) ^ 2)
                     Catch ex As NullReferenceException
                         concErr = 0
                     End Try
                     Try
                         'предел обнаружения=K*концентрация_из_REF*МДА_нуклида/средневзвешенная_активность_из_GRS
+                        Debug.WriteLine($"limit: {Coef}_{row(6)}_{rptTableMda.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(6) / row(4)}")
                         lim = Coef * row(6) * rptTableMda.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(6) / row(4)
                     Catch ex As NullReferenceException
                         lim = 0
@@ -663,7 +668,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
                     For i As Integer = 0 To conTable.Rows.Count - 1
                         For j As Integer = 0 To conTable.Columns.Count - 1
-                            outputString = outputString & vbTab & Replace(conTable(i)(j), ".", ",")
+                            outputString = outputString & vbTab & Replace(conTable(i)(j), ",", ".")
                         Next
                         sw.WriteLine(outputString.Substring(1, outputString.Length - 1))
                         outputString = ""
@@ -731,7 +736,6 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 MkDir("C:\GENIE2K\CONFILES\DJI2")
             End If
 
-
             ' SaveFileDialog_Conc_Elem.InitialDirectory = "C:\GENIE2K\CONFILES"
             If Save_File_Conc_Po_Umolch = False Then
                 SaveFileDialog_Conc_Elem.FileName = file_name_Aktivn_Issl_Obr_Short_Array(m_glob) + ".CON"
@@ -741,12 +745,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 SaveFileDialog_Conc_Elem.FileName = SaveFileDialog_Conc_Elem.FileName.ToUpper
             End If
 
-
-
             If Save_File_Conc_Po_Umolch = True Then
                 GoTo 1
             End If
-
 
             If SaveFileDialog_Conc_Elem.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then ' Эта строчка открывает диалог и сравнивает результат с cancel 
                 Exit Sub
@@ -821,7 +822,6 @@ a:                                  currentRow_copy = currentRow ' обход X 
     Public GRSName As String = ""
     Public FileInfoDict As New Dictionary(Of String, ArrayList)
 
-
     Function DataFromRPT(ByVal fileName As String, ByVal calcConcFlag As Boolean) As String()
         Try
             If System.IO.Path.GetExtension(fileName) = ".RPT" Then
@@ -853,7 +853,6 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     rptTablePeaks.Columns.Add("Погрешность, %", GetType(Double))
                     rptTablePeaks.Columns.Add("nuclSort", GetType(Integer))
                 End If
-
                 If rptTableMda.Columns.Count = 0 Then
                     'rptTableMda
                     Dim mdaKeys(0) As DataColumn
@@ -897,13 +896,11 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Dim enrg_otpt As Regex = New Regex("\d{1,5}.\d{2}")
                 Dim mdln_act As Regex = New Regex("\d.\d{4}E[+-]\d{3}")
                 Dim mdncl As Regex = New Regex("\d.\d{2}E[+-]\d{3}")
-
                 Dim element As String = ""
-
                 Dim FileInfo As New ArrayList
-
                 Dim excp As New Dictionary(Of String, String)
 
+                Debug.WriteLine($"Parsing of {fileName}")
                 For Each line As String In File.ReadLines(fileName, System.Text.Encoding.Default)
                     If Not String.IsNullOrEmpty(line) And line.Trim.Length > 8 Then
                         If line.StartsWith("Дата создания") Or line.StartsWith("Report") Then
@@ -920,21 +917,22 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         ElseIf line.StartsWith("Геометрия") Or line.StartsWith("Sample Geometry") Then
                             FileInfo.Add(Split(line, ":")(0).Trim & ":" & Split(line, ":")(1))
                         ElseIf String.Equals(Replace(line, "*", "").Trim, "Нуклид Достоверность Средневзвешенная  Погрешность") Or String.Equals(Replace(line, "*", "").Trim, "Nuclide       Wt mean         Wt mean") Then
+                            Debug.WriteLine("Start interference peaks parsing:")
+                            Debug.WriteLine("{nuclid}|{relInd}|{meanAct}|{std}|{nuclNum}")
                             startGrsFlag = True
                         ElseIf String.Equals(Replace(line, "*", "").Trim, "Нуклид     Энергия,   Выход,   МДА линии,    МДА нуклида, Активность,") Or String.Equals(Replace(line, "*", "").Trim, "Nuclide    Energy    Yield      Line MDA    Nuclide MDA    Activity") Then
                             startMdaFlag = True
+                            Debug.WriteLine("Start Mda parsing:")
+                            Debug.WriteLine("{nuclid}|{energy}|{output}|{MdaLine}|{MdaNucl}|{Activity}")
                         ElseIf Replace(line, "*", "").Trim = "НЕИДЕНТИФИЦИРОВАННЫЕ ПИКИ" Or Replace(line, "*", "").Trim = "U N I D E N T I F I E D   P E A K S" Then
                             startGrsFlag = False
                         ElseIf startGrsFlag And elem.IsMatch(line.Trim.Substring(0, 7).Trim) And line.Substring(4, 1) = " " Then
-                            ' Debug.WriteLine(line)
                             nuclid = elem.Match(line).Value
                             relInd = Convert.ToDouble(req.Match(line).Value, CultureInfo.InvariantCulture)
-                            'relInd = Double.Parse(req.Match(line).Value, System.Globalization.NumberStyles.Any)
                             meanAct = Convert.ToDouble(act.Match(line).Value, CultureInfo.InvariantCulture)
-                            'meanAct = Double.Parse(act.Match(line).Value.ToString, System.Globalization.NumberStyles.Any)
                             std = 100 * Convert.ToDouble(act.Matches(line).Item(1).Value, CultureInfo.InvariantCulture) / Convert.ToDouble(act.Match(line).Value, CultureInfo.InvariantCulture)
-                            'std = 100 * Double.Parse(act.Matches(line).Item(1).Value.ToString, System.Globalization.NumberStyles.Any) / meanAct
                             nuclNum = Convert.ToInt16(num.Match(line).Value)
+                            Debug.WriteLine($"{nuclid}|{relInd}|{meanAct}|{std}|{nuclNum}")
                             Try
                                 rptTablePeaks.Rows.Add(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid, NameSamp, nuclid, relInd, meanAct, std, nuclNum)
                             Catch ce As ConstraintException
@@ -945,23 +943,16 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         ElseIf startMdaFlag Then
                             line = line.Substring(10, line.Length - 10)
                             line = Regex.Replace(line, "[*>]", String.Empty).Trim
-
                             If Not elem.IsMatch(line.Substring(0, 7)) Then
                                 Continue For
                             End If
                             nuclid = elem.Match(line.Substring(0, 7)).Value
-                            'Debug.WriteLine("1  " & nuclid)
                             energy = Convert.ToDouble(enrg_otpt.Matches(line).Item(0).Value, CultureInfo.InvariantCulture)
-                            ' energy = Double.Parse(enrg_otpt.Matches(line).Item(0).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             output = Convert.ToDouble(enrg_otpt.Matches(line).Item(1).Value, CultureInfo.InvariantCulture)
-                            ' output = Double.Parse(enrg_otpt.Matches(line).Item(1).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             MdaLine = Convert.ToDouble(mdln_act.Matches(line).Item(0).Value, CultureInfo.InvariantCulture)
-                            ' MdaLine = Double.Parse(mdln_act.Matches(line).Item(0).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             MdaNucl = Convert.ToDouble(mdncl.Match(line, 42).Value, CultureInfo.InvariantCulture)
-                            ' MdaNucl = Double.Parse(mdncl.Match(line, 42).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
                             Activity = Convert.ToDouble(mdln_act.Matches(line).Item(1).Value, CultureInfo.InvariantCulture)
-                            ' Activity = Double.Parse(mdln_act.Matches(line).Item(1).Value.ToString.Replace(".", ","), System.Globalization.NumberStyles.Any)
-                            ' Debug.WriteLine(nuclid & "__" & energy & "__" & output & "__" & MdaLine & "__" & MdaNucl & "__" & Activity)
+                            Debug.WriteLine($"{nuclid}|{energy}|{output}|{MdaLine}|{MdaNucl}|{Activity}")
                             Try
                                 rptTableMda.Rows.Add(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid, NameSamp, nuclid, energy, output, MdaLine, MdaNucl, Activity)
                             Catch ce As ConstraintException
@@ -973,25 +964,23 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     End If
                 Next
 
-
                 If FileInfo.Count <> 0 Then FileInfoDict.Add(System.IO.Path.GetFileName(fileName).ToString, FileInfo)
 
                 If calcConcFlag Then
                     Dim rown As Integer = 0
+                    Debug.WriteLine($"Ref {NameSamp} parsing:")
+                    Debug.WriteLine("{nuclid}|{PasConc}|{PassErr}")
                     For Each lineref As String In File.ReadLines("C:\WORKPROG\REF\" & NameSamp & ".ref", System.Text.Encoding.Default)
                         rown += 1
                         If rown < 5 Then Continue For 'с пятой строки начинаются данные в .ref
-
                         lineref = lineref.Trim
                         If lineref.Length <> 1 Then
                             nuclid = lineref.Substring(0, 3).Trim
                             PasConc = Convert.ToDouble(ppm.Match(lineref).Value, CultureInfo.InvariantCulture)
-                            ' PasConc = Double.Parse(ppm.Match(lineref).Value, System.Globalization.NumberStyles.Any)
                             PassErr = Convert.ToDouble(err.Match(lineref).Value, CultureInfo.InvariantCulture)
-                            'PassErr = Double.Parse(err.Match(lineref).Value, System.Globalization.NumberStyles.Any)
+                            Debug.WriteLine($"{nuclid}|{PasConc}|{PassErr}")
                             Try
                                 refTable.Rows.Add(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid, NameSamp, nuclid, PasConc, PassErr)
-                                'Debug.WriteLine(System.IO.Path.GetFileName(fileName) & "_" & NameSamp & "_" & nuclid & "_" & NameSamp & "_" & nuclid & "_" & PasConc & "_" & PassErr)
                             Catch ce As ConstraintException
                                 Debug.WriteLine(ce.ToString)
                             Catch ex As Exception
@@ -1054,9 +1043,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 If Not uniqElemForGRS.Contains(row(2)) Then uniqElemForGRS.Add(row(2))
 
                 If Not refTable.Rows.Find(el) Is Nothing Then
-
-                    ppm = Convert.ToDouble(refTable.Rows.Find(el)("Паспортная концентрация, mg/kg"))
-                    pasErr = Convert.ToDouble(refTable.Rows.Find(el)("Паспортная погрешность, %"))
+                    ppm = refTable.Rows.Find(el)("Паспортная концентрация, mg/kg")
+                    pasErr = refTable.Rows.Find(el)("Паспортная погрешность, %")
                     stdErr = Math.Sqrt(row(5) ^ 2 + pasErr ^ 2)
                     If stdErr > 99 Then Continue For
                     Try ' если ключи одинаковые выбираем ту строку, в которой меньше ошибка
@@ -1879,22 +1867,28 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
     Sub DataFromCON(ByVal conFileName As String)
         Try
-            Dim elemName As String = ""
+            Dim sampleName As String = ""
+
             Dim type As String = ""
             Dim rown As Integer = 1
             Dim i As Integer = 0
             Debug.WriteLine("DataFromCON " & conFileName)
+            Debug.WriteLine("{sampleName}|{type}|{elemName}|{conc}|{err}|{limit}")
             Dim conc As Double
             For Each line As String In File.ReadLines(conFileName, System.Text.Encoding.Default)
-                If rown = 1 Then elemName = Split(line, ":")(1).Trim 'this is sampleName not elemName
+                If rown = 1 Then sampleName = Split(line, ":")(1).Trim 'this is sampleName not elemName
                 If rown = 3 Then type = Split(line, ":")(1).Trim
                 If rown > 10 Then
                     If line = "" Then Continue For
                     Dim values As New ArrayList
                     line = line.Replace("M" & vbTab, "m" & vbTab)
-                    For Each elem As String In Split(line, vbTab)
-                        values.Add(elem)
-                    Next
+                    line = line.Replace(",", ".")
+                    ' For Each elem As String In Split(line, vbTab)
+                    values.Add(Split(line, vbTab)(0))
+                    values.Add(Double.Parse(Split(line, vbTab)(1), CultureInfo.InvariantCulture))
+                    values.Add(Double.Parse(Split(line, vbTab)(2), CultureInfo.InvariantCulture))
+                    values.Add(Double.Parse(Split(line, vbTab)(3), CultureInfo.InvariantCulture))
+                    ' Next
                     If Not GlobalNuclidsForCon.Contains(values(0) & "_" & type) Then
                         GlobalNuclidsForCon.Add(values(0) & "_" & type)
                         'Debug.WriteLine(GlobalNuclidsForCon(i).ToString)
@@ -1902,26 +1896,27 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                     End If
 
                     Try
-                        conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & elemName & "_" & type & "_" & values(0), values)
-                        Debug.WriteLine("DataFromCON " & elemName & "_" & type & "_" & values(0) & "_" & values(1) & "_" & values(2) & "_" & values(3))
-                        conc = Double.Parse(values(1), CultureInfo.InvariantCulture)
+                        'conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
+                        conc = values(1)
+                        Debug.WriteLine($"{sampleName}|{type}|{values(0)}|{values(1)}|{values(2)}|{values(3)}")
+                        conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
                         If type = "LLI-1" Then
-                            If values(0) = "NA-24" Then yNA24LLI1.Add(elemName, conc)
-                            If values(0) = "SB-122" Then xSB122LLI1.Add(elemName, conc)
+                            If values(0) = "NA-24" Then yNA24LLI1.Add(sampleName, conc)
+                            If values(0) = "SB-122" Then xSB122LLI1.Add(sampleName, conc)
                             'If values(0) = "CE-141" Then xCE141LLI1.Add(elemName, conc)
-                            If values(0) = "LA-140" Then yLA140LLI1.Add(elemName, conc)
-                            If values(0) = "NP-239" Then xNP239LLI1.Add(elemName, conc)
+                            If values(0) = "LA-140" Then yLA140LLI1.Add(sampleName, conc)
+                            If values(0) = "NP-239" Then xNP239LLI1.Add(sampleName, conc)
                             'If values(0) = "PA-233" Then yPA233LLI1.Add(elemName, conc)
                         ElseIf type = "LLI-2" Then
-                            If values(0) = "CE-141" Then xCE141LLI2.Add(elemName, conc)
-                            If values(0) = "SB-124" Then ySB124LLI2.Add(elemName, conc)
-                            If values(0) = "PA-233" Then yPA233LLI2.Add(elemName, conc)
+                            If values(0) = "CE-141" Then xCE141LLI2.Add(sampleName, conc)
+                            If values(0) = "SB-124" Then ySB124LLI2.Add(sampleName, conc)
+                            If values(0) = "PA-233" Then yPA233LLI2.Add(sampleName, conc)
                         ElseIf type = "SLI-2" Then
-                            If values(0) = "NA-24" Then xNA24SLI2.Add(elemName, conc)
+                            If values(0) = "NA-24" Then xNA24SLI2.Add(sampleName, conc)
                         End If
                     Catch ex As NullReferenceException
                     Catch key As ArgumentException
-                        Dim result As Integer = MessageBox.Show("Вероятно произошло дублирование имен образцов в файлах: проверьте образец с именем" & elemName, "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
+                        Dim result As Integer = MessageBox.Show($"Вероятно произошло дублирование имен образцов в файлах {conFileName}: проверьте образец с именем {sampleName}.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
                         If result = DialogResult.Cancel Then
                             Application.Restart()
                         ElseIf result = DialogResult.OK Then
@@ -1931,9 +1926,9 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 rown += 1
             Next
 
-            If Not elements.Contains(elemName) Then
-                rowMap.Add(elemName, elements.Count)
-                elements.Add(elemName)
+            If Not elements.Contains(sampleName) Then
+                rowMap.Add(sampleName, elements.Count)
+                elements.Add(sampleName)
             End If
         Catch ex As Exception
             MsgBox(ex.ToString)

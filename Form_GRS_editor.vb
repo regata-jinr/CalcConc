@@ -24,6 +24,7 @@
 
     Private Sub B_Save_GRS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_Save_GRS.Click
         Try
+            Debug.WriteLine("Save GRS:")
             Dim formatDict As New Dictionary(Of Integer, String)
             formatDict.Add(1, "")
             formatDict.Add(2, "")
@@ -57,9 +58,12 @@
 
                     For i As Integer = 0 To DataGridView_GRS_Editor.Rows.Count - 1
                         For j As Integer = 1 To DataGridView_GRS_Editor.Columns.Count - 3
-                            If DataGridView_GRS_Editor.Rows(i).Visible <> False Then outputString = outputString & vbTab & Format(DataGridView_GRS_Editor.Rows(i).Cells(j).Value, formatDict.Item(j))
+                            If DataGridView_GRS_Editor.Rows(i).Visible <> False Then outputString = outputString & vbTab & Format(DataGridView_GRS_Editor.Rows(i).Cells(j).Value, formatDict.Item(j)).Replace(",", ".")
                         Next
-                        If outputString <> "" Then sw.WriteLine(outputString.Substring(1, outputString.Length - 1))
+                        If outputString <> "" Then
+                            sw.WriteLine(outputString.Substring(1, outputString.Length - 1))
+                            Debug.WriteLine(outputString)
+                        End If
                         outputString = ""
                     Next
                 End Using
