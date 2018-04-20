@@ -656,7 +656,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
                 Dim outputString As String = ""
 
-                Using sw As New IO.StreamWriter(FolderBrowserDialog_Conc_Elem.SelectedPath & "/" & fileName.Substring(fileName.Length - 11, 7) & ".CON")
+                Using sw As New IO.StreamWriter($"{FolderBrowserDialog_Conc_Elem.SelectedPath}/{System.IO.Path.GetFileNameWithoutExtension(fileName)}.CON")
                     sw.WriteLine("Концентрации элементов в образце  :  " + src(0) & vbCrLf)
                     sw.WriteLine("Тип измерений  :  " + src(1) & vbCrLf)
                     sw.WriteLine("Групповой стандарт  :  " + System.IO.Path.GetFileName(file_name_Grup_Stand) & vbCrLf)

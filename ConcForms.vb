@@ -531,13 +531,27 @@ Module ConcForms
     End Function
 
     Function Rounding(num As Decimal, prec As Decimal) As Decimal
-        Dim dig As Integer = 0
-        If num <> 0 Then
-            While 1 - Math.Round(num, dig) / num >= prec
-                dig += 1
+        Try
+            Dim dig As Integer = 0
+            Dim zeroCnt As Integer = 0
+            While (Math.Round(num, zeroCnt) = 0)
+                zeroCnt = zeroCnt + 1
+                dig = zeroCnt
             End While
-        End If
-        Return Math.Round(num, dig)
+
+            If num <> 0 Then
+                While Math.Abs(1 - (num / Math.Round(num, dig))) >= prec
+                    dig += 1
+                End While
+            End If
+            Return Math.Round(num, dig)
+        Catch ex As ArgumentOutOfRangeException
+            Return num
+        Catch ex As Exception
+            MessageBox.Show($"Something goes wrong with rounding - {ex.ToString}")
+            Return num
+        End Try
+
     End Function
 
 End Module

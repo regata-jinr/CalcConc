@@ -85,7 +85,6 @@ Public Class Form_Table_Nuclides
 
     Private Sub B_Save_Table_Nuclides_Click(sender As System.Object, e As System.EventArgs) Handles B_Save_Table_Nuclides.Click
         Try
-            Dim outputString As String = ""
             File.Delete("C:\WORKPROG\saved_table_nuclides.txt")
             Using sw As New IO.StreamWriter("C:\WORKPROG\saved_table_nuclides.txt")
                 Dim tempString As String = ""
