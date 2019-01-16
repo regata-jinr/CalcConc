@@ -70,9 +70,9 @@
             End If
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.B_Save_GRS_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.B_Save_GRS_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -87,9 +87,9 @@
             Dim First_Displayed_String As Integer
             First_Displayed_String = DataGridView_GRS_Editor.FirstDisplayedScrollingRowIndex
             If DataGridView_GRS_Editor.SelectedRows.Count = 0 Or DataGridView_GRS_Editor.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If My.Settings.language = "Русский" Then
                     MsgBox("Выберите строку!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                Else
                     MsgBox("Select row!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub
@@ -119,9 +119,9 @@
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.B_Del_String_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.B_Del_String_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -145,9 +145,9 @@
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.B_Undelete_Last_String_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.B_Undelete_Last_String_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -215,13 +215,7 @@
         DataGridView_GRS_Editor.DataSource = Form_Main.grsTable
 
 
-        If Form_Main.language = "russian" Then
-            ' Me.Text = "Редактор ГРС"
-            B_Del_String.Text = "Удалить строку"
-            B_Undelete_Last_String.Text = "Восстановить удалённую строку"
-            B_Save_GRS.Text = "Cохранить групповой стандарт"
-            B_Cancel.Text = "Отмена"
-            SaveFileDialog_Grup_Stand_GRS_Editor.Filter = "Файлы групповых стандартов (*.grs)|*.grs|Все файлы (*.*)|*.*"
+        If My.Settings.language = "Русский" Then
             DataGridView_GRS_Editor.Columns(1).HeaderText = "Имя стандарта"
             DataGridView_GRS_Editor.Columns(2).HeaderText = "Нуклид"
             DataGridView_GRS_Editor.Columns(3).HeaderText = "Достоверность идентификации"
@@ -230,12 +224,7 @@
             DataGridView_GRS_Editor.Columns(6).HeaderText = "Паспортная концентрация, mg/kg"
             DataGridView_GRS_Editor.Columns(7).HeaderText = "Паспортная погрешность, %"
             DataGridView_GRS_Editor.Columns(8).HeaderText = "'Средне-квадратичная погрешность', %"
-        ElseIf Form_Main.language = "english" Then
-            '  Me.Text = "GRS editor."
-            B_Del_String.Text = "Delete line"
-            B_Undelete_Last_String.Text = "Restore deleted line"
-            B_Save_GRS.Text = "Save group standard"
-            B_Cancel.Text = "Cancel"
+        Else
             DataGridView_GRS_Editor.Columns(1).HeaderText = "Standart name"
             DataGridView_GRS_Editor.Columns(2).HeaderText = "Nuclide name"
             DataGridView_GRS_Editor.Columns(3).HeaderText = "Nuclide ID confidence"
@@ -244,9 +233,7 @@
             DataGridView_GRS_Editor.Columns(6).HeaderText = "Passport concentration, mg/kg"
             DataGridView_GRS_Editor.Columns(7).HeaderText = "Passport uncertainty, %"
             DataGridView_GRS_Editor.Columns(8).HeaderText = "Mean-square error, %"
-            SaveFileDialog_Grup_Stand_GRS_Editor.Filter = "Files of group standard (*.grs)|*.grs|All files (*.*)|*.*"
         End If
-
         DataGridView_GRS_Editor.Columns(0).Visible = False
         DataGridView_GRS_Editor.Columns(4).DefaultCellStyle.Format = "0.00E+00"
         DataGridView_GRS_Editor.Columns(5).DefaultCellStyle.Format = "0.00"
@@ -288,6 +275,7 @@
         CheckGRS.Enabled = False
         InvSel.Enabled = False
         AutoGRS.Enabled = False
+        Form_Main.LocalizedForm()
 
         Try
             Dim column1 As New DataGridViewTextBoxColumn
@@ -303,12 +291,22 @@
             GRSAddedFileList.Columns.Add(column4)
             GRSAddedFileList.Columns.Add(column5)
             GRSAddedFileList.Columns.Add(column6)
-            GRSAddedFileList.Columns(0).HeaderText = "Имя файла стандарта"
-            GRSAddedFileList.Columns(1).HeaderText = "Дата создания отчёта"
-            GRSAddedFileList.Columns(2).HeaderText = "Описание"
-            GRSAddedFileList.Columns(3).HeaderText = "Код"
-            GRSAddedFileList.Columns(4).HeaderText = "Тип"
-            GRSAddedFileList.Columns(5).HeaderText = "Геометрия"
+            If My.Settings.language = "Русский" Then
+                GRSAddedFileList.Columns(0).HeaderText = "Имя файла стандарта"
+                GRSAddedFileList.Columns(1).HeaderText = "Дата создания отчёта"
+                GRSAddedFileList.Columns(2).HeaderText = "Описание"
+                GRSAddedFileList.Columns(3).HeaderText = "Код"
+                GRSAddedFileList.Columns(4).HeaderText = "Тип"
+                GRSAddedFileList.Columns(5).HeaderText = "Геометрия"
+            Else
+                GRSAddedFileList.Columns(0).HeaderText = "File name"
+                GRSAddedFileList.Columns(1).HeaderText = "Created date"
+                GRSAddedFileList.Columns(2).HeaderText = "Description"
+                GRSAddedFileList.Columns(3).HeaderText = "Code"
+                GRSAddedFileList.Columns(4).HeaderText = "Tpye"
+                GRSAddedFileList.Columns(5).HeaderText = "Geometry"
+            End If
+
 
             loadFlag = True
 
@@ -329,9 +327,9 @@
                 Next
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.DataGridView_GRS_Editor_ColumnHeaderMouseClick)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.DataGridView_GRS_Editor_ColumnHeaderMouseClick)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -341,9 +339,9 @@
     Private Sub InvSel_Click(sender As System.Object, e As System.EventArgs) Handles InvSel.Click
         Try
             If DataGridView_GRS_Editor.SelectedRows.Count = 0 Or DataGridView_GRS_Editor.SelectedRows.Count > 1 Then
-                If Form_Main.language = "russian" Then
+                If My.Settings.language = "Русский" Then
                     MsgBox("Выберите одну строку!", MsgBoxStyle.Exclamation, Me.Text)
-                ElseIf Form_Main.language = "english" Then
+                Else
                     MsgBox("Select one row!", MsgBoxStyle.Exclamation, Me.Text)
                 End If
                 Exit Sub

@@ -35,5 +35,11 @@
     <Setting Name="currentVersion" Type="System.String" Scope="User">
       <Value Profile="(Default)">656</Value>
     </Setting>
+    <Setting Name="acc" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1.0</Value>
+    </Setting>
+    <Setting Name="language" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Русский</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

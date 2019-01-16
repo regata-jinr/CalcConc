@@ -45,9 +45,9 @@
             End If
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical, Me.Text)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Final_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Final_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -62,26 +62,26 @@
             BuildGraph(Form_Main.xNP239LLI1, Form_Main.yPA233LLI2, "U-Th", Chart_Th_U)
             DataGridView_Final_Table_Concentration.ClearSelection()
 
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 Me.Text = "Окончательная таблица концентраций."
                 Button_Draw_Graph.Text = "Построить график"
                 Button_Save.Text = "Закрыть и сохранить в файл"
                 B_Cancel.Text = "Отмена"
-            ElseIf Form_Main.language = "english" Then
+            Else
                 Me.Text = "Final table of concentration."
                 Button_Draw_Graph.Text = "Construct graph"
                 Button_Save.Text = "Close and save into file"
                 B_Cancel.Text = "Cancel"
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Final_Table_Concentration.Form_Final_Table_Concentartion_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Final_Table_Concentration.Form_Final_Table_Concentartion_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
         End Try
-     
+
     End Sub
 
     Private Sub Button_Draw_Graph_Click(sender As System.Object, e As System.EventArgs) Handles Button_Draw_Graph.Click
@@ -90,9 +90,9 @@
             list = ConcForms.SelectionColumnParse(DataGridView_Final_Table_Concentration)
             BuildGraph(list(0), list(1), list(2), Chart_Ce_La)
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Final_Table_Concentration.Button_Draw_Graph_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Final_Table_Concentration.Button_Draw_Graph_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

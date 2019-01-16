@@ -19,17 +19,31 @@
             CheckGRSSrcKeyColumns(0) = CheckGRSSrcKeyColumn
             CheckGRSSrc.Columns.Add(CheckGRSSrcKeyColumn)
             CheckGRSSrc.PrimaryKey = CheckGRSSrcKeyColumns
-            CheckGRSSrc.Columns.Add("Имя файла")
-            CheckGRSSrc.Columns.Add("Имя стандарта")
+            If My.Settings.language = "Русский" Then
+                CheckGRSSrc.Columns.Add("Имя файла")
+                CheckGRSSrc.Columns.Add("Имя стандарта")
 
-            For Each element As String In UniqElements
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная концентрация, mg/kg", GetType(Double))
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "Стандартное отклонение, %", GetType(Double))
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "Z-значение", GetType(Double))
-            Next
+                For Each element As String In UniqElements
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная концентрация, mg/kg", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Стандартное отклонение, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Z-значение", GetType(Double))
+                Next
+            Else
+                CheckGRSSrc.Columns.Add("File Name")
+                CheckGRSSrc.Columns.Add("Standart name")
+                For Each element As String In UniqElements
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated concentration, mg/kg", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport Concentration, mg/kg", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated error, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport error, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Std. deviation, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Z-value", GetType(Double))
+                Next
+            End If
+
 
             For Each row As DataRow In Form_Main.rptTablePeaks.Rows
                 Try

@@ -39,7 +39,6 @@ Partial Class Form_Main
         Me.OpenConcIsslObr_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Table_Nuclides_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Clear_Form_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Language_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog_Aktivn_Issl_Obr = New System.Windows.Forms.OpenFileDialog()
         Me.L_Aktivn_Issl_Obr = New System.Windows.Forms.Label()
         Me.B_calc_conc = New System.Windows.Forms.Button()
@@ -85,6 +84,9 @@ Partial Class Form_Main
         Me.GroupBox_L_Aktivnosti = New System.Windows.Forms.GroupBox()
         Me.GroupBox_GroupStandart = New System.Windows.Forms.GroupBox()
         Me.GroupBox_Concentration = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TextBoxAcc = New System.Windows.Forms.TextBox()
+        Me.LangEngToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -93,7 +95,7 @@ Partial Class Form_Main
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Monitor_Activity_ToolStripMenuItem, Me.Concentration_ToolStripMenuItem, Me.Table_Nuclides_ToolStripMenuItem, Me.Clear_Form_ToolStripMenuItem, Me.Language_ToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Monitor_Activity_ToolStripMenuItem, Me.Concentration_ToolStripMenuItem, Me.Table_Nuclides_ToolStripMenuItem, Me.Clear_Form_ToolStripMenuItem, Me.LangEngToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -104,102 +106,95 @@ Partial Class Form_Main
         '
         Me.Monitor_Activity_ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem, Me.OpenFileAktMonStand_MON_ToolStripMenuItem, Me.OpenFileAktStand_MON_ToolStripMenuItem, Me.SavePereschAktStand_MON_ToolStripMenuItem})
         Me.Monitor_Activity_ToolStripMenuItem.Name = "Monitor_Activity_ToolStripMenuItem"
-        Me.Monitor_Activity_ToolStripMenuItem.Size = New System.Drawing.Size(206, 20)
-        Me.Monitor_Activity_ToolStripMenuItem.Text = "Пересчёт активностей стандартов"
+        Me.Monitor_Activity_ToolStripMenuItem.Size = New System.Drawing.Size(196, 20)
+        Me.Monitor_Activity_ToolStripMenuItem.Text = "Calculation of standards activities"
         '
         'VibrBazFileAktMonitStand_MON_ToolStripMenuItem
         '
         Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Name = "VibrBazFileAktMonitStand_MON_ToolStripMenuItem"
-        Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(406, 22)
-        Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Text = "Выбрать базовый файл активностей монитора стандарта"
+        Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(359, 22)
+        Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Text = "Choose the basic file of activities for standard monitor"
         '
         'OpenFileAktMonStand_MON_ToolStripMenuItem
         '
         Me.OpenFileAktMonStand_MON_ToolStripMenuItem.Name = "OpenFileAktMonStand_MON_ToolStripMenuItem"
-        Me.OpenFileAktMonStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(406, 22)
-        Me.OpenFileAktMonStand_MON_ToolStripMenuItem.Text = "Открыть файл активностей монитора стандарта"
+        Me.OpenFileAktMonStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(359, 22)
+        Me.OpenFileAktMonStand_MON_ToolStripMenuItem.Text = "Open file of activities for standard monitor"
         '
         'OpenFileAktStand_MON_ToolStripMenuItem
         '
         Me.OpenFileAktStand_MON_ToolStripMenuItem.Name = "OpenFileAktStand_MON_ToolStripMenuItem"
-        Me.OpenFileAktStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(406, 22)
-        Me.OpenFileAktStand_MON_ToolStripMenuItem.Text = "Открыть файл(ы) активностей стандартов для пересчёта"
+        Me.OpenFileAktStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(359, 22)
+        Me.OpenFileAktStand_MON_ToolStripMenuItem.Text = "Open files of standards activities for calculations"
         '
         'SavePereschAktStand_MON_ToolStripMenuItem
         '
         Me.SavePereschAktStand_MON_ToolStripMenuItem.Name = "SavePereschAktStand_MON_ToolStripMenuItem"
-        Me.SavePereschAktStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(406, 22)
-        Me.SavePereschAktStand_MON_ToolStripMenuItem.Text = "Сохранить пересчитанный файл(ы) активностей стандартов"
+        Me.SavePereschAktStand_MON_ToolStripMenuItem.Size = New System.Drawing.Size(359, 22)
+        Me.SavePereschAktStand_MON_ToolStripMenuItem.Text = "Save files"
         Me.SavePereschAktStand_MON_ToolStripMenuItem.Visible = False
         '
         'Concentration_ToolStripMenuItem
         '
         Me.Concentration_ToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenAktIsslObr_ToolStripMenuItem, Me.OpenFileGrupStand_ToolStripMenuItem, Me.VibrBazFileAktMonitStand_ToolStripMenuItem, Me.OpenFileAktMonStand_ToolStripMenuItem, Me.SaveConcIsslObr_ToolStripMenuItem, Me.ToolStripMenuItem1, Me.OpenConcIsslObr_ToolStripMenuItem})
         Me.Concentration_ToolStripMenuItem.Name = "Concentration_ToolStripMenuItem"
-        Me.Concentration_ToolStripMenuItem.Size = New System.Drawing.Size(98, 20)
-        Me.Concentration_ToolStripMenuItem.Text = "Концентрация"
+        Me.Concentration_ToolStripMenuItem.Size = New System.Drawing.Size(95, 20)
+        Me.Concentration_ToolStripMenuItem.Text = "Concentration"
         '
         'OpenAktIsslObr_ToolStripMenuItem
         '
         Me.OpenAktIsslObr_ToolStripMenuItem.AutoSize = False
         Me.OpenAktIsslObr_ToolStripMenuItem.Name = "OpenAktIsslObr_ToolStripMenuItem"
         Me.OpenAktIsslObr_ToolStripMenuItem.Size = New System.Drawing.Size(417, 22)
-        Me.OpenAktIsslObr_ToolStripMenuItem.Text = "Открыть файл(ы) активностей исследуемого образца"
+        Me.OpenAktIsslObr_ToolStripMenuItem.Text = "Open file of researching sample"
         '
         'OpenFileGrupStand_ToolStripMenuItem
         '
         Me.OpenFileGrupStand_ToolStripMenuItem.Name = "OpenFileGrupStand_ToolStripMenuItem"
-        Me.OpenFileGrupStand_ToolStripMenuItem.Size = New System.Drawing.Size(454, 22)
-        Me.OpenFileGrupStand_ToolStripMenuItem.Text = "Открыть файл группового стандарта"
+        Me.OpenFileGrupStand_ToolStripMenuItem.Size = New System.Drawing.Size(328, 22)
+        Me.OpenFileGrupStand_ToolStripMenuItem.Text = "Open GRS file"
         '
         'VibrBazFileAktMonitStand_ToolStripMenuItem
         '
         Me.VibrBazFileAktMonitStand_ToolStripMenuItem.Name = "VibrBazFileAktMonitStand_ToolStripMenuItem"
-        Me.VibrBazFileAktMonitStand_ToolStripMenuItem.Size = New System.Drawing.Size(454, 22)
-        Me.VibrBazFileAktMonitStand_ToolStripMenuItem.Text = "Выбрать базовый файл активностей монитора стандарта"
+        Me.VibrBazFileAktMonitStand_ToolStripMenuItem.Size = New System.Drawing.Size(328, 22)
+        Me.VibrBazFileAktMonitStand_ToolStripMenuItem.Text = "Choose basic file of standard monitor activity"
         '
         'OpenFileAktMonStand_ToolStripMenuItem
         '
         Me.OpenFileAktMonStand_ToolStripMenuItem.Name = "OpenFileAktMonStand_ToolStripMenuItem"
-        Me.OpenFileAktMonStand_ToolStripMenuItem.Size = New System.Drawing.Size(454, 22)
-        Me.OpenFileAktMonStand_ToolStripMenuItem.Text = "Открыть файл активностей монитора образца"
+        Me.OpenFileAktMonStand_ToolStripMenuItem.Size = New System.Drawing.Size(328, 22)
+        Me.OpenFileAktMonStand_ToolStripMenuItem.Text = "Open files of standards activities for calculations"
         '
         'SaveConcIsslObr_ToolStripMenuItem
         '
         Me.SaveConcIsslObr_ToolStripMenuItem.Name = "SaveConcIsslObr_ToolStripMenuItem"
-        Me.SaveConcIsslObr_ToolStripMenuItem.Size = New System.Drawing.Size(454, 22)
-        Me.SaveConcIsslObr_ToolStripMenuItem.Text = "Сохранить файл(ы) концентраций элементов исследуемого образца"
+        Me.SaveConcIsslObr_ToolStripMenuItem.Size = New System.Drawing.Size(328, 22)
+        Me.SaveConcIsslObr_ToolStripMenuItem.Text = "Save file with concentrations"
         Me.SaveConcIsslObr_ToolStripMenuItem.Visible = False
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(451, 6)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(325, 6)
         '
         'OpenConcIsslObr_ToolStripMenuItem
         '
         Me.OpenConcIsslObr_ToolStripMenuItem.Name = "OpenConcIsslObr_ToolStripMenuItem"
-        Me.OpenConcIsslObr_ToolStripMenuItem.Size = New System.Drawing.Size(454, 22)
-        Me.OpenConcIsslObr_ToolStripMenuItem.Text = "Открыть файлы концентраций исследуемых образцов"
+        Me.OpenConcIsslObr_ToolStripMenuItem.Size = New System.Drawing.Size(328, 22)
+        Me.OpenConcIsslObr_ToolStripMenuItem.Text = "Open CON files"
         '
         'Table_Nuclides_ToolStripMenuItem
         '
         Me.Table_Nuclides_ToolStripMenuItem.Name = "Table_Nuclides_ToolStripMenuItem"
-        Me.Table_Nuclides_ToolStripMenuItem.Size = New System.Drawing.Size(121, 20)
-        Me.Table_Nuclides_ToolStripMenuItem.Text = "Таблица нуклидов"
+        Me.Table_Nuclides_ToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
+        Me.Table_Nuclides_ToolStripMenuItem.Text = "Nuclids table"
         '
         'Clear_Form_ToolStripMenuItem
         '
         Me.Clear_Form_ToolStripMenuItem.Name = "Clear_Form_ToolStripMenuItem"
-        Me.Clear_Form_ToolStripMenuItem.Size = New System.Drawing.Size(112, 20)
-        Me.Clear_Form_ToolStripMenuItem.Text = "Очистить форму"
-        '
-        'Language_ToolStripMenuItem
-        '
-        Me.Language_ToolStripMenuItem.Name = "Language_ToolStripMenuItem"
-        Me.Language_ToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
-        Me.Language_ToolStripMenuItem.Text = "Язык"
-        Me.Language_ToolStripMenuItem.Visible = False
+        Me.Clear_Form_ToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
+        Me.Clear_Form_ToolStripMenuItem.Text = "Re-launch application"
         '
         'OpenFileDialog_Aktivn_Issl_Obr
         '
@@ -222,7 +217,7 @@ Partial Class Form_Main
         Me.B_calc_conc.Name = "B_calc_conc"
         Me.B_calc_conc.Size = New System.Drawing.Size(684, 25)
         Me.B_calc_conc.TabIndex = 4
-        Me.B_calc_conc.Text = "Рассчитать и сохранить концентрации"
+        Me.B_calc_conc.Text = "Calculate and save concentrations"
         Me.B_calc_conc.UseVisualStyleBackColor = False
         '
         'OpenFileDialog_Aktivn_Stand_Obr
@@ -238,9 +233,9 @@ Partial Class Form_Main
         Me.L_Coef.AutoSize = True
         Me.L_Coef.Location = New System.Drawing.Point(402, 115)
         Me.L_Coef.Name = "L_Coef"
-        Me.L_Coef.Size = New System.Drawing.Size(233, 13)
+        Me.L_Coef.Size = New System.Drawing.Size(182, 13)
         Me.L_Coef.TabIndex = 8
-        Me.L_Coef.Text = "Коэффициент изменения потока нейтронов:"
+        Me.L_Coef.Text = "Coefficient of neutrons flow changing"
         '
         'TextBox_Coef
         '
@@ -257,21 +252,21 @@ Partial Class Form_Main
         'B_TablConcElemOkonchat_CON
         '
         Me.B_TablConcElemOkonchat_CON.BackColor = System.Drawing.SystemColors.Control
-        Me.B_TablConcElemOkonchat_CON.Location = New System.Drawing.Point(6, 253)
+        Me.B_TablConcElemOkonchat_CON.Location = New System.Drawing.Point(4, 286)
         Me.B_TablConcElemOkonchat_CON.Name = "B_TablConcElemOkonchat_CON"
         Me.B_TablConcElemOkonchat_CON.Size = New System.Drawing.Size(685, 25)
         Me.B_TablConcElemOkonchat_CON.TabIndex = 19
-        Me.B_TablConcElemOkonchat_CON.Text = "Создать окончательную таблицу концентраций элементов"
+        Me.B_TablConcElemOkonchat_CON.Text = "Create final table concentration"
         Me.B_TablConcElemOkonchat_CON.UseVisualStyleBackColor = False
         '
         'B_TablConcElemPromezh_CON
         '
         Me.B_TablConcElemPromezh_CON.BackColor = System.Drawing.SystemColors.Control
-        Me.B_TablConcElemPromezh_CON.Location = New System.Drawing.Point(6, 225)
+        Me.B_TablConcElemPromezh_CON.Location = New System.Drawing.Point(6, 255)
         Me.B_TablConcElemPromezh_CON.Name = "B_TablConcElemPromezh_CON"
         Me.B_TablConcElemPromezh_CON.Size = New System.Drawing.Size(684, 25)
         Me.B_TablConcElemPromezh_CON.TabIndex = 14
-        Me.B_TablConcElemPromezh_CON.Text = "Создать промежуточную таблицу концентраций элементов"
+        Me.B_TablConcElemPromezh_CON.Text = "Create intermediate table of concentration"
         Me.B_TablConcElemPromezh_CON.UseVisualStyleBackColor = False
         '
         'L_SLI_Source
@@ -279,9 +274,9 @@ Partial Class Form_Main
         Me.L_SLI_Source.AutoSize = True
         Me.L_SLI_Source.Location = New System.Drawing.Point(4, 141)
         Me.L_SLI_Source.Name = "L_SLI_Source"
-        Me.L_SLI_Source.Size = New System.Drawing.Size(124, 13)
+        Me.L_SLI_Source.Size = New System.Drawing.Size(58, 13)
         Me.L_SLI_Source.TabIndex = 21
-        Me.L_SLI_Source.Text = "Источник данных КЖИ"
+        Me.L_SLI_Source.Text = "SLI source"
         '
         'ComboBox_SLI_Source
         '
@@ -298,9 +293,9 @@ Partial Class Form_Main
         Me.L_Name_System_Pogr.AutoSize = True
         Me.L_Name_System_Pogr.Location = New System.Drawing.Point(402, 141)
         Me.L_Name_System_Pogr.Name = "L_Name_System_Pogr"
-        Me.L_Name_System_Pogr.Size = New System.Drawing.Size(183, 13)
+        Me.L_Name_System_Pogr.Size = New System.Drawing.Size(99, 13)
         Me.L_Name_System_Pogr.TabIndex = 17
-        Me.L_Name_System_Pogr.Text = "Систематическая погрешность, %:"
+        Me.L_Name_System_Pogr.Text = "Systematic error, %:"
         '
         'TextBox_system_Pogr
         '
@@ -317,7 +312,7 @@ Partial Class Form_Main
         Me.B_Otm_Vib_Fil_Mon.Name = "B_Otm_Vib_Fil_Mon"
         Me.B_Otm_Vib_Fil_Mon.Size = New System.Drawing.Size(286, 23)
         Me.B_Otm_Vib_Fil_Mon.TabIndex = 16
-        Me.B_Otm_Vib_Fil_Mon.Text = "Отменить выбор файлов мониторов"
+        Me.B_Otm_Vib_Fil_Mon.Text = "Cancel of choosing monitors files"
         Me.B_Otm_Vib_Fil_Mon.UseVisualStyleBackColor = False
         '
         'L_Conc_Issl_Obr_CON
@@ -360,12 +355,12 @@ Partial Class Form_Main
         'B_make_Aktivn_Stand_Obr_GRS
         '
         Me.B_make_Aktivn_Stand_Obr_GRS.BackColor = System.Drawing.SystemColors.Control
-        Me.B_make_Aktivn_Stand_Obr_GRS.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.B_make_Aktivn_Stand_Obr_GRS.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.B_make_Aktivn_Stand_Obr_GRS.Location = New System.Drawing.Point(5, 18)
         Me.B_make_Aktivn_Stand_Obr_GRS.Name = "B_make_Aktivn_Stand_Obr_GRS"
         Me.B_make_Aktivn_Stand_Obr_GRS.Size = New System.Drawing.Size(684, 33)
         Me.B_make_Aktivn_Stand_Obr_GRS.TabIndex = 3
-        Me.B_make_Aktivn_Stand_Obr_GRS.Text = "Открыть редактор ГРС"
+        Me.B_make_Aktivn_Stand_Obr_GRS.Text = "Open GRS editor"
         Me.B_make_Aktivn_Stand_Obr_GRS.UseVisualStyleBackColor = False
         '
         'SaveFileDialog_Svodn_Akt_Stand_Obr_GRS
@@ -415,7 +410,7 @@ Partial Class Form_Main
         Me.B_Perschet_Aktivn_Stand.Name = "B_Perschet_Aktivn_Stand"
         Me.B_Perschet_Aktivn_Stand.Size = New System.Drawing.Size(684, 23)
         Me.B_Perschet_Aktivn_Stand.TabIndex = 1
-        Me.B_Perschet_Aktivn_Stand.Text = "Пересчитать и сохранить активности стандартов"
+        Me.B_Perschet_Aktivn_Stand.Text = "Recalc and save standards activities"
         Me.B_Perschet_Aktivn_Stand.UseVisualStyleBackColor = False
         '
         'L_Baz_File_Akt_Mon_Stand_MON
@@ -491,24 +486,26 @@ Partial Class Form_Main
         Me.GroupBox_L_Aktivnosti.Size = New System.Drawing.Size(696, 118)
         Me.GroupBox_L_Aktivnosti.TabIndex = 5
         Me.GroupBox_L_Aktivnosti.TabStop = False
-        Me.GroupBox_L_Aktivnosti.Text = "Пересчёт активностей стандартов"
+        Me.GroupBox_L_Aktivnosti.Text = "Recalculation of standards activities"
         '
         'GroupBox_GroupStandart
         '
         Me.GroupBox_GroupStandart.BackColor = System.Drawing.Color.Azure
         Me.GroupBox_GroupStandart.Controls.Add(Me.B_make_Aktivn_Stand_Obr_GRS)
-        Me.GroupBox_GroupStandart.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.GroupBox_GroupStandart.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.GroupBox_GroupStandart.ForeColor = System.Drawing.SystemColors.ControlText
         Me.GroupBox_GroupStandart.Location = New System.Drawing.Point(5, 151)
         Me.GroupBox_GroupStandart.Name = "GroupBox_GroupStandart"
         Me.GroupBox_GroupStandart.Size = New System.Drawing.Size(696, 57)
         Me.GroupBox_GroupStandart.TabIndex = 12
         Me.GroupBox_GroupStandart.TabStop = False
-        Me.GroupBox_GroupStandart.Text = "Групповой стандарт"
+        Me.GroupBox_GroupStandart.Text = "Group standard"
         '
         'GroupBox_Concentration
         '
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
+        Me.GroupBox_Concentration.Controls.Add(Me.Label1)
+        Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
         Me.GroupBox_Concentration.Controls.Add(Me.B_TablConcElemOkonchat_CON)
         Me.GroupBox_Concentration.Controls.Add(Me.L_SLI_Source)
         Me.GroupBox_Concentration.Controls.Add(Me.B_TablConcElemPromezh_CON)
@@ -527,16 +524,39 @@ Partial Class Form_Main
         Me.GroupBox_Concentration.ForeColor = System.Drawing.SystemColors.ControlText
         Me.GroupBox_Concentration.Location = New System.Drawing.Point(5, 214)
         Me.GroupBox_Concentration.Name = "GroupBox_Concentration"
-        Me.GroupBox_Concentration.Size = New System.Drawing.Size(696, 287)
+        Me.GroupBox_Concentration.Size = New System.Drawing.Size(696, 317)
         Me.GroupBox_Concentration.TabIndex = 13
         Me.GroupBox_Concentration.TabStop = False
-        Me.GroupBox_Concentration.Text = "Концентрация"
+        Me.GroupBox_Concentration.Text = "Concentration"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(446, 232)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(114, 13)
+        Me.Label1.TabIndex = 23
+        Me.Label1.Text = "Rounding accuracy %:"
+        '
+        'TextBoxAcc
+        '
+        Me.TextBoxAcc.Location = New System.Drawing.Point(627, 229)
+        Me.TextBoxAcc.Name = "TextBoxAcc"
+        Me.TextBoxAcc.Size = New System.Drawing.Size(35, 20)
+        Me.TextBoxAcc.TabIndex = 22
+        Me.TextBoxAcc.Text = "1"
+        Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'LangEngToolStripMenuItem
+        '
+        Me.LangEngToolStripMenuItem.Name = "LangEngToolStripMenuItem"
+        Me.LangEngToolStripMenuItem.Size = New System.Drawing.Size(12, 20)
         '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(707, 501)
+        Me.ClientSize = New System.Drawing.Size(707, 531)
         Me.Controls.Add(Me.GroupBox_Concentration)
         Me.Controls.Add(Me.GroupBox_GroupStandart)
         Me.Controls.Add(Me.GroupBox_L_Aktivnosti)
@@ -547,7 +567,7 @@ Partial Class Form_Main
         Me.MaximizeBox = False
         Me.Name = "Form_Main"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Программа расчета концентраций 10.0.40219.1"
+        Me.Text = "Calculation of concentration 10.0.40219.1"
         Me.MenuStrip.ResumeLayout(False)
         Me.MenuStrip.PerformLayout()
         Me.GroupBox_L_Aktivnosti.ResumeLayout(False)
@@ -614,11 +634,12 @@ Partial Class Form_Main
     Friend WithEvents Clear_Form_ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents L_SLI_Source As System.Windows.Forms.Label
     Friend WithEvents ComboBox_SLI_Source As System.Windows.Forms.ComboBox
-    Friend WithEvents Language_ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Table_Nuclides_ToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents FolderBrowserDialog_Conc_Elem As System.Windows.Forms.FolderBrowserDialog
     Friend WithEvents GroupBox_L_Aktivnosti As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox_GroupStandart As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox_Concentration As System.Windows.Forms.GroupBox
-
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TextBoxAcc As TextBox
+    Friend WithEvents LangEngToolStripMenuItem As ToolStripMenuItem
 End Class

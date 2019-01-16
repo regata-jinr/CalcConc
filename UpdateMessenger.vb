@@ -1,23 +1,18 @@
-﻿Imports System
+﻿Imports System.Deployment.Application
 
 Module UpdateMessenger
     Sub ShowMessage()
         Try
-            'В случае, если мне надо что-то изменять на компьютерах пользователей.
-            'If My.Settings.currentVersion <> Application.ProductVersion Then
-            '    Dim result As Integer = MessageBox.Show("Добрый день, уважаемый пользователь! Теперь, после каждого обновления, будет выводиться такое сообщение, в котором я буду сообщать Вам об изменениях в программе. В новой версии исправлена ошибка добавления элементов содержащих заглавную букву M в финальную таблицу. Вы можете нажать кнопу ОК, в таком случае Ваша таблица обновится автоматически. Если у Вас есть какие-либо изменения в таблице нуклидов, которые вы хотите сохранить, это необходимо проделать вручную. Файл с таблицей находится в папке WORKPROG. Хорошего дня!", "Обновление программы расчета концентраций", MessageBoxButtons.OKCancel)
-            '    If result = DialogResult.Cancel Then
-            '        Exit Sub
-            '    ElseIf result = DialogResult.OK Then
-            '        Form_Table_Nuclides.ButRestoreDefaults_Click(Nothing, Nothing)
-            '        My.Settings.currentVersion = Application.ProductVersion
-            '    End If
-            'End If
-            '  В случае, если мне не надо ничего изменять на компьютерах пользователей.
-            If Application.ProductVersion <> My.MySettings.Default.currentVersion Then
-                MsgBox($"В новой версии программы {Application.ProductVersion} сортировка элементов в таблицах производится в соответствии c таблицей нуклидов. Информация о некоторых ошибках дополнена так, что может помочь понять в чем причина ошибки. Внимательно читайте сообщение, возникающее при ошибке. Добавлен алгоритм округления, который записывает число в более удобном виде, теряя при этом не более 1% точности. Поправлена ошибка, возникающая при расчете концентраций в системах с раздлителем десятичных разрядов - '.'", MsgBoxStyle.Information)
-                My.MySettings.Default.currentVersion = Application.ProductVersion
+            Dim UpdMsg As String
+            UpdMsg = $"Добавлен английский интерфейс{vbCrLf}"
+            'update message
+            If ApplicationDeployment.IsNetworkDeployed Then
+                Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
+                If current.IsFirstRun Then
+                    MessageBox.Show($"В новой версии программы {Application.ProductVersion}{vbCrLf}{vbCrLf}{UpdMsg}{vbCrLf}{vbCrLf}Свои комментарии, замечания, сообщения об ошибках Вы можете сообщить мне {vbCrLf}по почте - bdrum@jinr.ru{vbCrLf}по телефону - 6 24 36{vbCrLf}лично{vbCrLf}С уважением,{vbCrLf}Борис Румянцев", $"Обновление программы расчета концентраций", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             End If
+
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try

@@ -22,8 +22,9 @@ Partial Class FormCheckGRS
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormCheckGRS))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.DataGridViewForCheckGRS = New System.Windows.Forms.DataGridView()
         Me.CheckBoxZVal = New System.Windows.Forms.CheckBox()
         Me.CheckBoxCaclErr = New System.Windows.Forms.CheckBox()
@@ -37,108 +38,77 @@ Partial Class FormCheckGRS
         '
         'DataGridViewForCheckGRS
         '
+        resources.ApplyResources(Me.DataGridViewForCheckGRS, "DataGridViewForCheckGRS")
         Me.DataGridViewForCheckGRS.AllowUserToAddRows = False
-        Me.DataGridViewForCheckGRS.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridViewForCheckGRS.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridViewForCheckGRS.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.DataGridViewForCheckGRS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridViewForCheckGRS.DefaultCellStyle = DataGridViewCellStyle4
-        Me.DataGridViewForCheckGRS.Location = New System.Drawing.Point(0, 71)
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridViewForCheckGRS.DefaultCellStyle = DataGridViewCellStyle2
         Me.DataGridViewForCheckGRS.Name = "DataGridViewForCheckGRS"
         Me.DataGridViewForCheckGRS.ReadOnly = True
         Me.DataGridViewForCheckGRS.RowHeadersVisible = False
         Me.DataGridViewForCheckGRS.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridViewForCheckGRS.Size = New System.Drawing.Size(1183, 440)
-        Me.DataGridViewForCheckGRS.TabIndex = 0
         '
         'CheckBoxZVal
         '
-        Me.CheckBoxZVal.AutoSize = True
-        Me.CheckBoxZVal.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.CheckBoxZVal.Location = New System.Drawing.Point(6, 22)
+        resources.ApplyResources(Me.CheckBoxZVal, "CheckBoxZVal")
         Me.CheckBoxZVal.Name = "CheckBoxZVal"
-        Me.CheckBoxZVal.Size = New System.Drawing.Size(102, 20)
-        Me.CheckBoxZVal.TabIndex = 1
-        Me.CheckBoxZVal.Text = "Z-значения"
         Me.CheckBoxZVal.UseVisualStyleBackColor = True
         '
         'CheckBoxCaclErr
         '
-        Me.CheckBoxCaclErr.AutoSize = True
-        Me.CheckBoxCaclErr.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.CheckBoxCaclErr.Location = New System.Drawing.Point(313, 22)
+        resources.ApplyResources(Me.CheckBoxCaclErr, "CheckBoxCaclErr")
         Me.CheckBoxCaclErr.Name = "CheckBoxCaclErr"
-        Me.CheckBoxCaclErr.Size = New System.Drawing.Size(184, 20)
-        Me.CheckBoxCaclErr.TabIndex = 2
-        Me.CheckBoxCaclErr.Text = "Расчётная погрешность"
         Me.CheckBoxCaclErr.UseVisualStyleBackColor = True
         '
         'CheckBoxPassErr
         '
-        Me.CheckBoxPassErr.AutoSize = True
-        Me.CheckBoxPassErr.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.CheckBoxPassErr.Location = New System.Drawing.Point(114, 22)
+        resources.ApplyResources(Me.CheckBoxPassErr, "CheckBoxPassErr")
         Me.CheckBoxPassErr.Name = "CheckBoxPassErr"
-        Me.CheckBoxPassErr.Size = New System.Drawing.Size(193, 20)
-        Me.CheckBoxPassErr.TabIndex = 3
-        Me.CheckBoxPassErr.Text = "Паспортная погрешность"
         Me.CheckBoxPassErr.UseVisualStyleBackColor = True
         '
         'HideGroupBox
         '
+        resources.ApplyResources(Me.HideGroupBox, "HideGroupBox")
         Me.HideGroupBox.Controls.Add(Me.CheckBoxZVal)
         Me.HideGroupBox.Controls.Add(Me.CheckBoxPassErr)
         Me.HideGroupBox.Controls.Add(Me.CheckBoxCaclErr)
-        Me.HideGroupBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.HideGroupBox.Location = New System.Drawing.Point(12, 4)
         Me.HideGroupBox.Name = "HideGroupBox"
-        Me.HideGroupBox.Size = New System.Drawing.Size(514, 61)
-        Me.HideGroupBox.TabIndex = 7
         Me.HideGroupBox.TabStop = False
-        Me.HideGroupBox.Text = "Скрыть отмеченные значения"
         '
         'BExportCheckTable
         '
-        Me.BExportCheckTable.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.BExportCheckTable.Location = New System.Drawing.Point(1039, 4)
+        resources.ApplyResources(Me.BExportCheckTable, "BExportCheckTable")
         Me.BExportCheckTable.Name = "BExportCheckTable"
-        Me.BExportCheckTable.Size = New System.Drawing.Size(131, 61)
-        Me.BExportCheckTable.TabIndex = 8
-        Me.BExportCheckTable.Text = "Экспорт таблицы проверки в Excel"
         Me.BExportCheckTable.UseVisualStyleBackColor = True
         '
         'SaveCheckTable
         '
         Me.SaveCheckTable.DefaultExt = "xlsx"
-        Me.SaveCheckTable.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+        resources.ApplyResources(Me.SaveCheckTable, "SaveCheckTable")
         Me.SaveCheckTable.RestoreDirectory = True
         '
         'FormCheckGRS
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(1182, 511)
         Me.Controls.Add(Me.BExportCheckTable)
         Me.Controls.Add(Me.HideGroupBox)
         Me.Controls.Add(Me.DataGridViewForCheckGRS)
         Me.Name = "FormCheckGRS"
-        Me.Text = "Проверка ГРС"
         CType(Me.DataGridViewForCheckGRS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.HideGroupBox.ResumeLayout(False)
         Me.HideGroupBox.PerformLayout()

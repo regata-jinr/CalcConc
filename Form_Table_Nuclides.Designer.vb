@@ -63,64 +63,64 @@ Partial Class Form_Table_Nuclides
         Me.DataGridView_Table_Nuclides.RowHeadersVisible = False
         Me.DataGridView_Table_Nuclides.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.DataGridView_Table_Nuclides.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DataGridView_Table_Nuclides.Size = New System.Drawing.Size(274, 692)
+        Me.DataGridView_Table_Nuclides.Size = New System.Drawing.Size(274, 639)
         Me.DataGridView_Table_Nuclides.TabIndex = 0
         '
         'B_Save_Table_Nuclides
         '
         Me.B_Save_Table_Nuclides.AutoSize = True
-        Me.B_Save_Table_Nuclides.Location = New System.Drawing.Point(3, 701)
+        Me.B_Save_Table_Nuclides.Location = New System.Drawing.Point(3, 648)
         Me.B_Save_Table_Nuclides.Name = "B_Save_Table_Nuclides"
         Me.B_Save_Table_Nuclides.Size = New System.Drawing.Size(274, 23)
         Me.B_Save_Table_Nuclides.TabIndex = 2
-        Me.B_Save_Table_Nuclides.Text = "Сохранить таблицу"
+        Me.B_Save_Table_Nuclides.Text = "Save table"
         Me.B_Save_Table_Nuclides.UseVisualStyleBackColor = True
         '
         'B_Cancel
         '
         Me.B_Cancel.AutoSize = True
-        Me.B_Cancel.Location = New System.Drawing.Point(3, 788)
+        Me.B_Cancel.Location = New System.Drawing.Point(3, 764)
         Me.B_Cancel.Name = "B_Cancel"
         Me.B_Cancel.Size = New System.Drawing.Size(274, 23)
         Me.B_Cancel.TabIndex = 4
-        Me.B_Cancel.Text = "Отмена"
+        Me.B_Cancel.Text = "Exit"
         Me.B_Cancel.UseVisualStyleBackColor = True
         '
         'ButAddNucl
         '
         Me.ButAddNucl.AutoSize = True
-        Me.ButAddNucl.Location = New System.Drawing.Point(3, 730)
+        Me.ButAddNucl.Location = New System.Drawing.Point(3, 677)
         Me.ButAddNucl.Name = "ButAddNucl"
         Me.ButAddNucl.Size = New System.Drawing.Size(274, 23)
         Me.ButAddNucl.TabIndex = 5
-        Me.ButAddNucl.Text = "Добавить элемент"
+        Me.ButAddNucl.Text = "Add new element"
         Me.ButAddNucl.UseVisualStyleBackColor = True
         '
         'ButDelNucl
         '
         Me.ButDelNucl.AutoSize = True
-        Me.ButDelNucl.Location = New System.Drawing.Point(3, 759)
+        Me.ButDelNucl.Location = New System.Drawing.Point(3, 735)
         Me.ButDelNucl.Name = "ButDelNucl"
         Me.ButDelNucl.Size = New System.Drawing.Size(274, 23)
         Me.ButDelNucl.TabIndex = 6
-        Me.ButDelNucl.Text = "Удалить элемент"
+        Me.ButDelNucl.Text = "Delete selected element"
         Me.ButDelNucl.UseVisualStyleBackColor = True
         '
         'ButRestoreDefaults
         '
         Me.ButRestoreDefaults.AutoSize = True
-        Me.ButRestoreDefaults.Location = New System.Drawing.Point(3, 817)
+        Me.ButRestoreDefaults.Location = New System.Drawing.Point(3, 706)
         Me.ButRestoreDefaults.Name = "ButRestoreDefaults"
         Me.ButRestoreDefaults.Size = New System.Drawing.Size(274, 23)
         Me.ButRestoreDefaults.TabIndex = 7
-        Me.ButRestoreDefaults.Text = "Восстановить таблицу"
+        Me.ButRestoreDefaults.Text = "Restore table"
         Me.ButRestoreDefaults.UseVisualStyleBackColor = True
         '
         'Form_Table_Nuclides
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(280, 845)
+        Me.ClientSize = New System.Drawing.Size(280, 788)
         Me.Controls.Add(Me.ButRestoreDefaults)
         Me.Controls.Add(Me.ButDelNucl)
         Me.Controls.Add(Me.ButAddNucl)
@@ -131,7 +131,7 @@ Partial Class Form_Table_Nuclides
         Me.MaximizeBox = False
         Me.Name = "Form_Table_Nuclides"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form_Table_Nuclides"
+        Me.Text = "Nuclids table"
         CType(Me.DataGridView_Table_Nuclides, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()

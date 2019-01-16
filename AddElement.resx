@@ -117,4 +117,234 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="NuclidFormat.Text" xml:space="preserve">
+    <value>Формат:
+[A-Z]{1,2}-\d{2,3}[m]{0,1}
+</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="NuclidFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 26</value>
+  </data>
+  <data name="LabelType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="&gt;&gt;LabelType.Name" xml:space="preserve">
+    <value>LabelType</value>
+  </data>
+  <data name="&gt;&gt;NuclidTextBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="LabelNucl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 9</value>
+  </data>
+  <data name="NuclidTextBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="NuclidFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>AddElement</value>
+  </data>
+  <data name="ComboBoxType.Items1" xml:space="preserve">
+    <value>КЖИ-1</value>
+  </data>
+  <data name="NuclidTextBox.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ButAddNuclAndType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 35</value>
+  </data>
+  <data name="&gt;&gt;LabelNucl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LabelType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;LabelNucl.Name" xml:space="preserve">
+    <value>LabelNucl</value>
+  </data>
+  <data name="ComboBoxType.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="&gt;&gt;ButCancel.Name" xml:space="preserve">
+    <value>ButCancel</value>
+  </data>
+  <data name="&gt;&gt;ButCancel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ButCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;NuclidFormat.Name" xml:space="preserve">
+    <value>NuclidFormat</value>
+  </data>
+  <data name="ComboBoxType.Items3" xml:space="preserve">
+    <value>ДЖИ-1</value>
+  </data>
+  <data name="NuclidTextBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 53</value>
+  </data>
+  <data name="&gt;&gt;NuclidTextBox.Name" xml:space="preserve">
+    <value>NuclidTextBox</value>
+  </data>
+  <data name="LabelType.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;NuclidFormat.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ButAddNuclAndType.Name" xml:space="preserve">
+    <value>ButAddNuclAndType</value>
+  </data>
+  <data name="ComboBoxType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 53</value>
+  </data>
+  <data name="&gt;&gt;ButAddNuclAndType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ComboBoxType.Items2" xml:space="preserve">
+    <value>КЖИ-2</value>
+  </data>
+  <data name="&gt;&gt;ButCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ButCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="LabelNucl.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ButAddNuclAndType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ButAddNuclAndType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="ButCancel.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="NuclidFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 25</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxType.Name" xml:space="preserve">
+    <value>ComboBoxType</value>
+  </data>
+  <data name="ButAddNuclAndType.Text" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="LabelType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;LabelType.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ButCancel.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ButCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 80</value>
+  </data>
+  <data name="&gt;&gt;NuclidFormat.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="LabelNucl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 16</value>
+  </data>
+  <data name="&gt;&gt;ComboBoxType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ComboBoxType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 23</value>
+  </data>
+  <data name="&gt;&gt;LabelNucl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;NuclidTextBox.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;LabelNucl.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;NuclidTextBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="ButAddNuclAndType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 80</value>
+  </data>
+  <data name="LabelNucl.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt, style=Bold</value>
+  </data>
+  <data name="NuclidFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Добавление элемента в таблицу нуклидов</value>
+  </data>
+  <data name="LabelNucl.Text" xml:space="preserve">
+    <value>Нуклид</value>
+  </data>
+  <data name="&gt;&gt;ButAddNuclAndType.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="LabelType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>149, 9</value>
+  </data>
+  <data name="ButCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 35</value>
+  </data>
+  <data name="NuclidTextBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="ComboBoxType.Items4" xml:space="preserve">
+    <value>ДЖИ-2</value>
+  </data>
+  <data name="LabelType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 32</value>
+  </data>
+  <data name="ComboBoxType.Items" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="ComboBoxType.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ComboBoxType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>262, 120</value>
+  </data>
+  <data name="&gt;&gt;NuclidFormat.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LabelType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ButAddNuclAndType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="LabelType.Text" xml:space="preserve">
+    <value>Тип
+измерений</value>
+  </data>
+  <data name="LabelNucl.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
 </root>

@@ -117,6 +117,210 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="CheckBoxZVal.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="CheckBoxPassErr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxCaclErr.Name" xml:space="preserve">
+    <value>CheckBoxCaclErr</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxCaclErr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CheckBoxZVal.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="CheckBoxCaclErr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>313, 22</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxZVal.Name" xml:space="preserve">
+    <value>CheckBoxZVal</value>
+  </data>
+  <data name="CheckBoxPassErr.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;SaveCheckTable.Name" xml:space="preserve">
+    <value>SaveCheckTable</value>
+  </data>
+  <data name="CheckBoxCaclErr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>184, 20</value>
+  </data>
+  <data name="HideGroupBox.Text" xml:space="preserve">
+    <value>Скрыть отмеченные значения</value>
+  </data>
+  <data name="&gt;&gt;SaveCheckTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CheckBoxZVal.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="HideGroupBox.Size" type="System.Drawing.Size, System.Drawing">
+    <value>514, 61</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxZVal.Parent" xml:space="preserve">
+    <value>HideGroupBox</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewForCheckGRS.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BExportCheckTable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;BExportCheckTable.Name" xml:space="preserve">
+    <value>BExportCheckTable</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="CheckBoxPassErr.Text" xml:space="preserve">
+    <value>Паспортная погрешность</value>
+  </data>
+  <data name="CheckBoxZVal.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 20</value>
+  </data>
+  <data name="HideGroupBox.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewForCheckGRS.Name" xml:space="preserve">
+    <value>DataGridViewForCheckGRS</value>
+  </data>
+  <data name="CheckBoxCaclErr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxPassErr.Name" xml:space="preserve">
+    <value>CheckBoxPassErr</value>
+  </data>
+  <data name="CheckBoxPassErr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 20</value>
+  </data>
+  <data name="DataGridViewForCheckGRS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1183, 440</value>
+  </data>
+  <data name="BExportCheckTable.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewForCheckGRS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxCaclErr.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="CheckBoxZVal.Text" xml:space="preserve">
+    <value>Z-значения</value>
+  </data>
+  <data name="&gt;&gt;DataGridViewForCheckGRS.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxZVal.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="BExportCheckTable.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="&gt;&gt;BExportCheckTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxPassErr.Parent" xml:space="preserve">
+    <value>HideGroupBox</value>
+  </data>
+  <data name="CheckBoxPassErr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="CheckBoxZVal.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 22</value>
+  </data>
+  <data name="&gt;&gt;HideGroupBox.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;HideGroupBox.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CheckBoxPassErr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 22</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxCaclErr.Parent" xml:space="preserve">
+    <value>HideGroupBox</value>
+  </data>
+  <data name="CheckBoxCaclErr.Text" xml:space="preserve">
+    <value>Расчётная погрешность</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxZVal.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CheckBoxCaclErr.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="&gt;&gt;BExportCheckTable.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="HideGroupBox.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="&gt;&gt;HideGroupBox.Name" xml:space="preserve">
+    <value>HideGroupBox</value>
+  </data>
+  <data name="SaveCheckTable.Filter" xml:space="preserve">
+    <value>Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*</value>
+  </data>
+  <data name="DataGridViewForCheckGRS.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="HideGroupBox.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormCheckGRS</value>
+  </data>
+  <data name="BExportCheckTable.Text" xml:space="preserve">
+    <value>Экспорт таблицы проверки в Excel</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Проверка ГРС</value>
+  </data>
+  <data name="BExportCheckTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 61</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxPassErr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;HideGroupBox.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BExportCheckTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1039, 4</value>
+  </data>
+  <data name="CheckBoxCaclErr.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;CheckBoxPassErr.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DataGridViewForCheckGRS.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1182, 511</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DataGridViewForCheckGRS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 71</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
   <metadata name="SaveCheckTable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

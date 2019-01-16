@@ -117,12 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="SaveFileDialog_Grup_Stand_GRS_Editor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="AutoGRSToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>644, 15</value>
-  </metadata>
+  <data name="&gt;&gt;GroupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Undelete_Last_String.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="InvSel.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="B_Del_String.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 83</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox2.Text" xml:space="preserve">
+    <value>Создание и проверка</value>
+  </data>
+  <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="OpenGRSFiles.Filter" xml:space="preserve">
+    <value>Файлы ГРС (*.grs)|*.grs|Все файлы|*.*</value>
+  </data>
+  <data name="GroupBox3.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="CheckGRS.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="GroupBox1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;CheckGRS.Name" xml:space="preserve">
+    <value>CheckGRS</value>
+  </data>
+  <data name="&gt;&gt;CheckGRS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;OpenGRSFiles.Name" xml:space="preserve">
+    <value>OpenGRSFiles</value>
+  </data>
+  <data name="B_Save_GRS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 25</value>
+  </data>
+  <data name="AutoGRS.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="GroupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>732, 4</value>
+  </data>
+  <data name="&gt;&gt;AutoGRSToolTip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="B_Undelete_Last_String.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 49</value>
+  </data>
+  <data name="GroupBox3.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="InvSel.Text" xml:space="preserve">
+    <value>Инвертировать выделение</value>
+  </data>
   <data name="AutoGRS.ToolTip" xml:space="preserve">
     <value>Автоматическое формирование ГРС происходит по следующему алгоритму:
 Для Mg-27 строка выбирается из стандарта, у которого наименьшая паспортная концентрация Al-28
@@ -132,10 +197,431 @@
 у которой максимальна паспортная концентрация.
 3. Если паспортная погрешность не менее 30%, то выбирается элемент с минимальным "среднеквадратичным отклонением".</value>
   </data>
+  <data name="&gt;&gt;B_Save_GRS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BChFileForGRSEd.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="DataGridView_GRS_Editor.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;B_Del_String.Name" xml:space="preserve">
+    <value>B_Del_String</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Редактор ГРС</value>
+  </data>
+  <data name="DataGridView_GRS_Editor.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="CheckGRS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 49</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GRS_Editor.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;B_Cancel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="B_Undelete_Last_String.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;GroupBox2.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;AutoGRS.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;B_Undelete_Last_String.Name" xml:space="preserve">
+    <value>B_Undelete_Last_String</value>
+  </data>
+  <data name="GroupBox4.Text" xml:space="preserve">
+    <value>Информация о стандартах</value>
+  </data>
+  <data name="&gt;&gt;B_Undelete_Last_String.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Name" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="InvSel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="&gt;&gt;B_Cancel.Name" xml:space="preserve">
+    <value>B_Cancel</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="BChFileForGRSEd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 49</value>
+  </data>
+  <data name="&gt;&gt;GroupBox4.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;BChFileForGRSEd.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;CheckGRS.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="BLoadGRS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 25</value>
+  </data>
+  <data name="B_Cancel.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GRS_Editor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GRSAddedFileList.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="AutoGRS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="GRSAddedFileList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 97</value>
+  </data>
+  <data name="GroupBox2.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>492, 118</value>
+  </data>
+  <data name="GRSAddedFileList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="GRSAddedFileList.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="SaveFileDialog_Grup_Stand_GRS_Editor.Filter" xml:space="preserve">
+    <value>Файлы групповых стандартов (*.grs)|*.grs|Все файлы (*.*)|*.*</value>
+  </data>
+  <data name="&gt;&gt;B_Cancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Del_String.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GRSAddedFileList.Parent" xml:space="preserve">
+    <value>GroupBox4</value>
+  </data>
+  <data name="B_Cancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 83</value>
+  </data>
+  <data name="&gt;&gt;OpenGRSFiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="B_Save_GRS.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>Form_GRS_editor</value>
+  </data>
+  <data name="&gt;&gt;BLoadGRS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;B_Save_GRS.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AutoGRS.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;AutoGRS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="&gt;&gt;CheckGRS.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="BChFileForGRSEd.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="OpenFileDialog_Akt_Stand_Obr_GRS_1.Filter" xml:space="preserve">
+    <value>Файлы активностей (*.rpt)|*.rpt|Все файлы|*.*</value>
+  </data>
+  <data name="BLoadGRS.Text" xml:space="preserve">
+    <value>Загрузить групповой стандарт</value>
+  </data>
+  <data name="&gt;&gt;AutoGRSToolTip.Name" xml:space="preserve">
+    <value>AutoGRSToolTip</value>
+  </data>
+  <data name="GroupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 118</value>
+  </data>
+  <data name="&gt;&gt;BLoadGRS.Name" xml:space="preserve">
+    <value>BLoadGRS</value>
+  </data>
+  <data name="&gt;&gt;GroupBox4.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="B_Cancel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="&gt;&gt;GroupBox4.Name" xml:space="preserve">
+    <value>GroupBox4</value>
+  </data>
+  <data name="B_Del_String.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;BChFileForGRSEd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;SaveFileDialog_Grup_Stand_GRS_Editor.Name" xml:space="preserve">
+    <value>SaveFileDialog_Grup_Stand_GRS_Editor</value>
+  </data>
+  <data name="GRSAddedFileList.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="DataGridView_GRS_Editor.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Bottom, Left, Right</value>
+  </data>
+  <data name="BLoadGRS.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CheckGRS.Text" xml:space="preserve">
+    <value>Проверить стандарт</value>
+  </data>
+  <data name="&gt;&gt;InvSel.Name" xml:space="preserve">
+    <value>InvSel</value>
+  </data>
+  <data name="DataGridView_GRS_Editor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>-5, 128</value>
+  </data>
+  <data name="&gt;&gt;B_Undelete_Last_String.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="BChFileForGRSEd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 25</value>
+  </data>
+  <data name="&gt;&gt;GroupBox3.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="GroupBox4.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="DataGridView_GRS_Editor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1229, 684</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;DataGridView_GRS_Editor.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="GroupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 4</value>
+  </data>
+  <data name="B_Undelete_Last_String.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;GRSAddedFileList.Name" xml:space="preserve">
+    <value>GRSAddedFileList</value>
+  </data>
+  <data name="B_Del_String.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;B_Save_GRS.Name" xml:space="preserve">
+    <value>B_Save_GRS</value>
+  </data>
+  <data name="GroupBox4.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="B_Save_GRS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 18</value>
+  </data>
+  <data name="B_Cancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 25</value>
+  </data>
+  <data name="&gt;&gt;BLoadGRS.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="B_Del_String.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 25</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 118</value>
+  </data>
+  <data name="B_Undelete_Last_String.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 25</value>
+  </data>
+  <data name="&gt;&gt;BChFileForGRSEd.Name" xml:space="preserve">
+    <value>BChFileForGRSEd</value>
+  </data>
+  <data name="&gt;&gt;InvSel.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BLoadGRS.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;AutoGRS.Name" xml:space="preserve">
+    <value>AutoGRS</value>
+  </data>
+  <data name="InvSel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox4.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 4</value>
+  </data>
+  <data name="&gt;&gt;B_Del_String.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;OpenFileDialog_Akt_Stand_Obr_GRS_1.Name" xml:space="preserve">
+    <value>OpenFileDialog_Akt_Stand_Obr_GRS_1</value>
+  </data>
+  <data name="&gt;&gt;B_Save_GRS.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="InvSel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 25</value>
+  </data>
+  <data name="BChFileForGRSEd.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="BLoadGRS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 83</value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;GroupBox2.Name" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="$this.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;SaveFileDialog_Grup_Stand_GRS_Editor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.SaveFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;InvSel.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="GRSAddedFileList.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="B_Save_GRS.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;B_Del_String.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="B_Save_GRS.Text" xml:space="preserve">
+    <value>Cохранить групповой стандарт</value>
+  </data>
+  <data name="&gt;&gt;GroupBox4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="CheckGRS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 25</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1230, 815</value>
+  </data>
+  <data name="&gt;&gt;BChFileForGRSEd.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="AutoGRS.Text" xml:space="preserve">
+    <value>Создать ГРС автоматически</value>
+  </data>
+  <data name="&gt;&gt;OpenFileDialog_Akt_Stand_Obr_GRS_1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.OpenFileDialog, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox3.Text" xml:space="preserve">
+    <value>Сохранение и загрузка</value>
+  </data>
+  <data name="&gt;&gt;BLoadGRS.Parent" xml:space="preserve">
+    <value>GroupBox3</value>
+  </data>
+  <data name="B_Del_String.Text" xml:space="preserve">
+    <value>Удалить строку</value>
+  </data>
+  <data name="&gt;&gt;GroupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="GroupBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="B_Undelete_Last_String.Text" xml:space="preserve">
+    <value>Восстановить удалённую строку</value>
+  </data>
+  <data name="&gt;&gt;GRSAddedFileList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="B_Cancel.Text" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="&gt;&gt;InvSel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AutoGRS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 25</value>
+  </data>
+  <data name="CheckGRS.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="&gt;&gt;DataGridView_GRS_Editor.Name" xml:space="preserve">
+    <value>DataGridView_GRS_Editor</value>
+  </data>
+  <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>218, 118</value>
+  </data>
+  <data name="GroupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>508, 4</value>
+  </data>
+  <data name="&gt;&gt;B_Cancel.Parent" xml:space="preserve">
+    <value>GroupBox2</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Редактирование</value>
+  </data>
+  <data name="GroupBox2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="BChFileForGRSEd.Text" xml:space="preserve">
+    <value>Выбрать файлы активностей стандартов</value>
+  </data>
   <metadata name="OpenFileDialog_Akt_Stand_Obr_GRS_1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 15</value>
   </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>en</value>
+  </metadata>
   <metadata name="OpenGRSFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>516, 15</value>
+  </metadata>
+  <metadata name="SaveFileDialog_Grup_Stand_GRS_Editor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="AutoGRSToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>644, 15</value>
   </metadata>
 </root>

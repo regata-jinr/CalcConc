@@ -22,6 +22,7 @@ Partial Class Form_Intermediate_Table_Concentration
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Intermediate_Table_Concentration))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -59,11 +60,9 @@ Partial Class Form_Intermediate_Table_Concentration
         '
         'DataGridView_Intermediate_Table_Concentration
         '
+        resources.ApplyResources(Me.DataGridView_Intermediate_Table_Concentration, "DataGridView_Intermediate_Table_Concentration")
         Me.DataGridView_Intermediate_Table_Concentration.AllowUserToAddRows = False
         Me.DataGridView_Intermediate_Table_Concentration.AllowUserToResizeRows = False
-        Me.DataGridView_Intermediate_Table_Concentration.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_Intermediate_Table_Concentration.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
@@ -82,7 +81,6 @@ Partial Class Form_Intermediate_Table_Concentration
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView_Intermediate_Table_Concentration.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView_Intermediate_Table_Concentration.Location = New System.Drawing.Point(2, 2)
         Me.DataGridView_Intermediate_Table_Concentration.Name = "DataGridView_Intermediate_Table_Concentration"
         Me.DataGridView_Intermediate_Table_Concentration.ReadOnly = True
         DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -94,19 +92,15 @@ Partial Class Form_Intermediate_Table_Concentration
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView_Intermediate_Table_Concentration.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView_Intermediate_Table_Concentration.RowHeadersVisible = False
-        Me.DataGridView_Intermediate_Table_Concentration.Size = New System.Drawing.Size(930, 311)
-        Me.DataGridView_Intermediate_Table_Concentration.TabIndex = 0
         '
         'Chart_Na_Na
         '
-        Me.Chart_Na_Na.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        resources.ApplyResources(Me.Chart_Na_Na, "Chart_Na_Na")
         ChartArea1.Name = "ChartArea1"
         Me.Chart_Na_Na.ChartAreas.Add(ChartArea1)
         Me.Chart_Na_Na.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Chart_Na_Na.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Legend1.Name = "Legend1"
         Me.Chart_Na_Na.Legends.Add(Legend1)
-        Me.Chart_Na_Na.Location = New System.Drawing.Point(12, 319)
         Me.Chart_Na_Na.Name = "Chart_Na_Na"
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
@@ -121,50 +115,33 @@ Partial Class Form_Intermediate_Table_Concentration
         Series2.Name = "TrendLine"
         Me.Chart_Na_Na.Series.Add(Series1)
         Me.Chart_Na_Na.Series.Add(Series2)
-        Me.Chart_Na_Na.Size = New System.Drawing.Size(449, 184)
-        Me.Chart_Na_Na.TabIndex = 1
-        Me.Chart_Na_Na.Text = "Chart_1"
         '
         'Button_Draw_Graph
         '
-        Me.Button_Draw_Graph.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button_Draw_Graph.Location = New System.Drawing.Point(192, 717)
+        resources.ApplyResources(Me.Button_Draw_Graph, "Button_Draw_Graph")
         Me.Button_Draw_Graph.Name = "Button_Draw_Graph"
-        Me.Button_Draw_Graph.Size = New System.Drawing.Size(176, 23)
-        Me.Button_Draw_Graph.TabIndex = 2
-        Me.Button_Draw_Graph.Text = "Построить график"
         Me.Button_Draw_Graph.UseVisualStyleBackColor = True
         '
         'B_Cancel
         '
-        Me.B_Cancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.B_Cancel.Location = New System.Drawing.Point(558, 717)
+        resources.ApplyResources(Me.B_Cancel, "B_Cancel")
         Me.B_Cancel.Name = "B_Cancel"
-        Me.B_Cancel.Size = New System.Drawing.Size(176, 23)
-        Me.B_Cancel.TabIndex = 4
-        Me.B_Cancel.Text = "Отмена"
         Me.B_Cancel.UseVisualStyleBackColor = True
         '
         'Button_Save
         '
-        Me.Button_Save.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        Me.Button_Save.Location = New System.Drawing.Point(374, 717)
+        resources.ApplyResources(Me.Button_Save, "Button_Save")
         Me.Button_Save.Name = "Button_Save"
-        Me.Button_Save.Size = New System.Drawing.Size(176, 23)
-        Me.Button_Save.TabIndex = 5
-        Me.Button_Save.Text = "Закрыть и сохранить в файл"
         Me.Button_Save.UseVisualStyleBackColor = True
         '
         'Chart_Sb122_Sb124
         '
-        Me.Chart_Sb122_Sb124.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        resources.ApplyResources(Me.Chart_Sb122_Sb124, "Chart_Sb122_Sb124")
         ChartArea2.Name = "ChartArea1"
         Me.Chart_Sb122_Sb124.ChartAreas.Add(ChartArea2)
         Me.Chart_Sb122_Sb124.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Chart_Sb122_Sb124.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Legend2.Name = "Legend1"
         Me.Chart_Sb122_Sb124.Legends.Add(Legend2)
-        Me.Chart_Sb122_Sb124.Location = New System.Drawing.Point(472, 319)
         Me.Chart_Sb122_Sb124.Name = "Chart_Sb122_Sb124"
         Series3.ChartArea = "ChartArea1"
         Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
@@ -179,20 +156,15 @@ Partial Class Form_Intermediate_Table_Concentration
         Series4.Name = "TrendLine"
         Me.Chart_Sb122_Sb124.Series.Add(Series3)
         Me.Chart_Sb122_Sb124.Series.Add(Series4)
-        Me.Chart_Sb122_Sb124.Size = New System.Drawing.Size(449, 184)
-        Me.Chart_Sb122_Sb124.TabIndex = 6
-        Me.Chart_Sb122_Sb124.Text = "Chart1"
         '
         'Chart_Ce_La
         '
-        Me.Chart_Ce_La.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        resources.ApplyResources(Me.Chart_Ce_La, "Chart_Ce_La")
         ChartArea3.Name = "ChartArea1"
         Me.Chart_Ce_La.ChartAreas.Add(ChartArea3)
         Me.Chart_Ce_La.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Chart_Ce_La.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Legend3.Name = "Legend1"
         Me.Chart_Ce_La.Legends.Add(Legend3)
-        Me.Chart_Ce_La.Location = New System.Drawing.Point(12, 520)
         Me.Chart_Ce_La.Name = "Chart_Ce_La"
         Series5.ChartArea = "ChartArea1"
         Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
@@ -207,20 +179,15 @@ Partial Class Form_Intermediate_Table_Concentration
         Series6.Name = "TrendLine"
         Me.Chart_Ce_La.Series.Add(Series5)
         Me.Chart_Ce_La.Series.Add(Series6)
-        Me.Chart_Ce_La.Size = New System.Drawing.Size(449, 184)
-        Me.Chart_Ce_La.TabIndex = 7
-        Me.Chart_Ce_La.Text = "Chart_1"
         '
         'Chart_Pa_Np
         '
-        Me.Chart_Pa_Np.Anchor = System.Windows.Forms.AnchorStyles.Bottom
+        resources.ApplyResources(Me.Chart_Pa_Np, "Chart_Pa_Np")
         ChartArea4.Name = "ChartArea1"
         Me.Chart_Pa_Np.ChartAreas.Add(ChartArea4)
         Me.Chart_Pa_Np.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Chart_Pa_Np.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Legend4.Name = "Legend1"
         Me.Chart_Pa_Np.Legends.Add(Legend4)
-        Me.Chart_Pa_Np.Location = New System.Drawing.Point(472, 520)
         Me.Chart_Pa_Np.Name = "Chart_Pa_Np"
         Series7.ChartArea = "ChartArea1"
         Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
@@ -235,22 +202,17 @@ Partial Class Form_Intermediate_Table_Concentration
         Series8.Name = "TrendLine"
         Me.Chart_Pa_Np.Series.Add(Series7)
         Me.Chart_Pa_Np.Series.Add(Series8)
-        Me.Chart_Pa_Np.Size = New System.Drawing.Size(449, 184)
-        Me.Chart_Pa_Np.TabIndex = 8
-        Me.Chart_Pa_Np.Text = "Chart_1"
         '
         'SaveInterTable
         '
         Me.SaveInterTable.DefaultExt = "xlsx"
-        Me.SaveInterTable.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+        resources.ApplyResources(Me.SaveInterTable, "SaveInterTable")
         Me.SaveInterTable.RestoreDirectory = True
         '
         'Form_Intermediate_Table_Concentration
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.AutoSize = True
-        Me.ClientSize = New System.Drawing.Size(933, 744)
         Me.Controls.Add(Me.Chart_Pa_Np)
         Me.Controls.Add(Me.Chart_Ce_La)
         Me.Controls.Add(Me.Chart_Sb122_Sb124)
@@ -261,8 +223,6 @@ Partial Class Form_Intermediate_Table_Concentration
         Me.Controls.Add(Me.DataGridView_Intermediate_Table_Concentration)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Name = "Form_Intermediate_Table_Concentration"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Промежуточная таблица концентраций."
         CType(Me.DataGridView_Intermediate_Table_Concentration, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart_Na_Na, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart_Sb122_Sb124, System.ComponentModel.ISupportInitialize).EndInit()

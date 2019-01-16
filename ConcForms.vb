@@ -129,9 +129,9 @@ Module ConcForms
         Try
             Dim ans As New ArrayList
             If {1, 2, 3, 4}.Contains(datagridview.SelectedColumns(0).Index) And {1, 2, 3, 4}.Contains(datagridview.SelectedColumns(1).Index) And datagridview.SelectedColumns.Count <> 2 Then
-                If Form_Main.language = "russian" Then
+                If My.Settings.language = "Русский" Then
                     MsgBox("Выделите два столбца с данными!", MsgBoxStyle.Exclamation, Form_Main.Text)
-                ElseIf Form_Main.language = "english" Then
+                Else
                     MsgBox("Select two columns with data!", MsgBoxStyle.Exclamation, Form_Main.Text)
                 End If
                 Return Nothing
@@ -154,9 +154,9 @@ Module ConcForms
 
         Catch ex As Exception
             MsgBox(ex.ToString(), MsgBoxStyle.Critical)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Button_Draw_Graph_Click)!", MsgBoxStyle.Critical)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Button_Draw_Graph_Click)!", MsgBoxStyle.Critical)
             End If
             Return Nothing
@@ -308,9 +308,9 @@ Module ConcForms
                 Try
                     curNucl = nucl
                     DataGridViewTable(columnMap(type), rown).Value = System.IO.Path.GetFileName(conFileName)
-                    DataGridViewTable(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type), rown).Value = Rounding(conc, 0.01)
+                    DataGridViewTable(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type), rown).Value = Rounding(conc, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
                     DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = Math.Ceiling(err)
-                    DataGridViewTable(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type), rown).Value = Rounding(lim, 0.01)
+                    DataGridViewTable(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
                 Catch keyNF As KeyNotFoundException
                     Debug.WriteLine(keyNF.ToString)
                     Dim result As Integer = MessageBox.Show($"Вероятно этот элемент {curNucl} из файла {conFileName} не надйен в таблице нуклидов. Вы можете добавить его самостоятельно в таблицу нуклидов (будьте осторожны это может повлиять на сортировку в промежуточной и окончательной таблицах) или нажать ok. В этом случае он будет пропущен.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
@@ -506,6 +506,7 @@ Module ConcForms
 
                                     ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.Bittersweet
                                 End If
+                                ws.Column(coln + 1).Width = 7.57
                             End If
                         Next
                     Next
@@ -515,7 +516,8 @@ Module ConcForms
                     rngbord.Style.Border.InsideBorder = ClosedXML.Excel.XLBorderStyleValues.Thin
                     rngbord.Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center
                     ws.Columns().Style.Alignment.WrapText = True
-                    ws.Columns().AdjustToContents()
+                    ' ws.Columns().AdjustToContents()
+
                     wb.SaveAs(SaveDialog.FileName)
                     Return valuesRange
                 End Using
@@ -532,6 +534,9 @@ Module ConcForms
 
     Function Rounding(num As Decimal, prec As Decimal) As Decimal
         Try
+            If prec = 0 Then
+                Return num
+            End If
             Dim dig As Integer = 0
             Dim zeroCnt As Integer = 0
             While (Math.Round(num, zeroCnt) = 0)

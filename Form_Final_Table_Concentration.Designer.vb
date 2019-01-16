@@ -22,6 +22,7 @@ Partial Class Form_Final_Table_Concentration
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Final_Table_Concentration))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
@@ -46,33 +47,25 @@ Partial Class Form_Final_Table_Concentration
         '
         'Button_Save
         '
-        Me.Button_Save.Location = New System.Drawing.Point(373, 509)
+        resources.ApplyResources(Me.Button_Save, "Button_Save")
         Me.Button_Save.Name = "Button_Save"
-        Me.Button_Save.Size = New System.Drawing.Size(176, 23)
-        Me.Button_Save.TabIndex = 13
-        Me.Button_Save.Text = "Закрыть и сохранить в файл"
         Me.Button_Save.UseVisualStyleBackColor = True
         '
         'B_Cancel
         '
-        Me.B_Cancel.Location = New System.Drawing.Point(555, 509)
+        resources.ApplyResources(Me.B_Cancel, "B_Cancel")
         Me.B_Cancel.Name = "B_Cancel"
-        Me.B_Cancel.Size = New System.Drawing.Size(176, 23)
-        Me.B_Cancel.TabIndex = 12
-        Me.B_Cancel.Text = "Отмена"
         Me.B_Cancel.UseVisualStyleBackColor = True
         '
         'Button_Draw_Graph
         '
-        Me.Button_Draw_Graph.Location = New System.Drawing.Point(191, 509)
+        resources.ApplyResources(Me.Button_Draw_Graph, "Button_Draw_Graph")
         Me.Button_Draw_Graph.Name = "Button_Draw_Graph"
-        Me.Button_Draw_Graph.Size = New System.Drawing.Size(176, 23)
-        Me.Button_Draw_Graph.TabIndex = 11
-        Me.Button_Draw_Graph.Text = "Построить график"
         Me.Button_Draw_Graph.UseVisualStyleBackColor = True
         '
         'DataGridView_Final_Table_Concentration
         '
+        resources.ApplyResources(Me.DataGridView_Final_Table_Concentration, "DataGridView_Final_Table_Concentration")
         Me.DataGridView_Final_Table_Concentration.AllowUserToAddRows = False
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
@@ -91,28 +84,24 @@ Partial Class Form_Final_Table_Concentration
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView_Final_Table_Concentration.DefaultCellStyle = DataGridViewCellStyle2
-        Me.DataGridView_Final_Table_Concentration.Location = New System.Drawing.Point(1, 3)
         Me.DataGridView_Final_Table_Concentration.Name = "DataGridView_Final_Table_Concentration"
         Me.DataGridView_Final_Table_Concentration.ReadOnly = True
         Me.DataGridView_Final_Table_Concentration.RowHeadersVisible = False
-        Me.DataGridView_Final_Table_Concentration.Size = New System.Drawing.Size(934, 310)
-        Me.DataGridView_Final_Table_Concentration.TabIndex = 9
         '
         'SaveFinalTable
         '
         Me.SaveFinalTable.DefaultExt = "xlsx"
-        Me.SaveFinalTable.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
+        resources.ApplyResources(Me.SaveFinalTable, "SaveFinalTable")
         Me.SaveFinalTable.RestoreDirectory = True
         '
         'Chart_Ce_La
         '
+        resources.ApplyResources(Me.Chart_Ce_La, "Chart_Ce_La")
         ChartArea1.Name = "ChartArea1"
         Me.Chart_Ce_La.ChartAreas.Add(ChartArea1)
         Me.Chart_Ce_La.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Chart_Ce_La.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Legend1.Name = "Legend1"
         Me.Chart_Ce_La.Legends.Add(Legend1)
-        Me.Chart_Ce_La.Location = New System.Drawing.Point(1, 319)
         Me.Chart_Ce_La.Name = "Chart_Ce_La"
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
@@ -127,19 +116,15 @@ Partial Class Form_Final_Table_Concentration
         Series2.Name = "TrendLine"
         Me.Chart_Ce_La.Series.Add(Series1)
         Me.Chart_Ce_La.Series.Add(Series2)
-        Me.Chart_Ce_La.Size = New System.Drawing.Size(464, 184)
-        Me.Chart_Ce_La.TabIndex = 15
-        Me.Chart_Ce_La.Text = "Chart_1"
         '
         'Chart_Th_U
         '
+        resources.ApplyResources(Me.Chart_Th_U, "Chart_Th_U")
         ChartArea2.Name = "ChartArea1"
         Me.Chart_Th_U.ChartAreas.Add(ChartArea2)
         Me.Chart_Th_U.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.Chart_Th_U.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Legend2.Name = "Legend1"
         Me.Chart_Th_U.Legends.Add(Legend2)
-        Me.Chart_Th_U.Location = New System.Drawing.Point(469, 319)
         Me.Chart_Th_U.Name = "Chart_Th_U"
         Series3.ChartArea = "ChartArea1"
         Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
@@ -154,15 +139,11 @@ Partial Class Form_Final_Table_Concentration
         Series4.Name = "TrendLine"
         Me.Chart_Th_U.Series.Add(Series3)
         Me.Chart_Th_U.Series.Add(Series4)
-        Me.Chart_Th_U.Size = New System.Drawing.Size(466, 184)
-        Me.Chart_Th_U.TabIndex = 16
-        Me.Chart_Th_U.Text = "Chart_1"
         '
         'Form_Final_Table_Concentration
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(937, 535)
         Me.Controls.Add(Me.Chart_Th_U)
         Me.Controls.Add(Me.Chart_Ce_La)
         Me.Controls.Add(Me.Button_Save)
@@ -172,8 +153,6 @@ Partial Class Form_Final_Table_Concentration
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = False
         Me.Name = "Form_Final_Table_Concentration"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Окончательная таблица концентраций."
         CType(Me.DataGridView_Final_Table_Concentration, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart_Ce_La, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart_Th_U, System.ComponentModel.ISupportInitialize).EndInit()

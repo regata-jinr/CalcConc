@@ -71,6 +71,7 @@ Namespace My.Resources
         '''CA-47_-
         '''CA-49_SLI-2
         '''SC-46_LLI-2
+        '''SC-47_-
         '''TI-51_SLI-2
         '''V-52_SLI-2
         '''CR-51_LLI-2
@@ -109,8 +110,7 @@ Namespace My.Resources
         '''RH-104m_-
         '''PD-109m_-
         '''AG-108_-
-        '''AG-110m_LLI-2
-        '''C [rest of string was truncated]&quot;;.
+        '''AG-110m [rest of string was truncated]&quot;;.
         '''</summary>
         Public ReadOnly Property table_nuclides_def() As String
             Get

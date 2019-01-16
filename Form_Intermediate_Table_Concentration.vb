@@ -29,21 +29,21 @@ Public Class Form_Intermediate_Table_Concentration
             MsgBox(ex.ToString)
         End Try
         Try
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 Me.Text = "Промежуточная таблица концентраций."
                 Button_Draw_Graph.Text = "Построить график"
                 Button_Save.Text = "Закрыть и сохранить в файл"
                 B_Cancel.Text = "Отмена"
-            ElseIf Form_Main.language = "english" Then
+            Else
                 Me.Text = "Intermediate table of concentration."
                 Button_Draw_Graph.Text = "Construct graph"
                 Button_Save.Text = "Close and save into file"
                 B_Cancel.Text = "Cancel"
             End If
         Catch ex As Exception
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Form_Intermediate_Table_Concentration_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Form_Intermediate_Table_Concentration_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub
@@ -101,9 +101,9 @@ Public Class Form_Intermediate_Table_Concentration
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

@@ -10,6 +10,8 @@ Public Class Form_Table_Nuclides
 
     Public Sub Form_Table_Nuclides_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
+            Form_Main.LocalizedForm()
+
             Dim elem As String = ""
             Dim type As String = ""
             Dim i As Integer = 0
@@ -47,7 +49,7 @@ Public Class Form_Table_Nuclides
             DataGridView_Table_Nuclides.Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
             DataGridView_Table_Nuclides.Columns(1).SortMode = DataGridViewColumnSortMode.NotSortable
 
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 Me.Text = "Таблица нуклидов."
                 B_Save_Table_Nuclides.Text = "Cохранить таблицу"
                 B_Cancel.Text = "Отмена"
@@ -55,7 +57,7 @@ Public Class Form_Table_Nuclides
                 DataGridView_Table_Nuclides.Columns(0).HeaderText = "Нуклид"
                 DataGridView_Table_Nuclides.Columns(1).HeaderText = "Тип измерений"
                 'SaveFileDialog_Grup_Stand_GRS_Editor.Filter = "Файлы групповых стандартов (*.grs)|*.grs|Все файлы (*.*)|*.*"
-            ElseIf Form_Main.language = "english" Then
+            Else
                 Me.Text = "Table of nuclides."
 
                 B_Save_Table_Nuclides.Text = "Save table"
@@ -70,9 +72,9 @@ Public Class Form_Table_Nuclides
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If Form_Main.language = "russian" Then
+            If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в Form_Table_Nuclides.Form_Table_Nuclides_Load)!", MsgBoxStyle.Critical, Me.Text)
-            ElseIf Form_Main.language = "english" Then
+            Else
                 MsgBox("Operation was cancelled (error in Form_Table_Nuclides.Form_Table_Nuclides_Load)!", MsgBoxStyle.Critical, Me.Text)
             End If
             Exit Sub

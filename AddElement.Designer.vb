@@ -22,6 +22,7 @@ Partial Class AddElement
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddElement))
         Me.ButAddNuclAndType = New System.Windows.Forms.Button()
         Me.LabelNucl = New System.Windows.Forms.Label()
         Me.LabelType = New System.Windows.Forms.Label()
@@ -33,80 +34,51 @@ Partial Class AddElement
         '
         'ButAddNuclAndType
         '
+        resources.ApplyResources(Me.ButAddNuclAndType, "ButAddNuclAndType")
         Me.ButAddNuclAndType.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.ButAddNuclAndType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.ButAddNuclAndType.Location = New System.Drawing.Point(12, 80)
         Me.ButAddNuclAndType.Name = "ButAddNuclAndType"
-        Me.ButAddNuclAndType.Size = New System.Drawing.Size(103, 35)
-        Me.ButAddNuclAndType.TabIndex = 0
-        Me.ButAddNuclAndType.Text = "Добавить"
         Me.ButAddNuclAndType.UseVisualStyleBackColor = True
         '
         'LabelNucl
         '
-        Me.LabelNucl.AutoSize = True
-        Me.LabelNucl.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.LabelNucl.Location = New System.Drawing.Point(30, 9)
+        resources.ApplyResources(Me.LabelNucl, "LabelNucl")
         Me.LabelNucl.Name = "LabelNucl"
-        Me.LabelNucl.Size = New System.Drawing.Size(63, 16)
-        Me.LabelNucl.TabIndex = 3
-        Me.LabelNucl.Text = "Нуклид"
         '
         'LabelType
         '
-        Me.LabelType.AutoSize = True
-        Me.LabelType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.LabelType.Location = New System.Drawing.Point(149, 9)
+        resources.ApplyResources(Me.LabelType, "LabelType")
         Me.LabelType.Name = "LabelType"
-        Me.LabelType.Size = New System.Drawing.Size(90, 32)
-        Me.LabelType.TabIndex = 4
-        Me.LabelType.Text = "Тип" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "измерений"
         '
         'ButCancel
         '
+        resources.ApplyResources(Me.ButCancel, "ButCancel")
         Me.ButCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.ButCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.ButCancel.Location = New System.Drawing.Point(136, 80)
         Me.ButCancel.Name = "ButCancel"
-        Me.ButCancel.Size = New System.Drawing.Size(103, 35)
-        Me.ButCancel.TabIndex = 5
-        Me.ButCancel.Text = "Отмена"
         Me.ButCancel.UseVisualStyleBackColor = True
         '
         'NuclidTextBox
         '
-        Me.NuclidTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.NuclidTextBox.Location = New System.Drawing.Point(15, 53)
+        resources.ApplyResources(Me.NuclidTextBox, "NuclidTextBox")
         Me.NuclidTextBox.Name = "NuclidTextBox"
-        Me.NuclidTextBox.Size = New System.Drawing.Size(100, 21)
-        Me.NuclidTextBox.TabIndex = 6
         '
         'ComboBoxType
         '
-        Me.ComboBoxType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        resources.ApplyResources(Me.ComboBoxType, "ComboBoxType")
         Me.ComboBoxType.FormattingEnabled = True
-        Me.ComboBoxType.Items.AddRange(New Object() {"-", "КЖИ-1", "КЖИ-2", "ДЖИ-1", "ДЖИ-2"})
-        Me.ComboBoxType.Location = New System.Drawing.Point(136, 53)
+        Me.ComboBoxType.Items.AddRange(New Object() {resources.GetString("ComboBoxType.Items"), resources.GetString("ComboBoxType.Items1"), resources.GetString("ComboBoxType.Items2"), resources.GetString("ComboBoxType.Items3"), resources.GetString("ComboBoxType.Items4")})
         Me.ComboBoxType.Name = "ComboBoxType"
-        Me.ComboBoxType.Size = New System.Drawing.Size(103, 23)
-        Me.ComboBoxType.TabIndex = 7
-        Me.ComboBoxType.Text = "-"
         '
         'NuclidFormat
         '
-        Me.NuclidFormat.AutoSize = True
-        Me.NuclidFormat.Location = New System.Drawing.Point(4, 25)
+        resources.ApplyResources(Me.NuclidFormat, "NuclidFormat")
         Me.NuclidFormat.Name = "NuclidFormat"
-        Me.NuclidFormat.Size = New System.Drawing.Size(127, 26)
-        Me.NuclidFormat.TabIndex = 8
-        Me.NuclidFormat.Text = "Формат:" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "[A-Z]{1,2}-\d{2,3}[m]{0,1}" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'AddElement
         '
         Me.AcceptButton = Me.ButAddNuclAndType
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.CancelButton = Me.ButCancel
-        Me.ClientSize = New System.Drawing.Size(262, 120)
         Me.ControlBox = False
         Me.Controls.Add(Me.NuclidFormat)
         Me.Controls.Add(Me.ComboBoxType)
@@ -116,7 +88,6 @@ Partial Class AddElement
         Me.Controls.Add(Me.LabelNucl)
         Me.Controls.Add(Me.ButAddNuclAndType)
         Me.Name = "AddElement"
-        Me.Text = "Добавление элемента в таблицу нуклидов"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
