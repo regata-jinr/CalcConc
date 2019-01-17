@@ -262,7 +262,16 @@
                 DataGridView_GRS_Editor.Rows(i).DefaultCellStyle.Font = New Font("Arial", 11, FontStyle.Regular)
                 k += 1
             End If
-            DataGridView_GRS_Editor.Rows(i).DefaultCellStyle.BackColor = ColorList(k Mod 2)
+
+
+
+            If DataGridView_GRS_Editor.Rows(i).Cells(6).Value <> 0 Then
+                DataGridView_GRS_Editor.Rows(i).DefaultCellStyle.BackColor = ColorList(k Mod 2)
+            Else
+                DataGridView_GRS_Editor.Rows(i).DefaultCellStyle.BackColor = Color.Gainsboro
+            End If
+
+
 
         Next
     End Sub
@@ -504,5 +513,9 @@
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try
     End Sub
+
+    Public Function IsShowing() As Boolean
+        Return ShowElementsToolStripMenuItem.Checked
+    End Function
 
 End Class

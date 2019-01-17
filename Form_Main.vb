@@ -6,6 +6,7 @@ Imports File = System.IO.File
 Imports StrPars = Microsoft.VisualBasic
 Imports System.Threading
 Imports System.ComponentModel
+Imports System.Linq
 
 Public Class Form_Main
 
@@ -79,6 +80,7 @@ Public Class Form_Main
             Form_GRS_editor.B_Save_GRS.Text = "Cохранить групповой стандарт"
             Form_GRS_editor.BChFileForGRSEd.Text = "Выбрать файлы активностей"
             Form_GRS_editor.BLoadGRS.Text = "Загрузить существующий ГРС"
+            Form_Final_Table_Concentration.LabelTableFinalComment.Text = "Ячейки с белым фоновым цветом содержат значения относящиеся к активности"
 
             Form_GRS_editor.GroupBox1.Text = "Редактирование"
 
@@ -93,11 +95,14 @@ Public Class Form_Main
             Form_GRS_editor.B_Cancel.Text = "Отмена"
 
             Form_GRS_editor.GroupBox4.Text = "Информация"
+            Form_GRS_editor.ShowElementsToolStripMenuItem.Text = "Показывать нуклиды со значениями не найденными в пасспорте"
+            Form_GRS_editor.SettingsToolStripMenuItem.Text = "Настройки"
 
             Form_Intermediate_Table_Concentration.Text = "Промежуточная таблица концентраций"
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Построить график"
             Form_Intermediate_Table_Concentration.Button_Save.Text = "Закрыть и сохранить в файл"
             Form_Intermediate_Table_Concentration.B_Cancel.Text = "Отмена"
+            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Ячейки с белым фоновым цветом содержат значения относящиеся к активности"
 
             Me.TextBox_Coef.Text = "1.0"
             Me.Monitor_Activity_ToolStripMenuItem.Text = "Пересчёт активностей стандартов"
@@ -210,13 +215,15 @@ Public Class Form_Main
             Form_GRS_editor.B_Cancel.Text = "Cancel"
 
             Form_GRS_editor.GroupBox4.Text = "Information"
-
+            Form_GRS_editor.ShowElementsToolStripMenuItem.Text = "Show nuclids without passport's values"
+            Form_GRS_editor.SettingsToolStripMenuItem.Text = "Options"
 
             Form_Intermediate_Table_Concentration.Text = "Intermediate table of concentration"
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Construct graph"
             Form_Intermediate_Table_Concentration.Button_Save.Text = "Close and save into file"
             Form_Intermediate_Table_Concentration.B_Cancel.Text = "Cancel"
-
+            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Cells with white background color refers to activity's values"
+            Form_Final_Table_Concentration.LabelTableFinalComment.Text = "Cells with white background color refers to activity's values"
 
             Me.Monitor_Activity_ToolStripMenuItem.Text = "Calculation of standards activities"
             Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Text = "Choose the basic file of activities for standard monitor"
@@ -855,7 +862,6 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
             FolderBrowserDialog_Conc_Elem.SelectedPath = My.MySettings.Default.pathTo31
 
-
             If FolderBrowserDialog_Conc_Elem.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then ' Эта строчка открывает диалог и сравнивает результат с cancel 
                 Path_To_Folder_glob = My.MySettings.Default.pathTo31
             ElseIf System.Windows.Forms.DialogResult.OK Then ' Эта строчка только сравнивает результат с OK 
@@ -863,8 +869,11 @@ a:                                  currentRow_copy = currentRow ' обход X 
             End If
 
             measurements_type = ""
+            Dim comment As String = ""
 
             For Each fileName In file_name_Aktivn_Issl_Obr_Array
+                rptTableMda.Clear()
+                rptTablePeaks.Clear()
                 If fileName = "" Then Exit Sub
                 Dim src As String() = DataFromRPT(fileName, False)
                 measurements_type = src(1)
@@ -896,13 +905,15 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 conTable.Columns.Add("Концентрация")
                 conTable.Columns.Add("Погрешность")
                 conTable.Columns.Add("Предел обнаружения")
+                conTable.Columns.Add("Пометки")
+                conTable.Columns.Add("Номер", GetType(Integer))
                 Dim conc As Double
                 Dim concErr As Double
                 Dim lim As Double
 
                 For Each row As DataRow In tempgrs.Rows
                     Try
-
+                        Debug.WriteLine($"{row(2)}")
                         'MsgBox(rptTableMda.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(6))
                         'концентрацияОбразца=K*концентрацияЭталона*АктивностьОбразца/АктивностьЭталона
                         Debug.WriteLine($"conc: {Coef}_{row(6)}_{rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & row(2))(4) / row(4)}")
@@ -926,9 +937,36 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         lim = 0
                     End Try
                     Debug.WriteLine($"{row(2)}, {Format(conc, "0.00E+00")}, {Format(concErr, "0.00")}, {Format(lim, "0.00E+00")}")
-                    conTable.Rows.Add(row(2), Format(conc, "0.00E+00"), Format(concErr, "0.00"), Format(lim, "0.00E+00"))
+                    If conc <> 0 Then
+                        conTable.Rows.Add(row(2), Format(conc, "0.00E+00"), Format(concErr, "0.00"), Format(lim, "0.00E+00"), "", Convert.ToInt32(row(2).Split("-")(1)))
+                    ElseIf lim <> 0 Then
+                        conTable.Rows.Add(row(2), Format(conc, "0.00E+00"), Format(concErr, "0.00"), Format(lim, "0.00E+00"), "$", Convert.ToInt32(row(2).Split("-")(1)))
+                    Else
+                        Try
+                            conTable.Rows.Add($"{row(2)}", Format(rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & row(2))(4), "0.00E+00"), Format(100 * (rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(5) / 100), "0.00"), Format(lim, "0.00E+00"), "*", Convert.ToInt32(row(2).Split("-")(1)))
+                        Catch ex As NullReferenceException
+                            Debug.WriteLine($"Element {row(2)} doesn't exist in file {System.IO.Path.GetFileName(fileName)} ")
+                        End Try
+                    End If
+
                 Next
 
+                'check for nuclids which has found in sample, but hasn't found in standard:
+                Dim limit As Double = 0
+                For Each row As DataRow In rptTablePeaks.Rows
+                    limit = 0
+                    If conTable.Select($"Элемент = '{row(2)}'").Count = 0 Then
+                        If rptTableMda.Select($"Нуклид = '{row(2)}'").Count > 0 Then
+                            limit = rptTableMda.Select($"Нуклид = '{row(2)}'")(0)(6)
+                        End If
+                        conTable.Rows.Add($"{row(2)}", Format(row(4), "0.00E+00"), Format(row(5), "0.00"), Format(limit, "0.00E+00"), "&", Convert.ToInt32(row(2).Split("-")(1)))
+                    End If
+                Next
+
+                conTable.DefaultView.Sort = "Номер"
+                conTable = conTable.DefaultView.ToTable()
+
+                ' save to file
                 Dim outputString As String = ""
 
                 Using sw As New IO.StreamWriter($"{FolderBrowserDialog_Conc_Elem.SelectedPath}/{System.IO.Path.GetFileNameWithoutExtension(fileName)}.CON")
@@ -937,17 +975,25 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     sw.WriteLine("Групповой стандарт  :  " + System.IO.Path.GetFileName(file_name_Grup_Stand) & vbCrLf)
                     ' my version sw.WriteLine("Элемент" & "_" & "Концентрация, мг/гр" & "_" & "Погрешность, %" & "_" & "Предел обнаружения, мг/гр")
                     'for correct work old version of program
-                    sw.WriteLine("элемент	концентр.,	погр.,	предел")
+                    sw.WriteLine("элемент	концентр.,	погр.,	предел      пометки")
                     sw.WriteLine("	uг/гр		%	обнаруж.,")
                     sw.WriteLine("				uг/гр" & vbCrLf)
 
+
                     For i As Integer = 0 To conTable.Rows.Count - 1
-                        For j As Integer = 0 To conTable.Columns.Count - 1
+                        For j As Integer = 0 To conTable.Columns.Count - 2
                             outputString = outputString & vbTab & Replace(conTable(i)(j), ",", ".")
                         Next
                         sw.WriteLine(outputString.Substring(1, outputString.Length - 1))
                         outputString = ""
                     Next
+                    sw.WriteLine()
+                    If My.Settings.language = "Русский" Then
+                        comment = $"* - Нуклид найден в образце и в эталоне, но в паспорте отсутствует значение концентрации (указана активность и ее погрешность){vbCrLf}& - Нуклид найден в образце, но отсутствует в эталоне (указана активность и ее погрешность){vbCrLf}$ - Нуклид найден в эталоне, но отсутствует в образце"
+                    Else
+                        comment = $"* - Nuclid has found in sample and standard, but reference doesn't contain value of concentration for this nuclid (specified activity and it error){vbCrLf}& - Nuclid has found in sample, but doesn't exist in standard (specified activity and it error){vbCrLf}$ - Nuclid has found in standard, but hasn't found in sample"
+                    End If
+                    sw.WriteLine(comment)
                 End Using
             Next
 
@@ -1225,7 +1271,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             Debug.WriteLine("{nuclid}|{relInd}|{meanAct}|{std}|{nuclNum}")
                             startGrsFlag = True
                             line = Replace(line, "*", "").Trim
-                        ElseIf String.Equals(line, "Нуклид     Энергия,   Выход,   МДА линии,    МДА нуклида, Активность,") Or String.Equals(Replace(line, " ", "").Trim, "NuclideEnergyYieldLineMDANuclideMDAActivity") Then
+                        ElseIf String.Equals(Replace(line, " ", "").Trim, "НуклидЭнергия,Выход,МДАлинии,МДАнуклида,Активность,") Or String.Equals(Replace(line, " ", "").Trim, "NuclideEnergyYieldLineMDANuclideMDAActivity") Then
                             startMdaFlag = True
                             Debug.WriteLine("Start Mda parsing:")
                             Debug.WriteLine("{nuclid}|{energy}|{output}|{MdaLine}|{MdaNucl}|{Activity}")
@@ -1321,6 +1367,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
     Public uniqElemForGRS As New ArrayList
     Function GrsSrc(grsTable As DataTable) As DataTable
         Try
+            Debug.WriteLine($"Add elements from rpt to grs")
             Dim ppm, pasErr, stdErr As Double
 
             If grsTable.Columns.Count = 0 Then
@@ -1359,6 +1406,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
             For Each row As DataRow In rptTablePeaks.Rows
                 keyString = row(0).ToString.Substring(0, row(0).LastIndexOf("-"))
+                Debug.WriteLine($"rptTablePeaks:{keyString}")
+
                 If Not excp.ContainsKey(Split(row(0), "_")(2)) Then
                     el = keyString
                 Else
@@ -1375,7 +1424,13 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         ppm = refTable.Rows.Find(el)("Passport concentration, mg/kg")
                         pasErr = refTable.Rows.Find(el)("Passport error, %")
                     End If
-
+                Else
+                    If Form_GRS_editor.IsShowing() Then
+                        ppm = 0
+                        pasErr = 0
+                    Else Continue For
+                    End If
+                End If
                     stdErr = Math.Sqrt(row(5) ^ 2 + pasErr ^ 2)
                     If stdErr > 99 Then Continue For
                     Try ' если ключи одинаковые выбираем ту строку, в которой меньше ошибка
@@ -1385,7 +1440,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Catch ex As Exception
                         MsgBox(ex.ToString, MsgBoxStyle.Critical)
                     End Try
-                End If
+
             Next
             '   refTable.Clear()
             ' rptTablePeaks.Clear()
@@ -2113,6 +2168,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
     Public conDict As New Dictionary(Of String, ArrayList)
     Public GlobalNuclidsForCon As New ArrayList
+    Public GlobalNuclidsForConDict As New Dictionary(Of String, String)
     Public elements As List(Of String) = New List(Of String)
     Public xNA24SLI2, yNA24LLI1, xSB122LLI1, ySB124LLI2, xCE141LLI2, yLA140LLI1, xNP239LLI1, yPA233LLI2 As New Dictionary(Of String, Double)
     Public rowMap As New Dictionary(Of String, Integer)
@@ -2123,34 +2179,38 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
             Dim type As String = ""
             Dim rown As Integer = 1
-            Dim i As Integer = 0
+            '  Dim i As Integer = 0
             Debug.WriteLine("DataFromCON " & conFileName)
             Debug.WriteLine("{sampleName}|{type}|{elemName}|{conc}|{err}|{limit}")
             Dim conc As Double
             For Each line As String In File.ReadLines(conFileName, System.Text.Encoding.Default)
+                Debug.WriteLine($"The line is [{line}]")
                 If rown = 1 Then sampleName = Split(line, ":")(1).Trim 'this is sampleName not elemName
                 If rown = 3 Then type = Split(line, ":")(1).Trim
                 If rown > 10 Then
-                    If line = "" Then Continue For
+                    If String.IsNullOrEmpty(line) Then Exit For
+                    'If line = Environment.NewLine Then Exit For
                     Dim values As New ArrayList
                     line = line.Replace("M" & vbTab, "m" & vbTab)
                     line = line.Replace(",", ".")
                     ' For Each elem As String In Split(line, vbTab)
-                    values.Add(Split(line, vbTab)(0))
+                    values.Add(Split(line, vbTab)(0).Replace("*", ""))
                     values.Add(Double.Parse(Split(line, vbTab)(1), CultureInfo.InvariantCulture))
                     values.Add(Double.Parse(Split(line, vbTab)(2), CultureInfo.InvariantCulture))
                     values.Add(Double.Parse(Split(line, vbTab)(3), CultureInfo.InvariantCulture))
+                    values.Add(Split(line, vbTab)(4))
                     ' Next
                     If Not GlobalNuclidsForCon.Contains(values(0) & "_" & type) Then
                         GlobalNuclidsForCon.Add(values(0) & "_" & type)
-                        'Debug.WriteLine(GlobalNuclidsForCon(i).ToString)
-                        'i += 1
+                        GlobalNuclidsForConDict.Add(values(0) & "_" & type, values(4))
+                        '  Debug.WriteLine(GlobalNuclidsForCon(i).ToString)
+                        ' i += 1
                     End If
 
                     Try
                         'conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
                         conc = values(1)
-                        Debug.WriteLine($"{sampleName}|{type}|{values(0)}|{values(1)}|{values(2)}|{values(3)}")
+                        Debug.WriteLine($"{sampleName}|{type}|{values(0)}|{values(1)}|{values(2)}|{values(3)}|{values(4)}")
                         conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
                         If type = "LLI-1" Then
                             If values(0) = "NA-24" Then yNA24LLI1.Add(sampleName, conc)
@@ -2421,4 +2481,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
     End Sub
 
+    Private Sub Form_Main_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        LocalizedForm()
+    End Sub
 End Class

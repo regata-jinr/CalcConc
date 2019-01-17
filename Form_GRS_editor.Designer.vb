@@ -23,11 +23,11 @@ Partial Class Form_GRS_editor
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GRS_editor))
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_GRS_editor))
         Me.DataGridView_GRS_Editor = New System.Windows.Forms.DataGridView()
         Me.SaveFileDialog_Grup_Stand_GRS_Editor = New System.Windows.Forms.SaveFileDialog()
         Me.AutoGRS = New System.Windows.Forms.Button()
@@ -47,19 +47,25 @@ Partial Class Form_GRS_editor
         Me.OpenFileDialog_Akt_Stand_Obr_GRS_1 = New System.Windows.Forms.OpenFileDialog()
         Me.OpenGRSFiles = New System.Windows.Forms.OpenFileDialog()
         Me.AutoGRSToolTip = New System.Windows.Forms.ToolTip(Me.components)
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ShowElementsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.DataGridView_GRS_Editor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.GRSAddedFileList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox4.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView_GRS_Editor
         '
-        resources.ApplyResources(Me.DataGridView_GRS_Editor, "DataGridView_GRS_Editor")
         Me.DataGridView_GRS_Editor.AllowUserToAddRows = False
         Me.DataGridView_GRS_Editor.AllowUserToDeleteRows = False
+        Me.DataGridView_GRS_Editor.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_GRS_Editor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView_GRS_Editor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
@@ -79,6 +85,7 @@ Partial Class Form_GRS_editor
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.DataGridView_GRS_Editor.DefaultCellStyle = DataGridViewCellStyle2
+        Me.DataGridView_GRS_Editor.Location = New System.Drawing.Point(0, 163)
         Me.DataGridView_GRS_Editor.MultiSelect = False
         Me.DataGridView_GRS_Editor.Name = "DataGridView_GRS_Editor"
         Me.DataGridView_GRS_Editor.ReadOnly = True
@@ -95,140 +102,178 @@ Partial Class Form_GRS_editor
         DataGridViewCellStyle4.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
         Me.DataGridView_GRS_Editor.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView_GRS_Editor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.AutoGRSToolTip.SetToolTip(Me.DataGridView_GRS_Editor, resources.GetString("DataGridView_GRS_Editor.ToolTip"))
+        Me.DataGridView_GRS_Editor.Size = New System.Drawing.Size(1230, 649)
+        Me.DataGridView_GRS_Editor.TabIndex = 0
         '
         'SaveFileDialog_Grup_Stand_GRS_Editor
         '
         Me.SaveFileDialog_Grup_Stand_GRS_Editor.DefaultExt = "grs"
-        resources.ApplyResources(Me.SaveFileDialog_Grup_Stand_GRS_Editor, "SaveFileDialog_Grup_Stand_GRS_Editor")
+        Me.SaveFileDialog_Grup_Stand_GRS_Editor.Filter = "Файлы групповых стандартов (*.grs)|*.grs|Все файлы (*.*)|*.*"
         Me.SaveFileDialog_Grup_Stand_GRS_Editor.RestoreDirectory = True
         '
         'AutoGRS
         '
-        resources.ApplyResources(Me.AutoGRS, "AutoGRS")
+        Me.AutoGRS.Location = New System.Drawing.Point(6, 18)
         Me.AutoGRS.Name = "AutoGRS"
+        Me.AutoGRS.Size = New System.Drawing.Size(207, 25)
+        Me.AutoGRS.TabIndex = 14
+        Me.AutoGRS.Text = "Создать ГРС автоматически"
         Me.AutoGRSToolTip.SetToolTip(Me.AutoGRS, resources.GetString("AutoGRS.ToolTip"))
         Me.AutoGRS.UseVisualStyleBackColor = True
         '
         'InvSel
         '
-        resources.ApplyResources(Me.InvSel, "InvSel")
+        Me.InvSel.Location = New System.Drawing.Point(6, 18)
         Me.InvSel.Name = "InvSel"
-        Me.AutoGRSToolTip.SetToolTip(Me.InvSel, resources.GetString("InvSel.ToolTip"))
+        Me.InvSel.Size = New System.Drawing.Size(235, 25)
+        Me.InvSel.TabIndex = 13
+        Me.InvSel.Text = "Инвертировать выделение"
         Me.InvSel.UseVisualStyleBackColor = True
         '
         'B_Undelete_Last_String
         '
-        resources.ApplyResources(Me.B_Undelete_Last_String, "B_Undelete_Last_String")
+        Me.B_Undelete_Last_String.Location = New System.Drawing.Point(6, 49)
         Me.B_Undelete_Last_String.Name = "B_Undelete_Last_String"
-        Me.AutoGRSToolTip.SetToolTip(Me.B_Undelete_Last_String, resources.GetString("B_Undelete_Last_String.ToolTip"))
+        Me.B_Undelete_Last_String.Size = New System.Drawing.Size(235, 25)
+        Me.B_Undelete_Last_String.TabIndex = 12
+        Me.B_Undelete_Last_String.Text = "Восстановить удалённую строку"
         Me.B_Undelete_Last_String.UseVisualStyleBackColor = True
         '
         'B_Del_String
         '
-        resources.ApplyResources(Me.B_Del_String, "B_Del_String")
+        Me.B_Del_String.Location = New System.Drawing.Point(6, 83)
         Me.B_Del_String.Name = "B_Del_String"
-        Me.AutoGRSToolTip.SetToolTip(Me.B_Del_String, resources.GetString("B_Del_String.ToolTip"))
+        Me.B_Del_String.Size = New System.Drawing.Size(235, 25)
+        Me.B_Del_String.TabIndex = 11
+        Me.B_Del_String.Text = "Удалить строку"
         Me.B_Del_String.UseVisualStyleBackColor = True
         '
         'B_Save_GRS
         '
-        resources.ApplyResources(Me.B_Save_GRS, "B_Save_GRS")
+        Me.B_Save_GRS.Location = New System.Drawing.Point(6, 18)
         Me.B_Save_GRS.Name = "B_Save_GRS"
-        Me.AutoGRSToolTip.SetToolTip(Me.B_Save_GRS, resources.GetString("B_Save_GRS.ToolTip"))
+        Me.B_Save_GRS.Size = New System.Drawing.Size(224, 25)
+        Me.B_Save_GRS.TabIndex = 9
+        Me.B_Save_GRS.Text = "Cохранить групповой стандарт"
         Me.B_Save_GRS.UseVisualStyleBackColor = True
         '
         'CheckGRS
         '
-        resources.ApplyResources(Me.CheckGRS, "CheckGRS")
+        Me.CheckGRS.Location = New System.Drawing.Point(6, 49)
         Me.CheckGRS.Name = "CheckGRS"
-        Me.AutoGRSToolTip.SetToolTip(Me.CheckGRS, resources.GetString("CheckGRS.ToolTip"))
+        Me.CheckGRS.Size = New System.Drawing.Size(207, 25)
+        Me.CheckGRS.TabIndex = 15
+        Me.CheckGRS.Text = "Проверить стандарт"
         Me.CheckGRS.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
-        resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Controls.Add(Me.B_Del_String)
         Me.GroupBox1.Controls.Add(Me.B_Undelete_Last_String)
         Me.GroupBox1.Controls.Add(Me.InvSel)
+        Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.GroupBox1.Location = New System.Drawing.Point(254, 39)
         Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(248, 118)
+        Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
-        Me.AutoGRSToolTip.SetToolTip(Me.GroupBox1, resources.GetString("GroupBox1.ToolTip"))
+        Me.GroupBox1.Text = "Редактирование"
         '
         'GroupBox2
         '
-        resources.ApplyResources(Me.GroupBox2, "GroupBox2")
         Me.GroupBox2.Controls.Add(Me.B_Cancel)
         Me.GroupBox2.Controls.Add(Me.AutoGRS)
         Me.GroupBox2.Controls.Add(Me.CheckGRS)
+        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.GroupBox2.Location = New System.Drawing.Point(508, 39)
         Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(218, 118)
+        Me.GroupBox2.TabIndex = 17
         Me.GroupBox2.TabStop = False
-        Me.AutoGRSToolTip.SetToolTip(Me.GroupBox2, resources.GetString("GroupBox2.ToolTip"))
+        Me.GroupBox2.Text = "Создание и проверка"
         '
         'B_Cancel
         '
-        resources.ApplyResources(Me.B_Cancel, "B_Cancel")
+        Me.B_Cancel.Location = New System.Drawing.Point(6, 83)
         Me.B_Cancel.Name = "B_Cancel"
-        Me.AutoGRSToolTip.SetToolTip(Me.B_Cancel, resources.GetString("B_Cancel.ToolTip"))
+        Me.B_Cancel.Size = New System.Drawing.Size(207, 25)
+        Me.B_Cancel.TabIndex = 14
+        Me.B_Cancel.Text = "Отмена"
         Me.B_Cancel.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
-        resources.ApplyResources(Me.GroupBox3, "GroupBox3")
         Me.GroupBox3.Controls.Add(Me.BLoadGRS)
         Me.GroupBox3.Controls.Add(Me.B_Save_GRS)
         Me.GroupBox3.Controls.Add(Me.BChFileForGRSEd)
+        Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 39)
         Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(236, 118)
+        Me.GroupBox3.TabIndex = 17
         Me.GroupBox3.TabStop = False
-        Me.AutoGRSToolTip.SetToolTip(Me.GroupBox3, resources.GetString("GroupBox3.ToolTip"))
+        Me.GroupBox3.Text = "Сохранение и загрузка"
         '
         'BLoadGRS
         '
-        resources.ApplyResources(Me.BLoadGRS, "BLoadGRS")
+        Me.BLoadGRS.Location = New System.Drawing.Point(6, 83)
         Me.BLoadGRS.Name = "BLoadGRS"
-        Me.AutoGRSToolTip.SetToolTip(Me.BLoadGRS, resources.GetString("BLoadGRS.ToolTip"))
+        Me.BLoadGRS.Size = New System.Drawing.Size(224, 25)
+        Me.BLoadGRS.TabIndex = 10
+        Me.BLoadGRS.Text = "Загрузить групповой стандарт"
         Me.BLoadGRS.UseVisualStyleBackColor = True
         '
         'BChFileForGRSEd
         '
-        resources.ApplyResources(Me.BChFileForGRSEd, "BChFileForGRSEd")
         Me.BChFileForGRSEd.BackColor = System.Drawing.SystemColors.Control
+        Me.BChFileForGRSEd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.BChFileForGRSEd.Location = New System.Drawing.Point(6, 49)
         Me.BChFileForGRSEd.Name = "BChFileForGRSEd"
-        Me.AutoGRSToolTip.SetToolTip(Me.BChFileForGRSEd, resources.GetString("BChFileForGRSEd.ToolTip"))
+        Me.BChFileForGRSEd.Size = New System.Drawing.Size(224, 25)
+        Me.BChFileForGRSEd.TabIndex = 5
+        Me.BChFileForGRSEd.Text = "Выбрать файлы активностей стандартов"
         Me.BChFileForGRSEd.UseVisualStyleBackColor = False
         '
         'GRSAddedFileList
         '
-        resources.ApplyResources(Me.GRSAddedFileList, "GRSAddedFileList")
         Me.GRSAddedFileList.AllowUserToAddRows = False
         Me.GRSAddedFileList.AllowUserToDeleteRows = False
+        Me.GRSAddedFileList.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GRSAddedFileList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.GRSAddedFileList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.GRSAddedFileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GRSAddedFileList.Location = New System.Drawing.Point(6, 15)
         Me.GRSAddedFileList.MultiSelect = False
         Me.GRSAddedFileList.Name = "GRSAddedFileList"
         Me.GRSAddedFileList.ReadOnly = True
         Me.GRSAddedFileList.RowHeadersVisible = False
         Me.GRSAddedFileList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.AutoGRSToolTip.SetToolTip(Me.GRSAddedFileList, resources.GetString("GRSAddedFileList.ToolTip"))
+        Me.GRSAddedFileList.Size = New System.Drawing.Size(480, 97)
+        Me.GRSAddedFileList.TabIndex = 18
         '
         'GroupBox4
         '
-        resources.ApplyResources(Me.GroupBox4, "GroupBox4")
+        Me.GroupBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox4.Controls.Add(Me.GRSAddedFileList)
+        Me.GroupBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
+        Me.GroupBox4.Location = New System.Drawing.Point(732, 39)
         Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(492, 118)
+        Me.GroupBox4.TabIndex = 19
         Me.GroupBox4.TabStop = False
-        Me.AutoGRSToolTip.SetToolTip(Me.GroupBox4, resources.GetString("GroupBox4.ToolTip"))
+        Me.GroupBox4.Text = "Информация о стандартах"
         '
         'OpenFileDialog_Akt_Stand_Obr_GRS_1
         '
-        resources.ApplyResources(Me.OpenFileDialog_Akt_Stand_Obr_GRS_1, "OpenFileDialog_Akt_Stand_Obr_GRS_1")
+        Me.OpenFileDialog_Akt_Stand_Obr_GRS_1.Filter = "Файлы активностей (*.rpt)|*.rpt|Все файлы|*.*"
         Me.OpenFileDialog_Akt_Stand_Obr_GRS_1.Multiselect = True
         Me.OpenFileDialog_Akt_Stand_Obr_GRS_1.RestoreDirectory = True
         '
         'OpenGRSFiles
         '
-        resources.ApplyResources(Me.OpenGRSFiles, "OpenGRSFiles")
+        Me.OpenGRSFiles.Filter = "Файлы ГРС (*.grs)|*.grs|Все файлы|*.*"
         Me.OpenGRSFiles.RestoreDirectory = True
         '
         'AutoGRSToolTip
@@ -237,24 +282,56 @@ Partial Class Form_GRS_editor
         Me.AutoGRSToolTip.InitialDelay = 500
         Me.AutoGRSToolTip.ReshowDelay = 100
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1230, 28)
+        Me.MenuStrip1.TabIndex = 20
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ShowElementsToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(96, 24)
+        Me.SettingsToolStripMenuItem.Text = "Настройки"
+        '
+        'ShowElementsToolStripMenuItem
+        '
+        Me.ShowElementsToolStripMenuItem.CheckOnClick = True
+        Me.ShowElementsToolStripMenuItem.Name = "ShowElementsToolStripMenuItem"
+        Me.ShowElementsToolStripMenuItem.Size = New System.Drawing.Size(422, 24)
+        Me.ShowElementsToolStripMenuItem.Text = "Показывать элементы не найденные в стандарте"
+        '
         'Form_GRS_editor
         '
-        resources.ApplyResources(Me, "$this")
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(1230, 815)
         Me.Controls.Add(Me.GroupBox4)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DataGridView_GRS_Editor)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Form_GRS_editor"
-        Me.AutoGRSToolTip.SetToolTip(Me, resources.GetString("$this.ToolTip"))
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Редактор ГРС"
         CType(Me.DataGridView_GRS_Editor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         CType(Me.GRSAddedFileList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox4.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DataGridView_GRS_Editor As System.Windows.Forms.DataGridView
@@ -276,4 +353,7 @@ Partial Class Form_GRS_editor
     Friend WithEvents OpenFileDialog_Akt_Stand_Obr_GRS_1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents OpenGRSFiles As System.Windows.Forms.OpenFileDialog
     Friend WithEvents AutoGRSToolTip As ToolTip
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ShowElementsToolStripMenuItem As ToolStripMenuItem
 End Class

@@ -57,7 +57,7 @@
     Private Sub Form_Final_Table_Concentartion_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
             ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True)
-
+            Form_Main.LocalizedForm()
             BuildGraph(Form_Main.xCE141LLI2, Form_Main.yLA140LLI1, "Ce-La", Chart_Ce_La)
             BuildGraph(Form_Main.xNP239LLI1, Form_Main.yPA233LLI2, "U-Th", Chart_Th_U)
             DataGridView_Final_Table_Concentration.ClearSelection()

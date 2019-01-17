@@ -165,7 +165,6 @@ Module ConcForms
     End Function
 
     Public NuclStartStop As New Dictionary(Of String, Integer())
-    Public curNucl As String = ""
     Sub TableContentLoad(ByVal DataGridViewTable As DataGridView, ByVal FinalFlag As Boolean)
         Try
             Debug.WriteLine("TableContentLoad: ")
@@ -193,8 +192,7 @@ Module ConcForms
             Dim i As Integer = 0
             Dim k As Integer = 0
             Dim ti As Integer = 0
-            Dim nameOfColumn As String
-
+            Dim nameOfColumn As String = ""
             'Dim TypeLang As New Dictionary(Of String, String)
             'TypeLang.Add("SLI-1", "КЖИ-1")
             'TypeLang.Add("SLI-2", "КЖИ-2")
@@ -206,7 +204,7 @@ Module ConcForms
             'TypeLang.Add("ДЖИ-2", "LLI-2")
             Debug.WriteLine("Filling content in tables: ")
             For Each nucl_type As String In Form_Main.GlobalNuclidsForCon
-
+                Debug.WriteLine($"nucl_type mark - {nucl_type}")
                 nucl = Split(nucl_type, "_")(0)
                 type = Split(nucl_type, "_")(1)
 
@@ -223,7 +221,7 @@ Module ConcForms
 
                 Try
                     nameOfColumn = nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type
-                    Debug.WriteLine("nameOfColumn " & nameOfColumn)
+                    Debug.WriteLine($"nameOfColumn - {nameOfColumn}")
                     DataGridViewTable.Columns.Add(nameOfColumn, nameOfColumn)
                     columnMap.Add(nameOfColumn, 3 * i + 5)
                     DataGridViewTable.Columns(3 * i + 5).SortMode = DataGridViewColumnSortMode.NotSortable
@@ -269,10 +267,12 @@ Module ConcForms
             Dim conc, err, lim As Decimal
             Dim rown As Integer
             Dim decimalSeparator As String = Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
+            Dim mark As String
             For Each key As String In Form_Main.conDict.Keys
 
                 nucl = Split(key, "_")(3)
                 type = Split(key, "_")(2)
+                mark = Form_Main.conDict(key)(4)
 
                 If FinalFlag Then
                     If Not Form_Main.NuclidFromTable.Contains(nucl & "_" & type) Then Continue For
@@ -306,14 +306,18 @@ Module ConcForms
                     Exit Sub
                 End Try
                 Try
-                    curNucl = nucl
                     DataGridViewTable(columnMap(type), rown).Value = System.IO.Path.GetFileName(conFileName)
                     DataGridViewTable(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type), rown).Value = Rounding(conc, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
                     DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = Math.Ceiling(err)
                     DataGridViewTable(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                    If Not String.IsNullOrEmpty(mark) Then
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.White
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.White
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Style.BackColor = Color.White
+                    End If
                 Catch keyNF As KeyNotFoundException
                     Debug.WriteLine(keyNF.ToString)
-                    Dim result As Integer = MessageBox.Show($"Вероятно этот элемент {curNucl} из файла {conFileName} не надйен в таблице нуклидов. Вы можете добавить его самостоятельно в таблицу нуклидов (будьте осторожны это может повлиять на сортировку в промежуточной и окончательной таблицах) или нажать ok. В этом случае он будет пропущен.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
+                    Dim result As Integer = MessageBox.Show($"Вероятно этот элемент {nucl} из файла {conFileName} не надйен в таблице нуклидов. Вы можете добавить его самостоятельно в таблицу нуклидов (будьте осторожны это может повлиять на сортировку в промежуточной и окончательной таблицах) или нажать ok. В этом случае он будет пропущен.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
                     If result = DialogResult.Cancel Then
                         Application.Restart()
                     ElseIf result = DialogResult.OK Then
@@ -362,7 +366,7 @@ Module ConcForms
             xlChart.Axes(Excel.XlAxisType.xlValue).AxisTitle.Caption = yName
             xlChart.Axes(Excel.XlAxisType.xlValue).AxisTitle.Font.Name = "Arial Cyr"
             xlChart.Axes(Excel.XlAxisType.xlValue).AxisTitle.Font.Size = 10
-            'xlChart.Axes(Excel.XlAxisType.xlValue).MinimumScaleIsAuto = True
+            ' xlChart.Axes(Excel.XlAxisType.xlValue).MinimumScaleIsAuto = True
             ' xlChart.Axes(Excel.XlAxisType.xlValue).MaximumScaleIsAuto = True
 
             xlChart.Axes(Excel.XlAxisType.xlCategory).HasTitle = True

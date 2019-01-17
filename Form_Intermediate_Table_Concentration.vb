@@ -17,7 +17,7 @@ Public Class Form_Intermediate_Table_Concentration
     Private Sub Form_Intermediate_Table_Concentration_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
             ConcForms.TableContentLoad(DataGridView_Intermediate_Table_Concentration, False)
-
+            Form_Main.LocalizedForm()
             BuildGraph(Form_Main.xNA24SLI2, Form_Main.yNA24LLI1, "Na24-Na24", Chart_Na_Na)
             BuildGraph(Form_Main.xSB122LLI1, Form_Main.ySB124LLI2, "Sb122-Sb124", Chart_Sb122_Sb124)
             BuildGraph(Form_Main.xCE141LLI2, Form_Main.yLA140LLI1, "Ce141-La140", Chart_Ce_La)
