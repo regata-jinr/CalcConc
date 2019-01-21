@@ -514,8 +514,4 @@
         End Try
     End Sub
 
-    Public Function IsShowing() As Boolean
-        Return ShowElementsToolStripMenuItem.Checked
-    End Function
-
 End Class

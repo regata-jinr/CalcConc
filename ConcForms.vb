@@ -3,6 +3,7 @@ Imports ClosedXML.Excel
 Imports System.ComponentModel
 Imports File = System.IO.File
 Imports System.Globalization
+
 Module ConcForms
     Sub ElementsSort()
         Try
@@ -80,7 +81,7 @@ Module ConcForms
                 Chart.ChartAreas("ChartArea1").AxisX.Maximum = Format(xMax, "0.00")
             End If
             Chart.ChartAreas("ChartArea1").AxisX.Interval = Format((xValues.Max - xValues.Min) / 4, "0.00")
-                Chart.ChartAreas("ChartArea1").AxisY.Interval = Format((yValues.Max - yValues.Min) / 4, "0.00")
+            Chart.ChartAreas("ChartArea1").AxisY.Interval = Format((yValues.Max - yValues.Min) / 4, "0.00")
 
             'МНК
             Dim a, b As Double
@@ -120,8 +121,8 @@ Module ConcForms
             Chart.Series("TrendLine").Points.DataBindXY(xValues, appy)
             Chart.Series("TrendLine").LegendText = "R^2 = " & Format(r, "0.00")
 
-            Catch ex As Exception
-                MsgBox(ex.ToString, MsgBoxStyle.Critical)
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try
     End Sub
 
@@ -235,9 +236,9 @@ Module ConcForms
                     DataGridViewTable.Columns(3 * i + 7).SortMode = DataGridViewColumnSortMode.NotSortable
                     If i <> 0 And nucl <> Split(DataGridViewTable.Columns(3 * (i - 1) + 5).HeaderText, vbCrLf)(0) Then k += 1
                     If k Mod 2 = 0 Then
-                        DataGridViewTable.Columns(3 * i + 5).DefaultCellStyle.BackColor = Color.MediumTurquoise
-                        DataGridViewTable.Columns(3 * i + 6).DefaultCellStyle.BackColor = Color.MediumTurquoise
-                        DataGridViewTable.Columns(3 * i + 7).DefaultCellStyle.BackColor = Color.MediumTurquoise
+                        DataGridViewTable.Columns(3 * i + 5).DefaultCellStyle.BackColor = Color.SkyBlue
+                        DataGridViewTable.Columns(3 * i + 6).DefaultCellStyle.BackColor = Color.SkyBlue
+                        DataGridViewTable.Columns(3 * i + 7).DefaultCellStyle.BackColor = Color.SkyBlue
                         If Not NuclStartStop.ContainsKey(nucl) Then
                             NuclStartStop.Add(nucl, {3 * i + 5, 3 * i + 7})
                         Else
@@ -249,9 +250,9 @@ Module ConcForms
                         Else
                             NuclStartStop(nucl)(1) = 3 * i + 7
                         End If
-                        DataGridViewTable.Columns(3 * i + 5).DefaultCellStyle.BackColor = Color.LightSalmon
-                        DataGridViewTable.Columns(3 * i + 6).DefaultCellStyle.BackColor = Color.LightSalmon
-                        DataGridViewTable.Columns(3 * i + 7).DefaultCellStyle.BackColor = Color.LightSalmon
+                        DataGridViewTable.Columns(3 * i + 5).DefaultCellStyle.BackColor = Color.Moccasin
+                        DataGridViewTable.Columns(3 * i + 6).DefaultCellStyle.BackColor = Color.Moccasin
+                        DataGridViewTable.Columns(3 * i + 7).DefaultCellStyle.BackColor = Color.Moccasin
                     End If
                     i += 1
                 Catch ex As DuplicateNameException
@@ -268,8 +269,9 @@ Module ConcForms
             Dim rown As Integer
             Dim decimalSeparator As String = Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
             Dim mark As String
-            For Each key As String In Form_Main.conDict.Keys
 
+            'todo: could be parallel, but for it I should switch dotnet framework version to 4.7.2 I'm not sure that it's will work on users computers
+            For Each key As String In Form_Main.conDict.Keys
                 nucl = Split(key, "_")(3)
                 type = Split(key, "_")(2)
                 mark = Form_Main.conDict(key)(4)
@@ -310,10 +312,14 @@ Module ConcForms
                     DataGridViewTable(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type), rown).Value = Rounding(conc, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
                     DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = Math.Ceiling(err)
                     DataGridViewTable(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
-                    If Not String.IsNullOrEmpty(mark) Then
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.White
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.White
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Style.BackColor = Color.White
+                    If (mark = "*" Or mark = "&") And Not FinalFlag Then
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.LightGray
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
+                    ElseIf mark = "$" And FinalFlag Then ' удаляем активности из финальной таблицы
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Value = ""
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Value = ""
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Value = ""
                     End If
                 Catch keyNF As KeyNotFoundException
                     Debug.WriteLine(keyNF.ToString)
@@ -388,18 +394,16 @@ Module ConcForms
 
     Function SaveToExcel(ByVal DataGridViewTable As DataGridView, ByVal SaveDialog As SaveFileDialog, ByVal FinalTable As Boolean) As Dictionary(Of String, String())
         Try
-            '  Form_Main.SaveTablConcElemPromezh_ToolStripMenuItem.Enabled = True
             If FinalTable Then
                 SaveDialog.FileName = "finalTable.xlsx"
             Else
                 SaveDialog.FileName = "tempTable.xlsx"
             End If
 
-            If SaveDialog.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then ' Эта строчка открывает диалог и сравнивает результат с cancel 
-
+            If SaveDialog.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
                 Return Nothing
                 Exit Function
-            ElseIf System.Windows.Forms.DialogResult.OK Then ' Эта строчка только сравнивает результат с OK 
+            ElseIf System.Windows.Forms.DialogResult.OK Then
                 Using wb As New ClosedXML.Excel.XLWorkbook()
                     Dim ws = wb.Worksheets.Add("1")
                     If FinalTable Then
@@ -466,11 +470,6 @@ Module ConcForms
                             ws.Range(1, NuclStartStop(nucl)(0) + 1, 1, NuclStartStop(nucl)(1) + 1).Merge()
                             ws.Range(1, NuclStartStop(nucl)(0) + 1, 1, NuclStartStop(nucl)(1) + 1).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center
                             ws.Range(1, NuclStartStop(nucl)(0) + 1, 1, NuclStartStop(nucl)(1) + 1).Style.Font.Bold = True
-                            If fillMarker Mod 2 = 0 Then
-                                ws.Range(1, NuclStartStop(nucl)(0) + 1, DataGridViewTable.Rows.Count + 3, NuclStartStop(nucl)(1) + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.SkyBlue
-                            Else
-                                ws.Range(1, NuclStartStop(nucl)(0) + 1, DataGridViewTable.Rows.Count + 3, NuclStartStop(nucl)(1) + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.Moccasin
-                            End If
                             If nucl <> Split(DataGridViewTable.Columns(coln - 1).HeaderText, vbCrLf)(0) Then fillMarker += 1
                             'Nuclid
 
@@ -493,10 +492,15 @@ Module ConcForms
                             If coln > 4 Then
                                 If DataGridViewTable(coln, rown).Value = 0 Then Continue For
                                 ws.Cell(rown + 4, coln + 1).Value = DataGridViewTable(coln, rown).Value
+                                If DataGridViewTable(coln, rown).Style.BackColor.Name = "0" Then
+                                    ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.FromName(DataGridViewTable.Columns(coln).DefaultCellStyle.BackColor.Name)
+                                Else
+                                    ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.FromName(DataGridViewTable(coln, rown).Style.BackColor.Name)
+                                End If
                             Else
                                 ws.Cell(rown + 4, coln + 1).Value = "'" & DataGridViewTable(coln, rown).Value ' "'" нужен из-за того, что такие имена как 2710-1 без апострофа он переводит в дату
+                                ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.White
                             End If
-
                         Next
                     Next
 

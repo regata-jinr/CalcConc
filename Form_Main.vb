@@ -80,7 +80,6 @@ Public Class Form_Main
             Form_GRS_editor.B_Save_GRS.Text = "Cохранить групповой стандарт"
             Form_GRS_editor.BChFileForGRSEd.Text = "Выбрать файлы активностей"
             Form_GRS_editor.BLoadGRS.Text = "Загрузить существующий ГРС"
-            Form_Final_Table_Concentration.LabelTableFinalComment.Text = "Ячейки с белым фоновым цветом содержат значения относящиеся к активности"
 
             Form_GRS_editor.GroupBox1.Text = "Редактирование"
 
@@ -95,14 +94,12 @@ Public Class Form_Main
             Form_GRS_editor.B_Cancel.Text = "Отмена"
 
             Form_GRS_editor.GroupBox4.Text = "Информация"
-            Form_GRS_editor.ShowElementsToolStripMenuItem.Text = "Показывать нуклиды со значениями не найденными в пасспорте"
-            Form_GRS_editor.SettingsToolStripMenuItem.Text = "Настройки"
 
             Form_Intermediate_Table_Concentration.Text = "Промежуточная таблица концентраций"
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Построить график"
             Form_Intermediate_Table_Concentration.Button_Save.Text = "Закрыть и сохранить в файл"
             Form_Intermediate_Table_Concentration.B_Cancel.Text = "Отмена"
-            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Ячейки с белым фоновым цветом содержат значения относящиеся к активности"
+            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Ячейки с серым фоновым цветом содержат значения относящиеся к активности"
 
             Me.TextBox_Coef.Text = "1.0"
             Me.Monitor_Activity_ToolStripMenuItem.Text = "Пересчёт активностей стандартов"
@@ -215,15 +212,12 @@ Public Class Form_Main
             Form_GRS_editor.B_Cancel.Text = "Cancel"
 
             Form_GRS_editor.GroupBox4.Text = "Information"
-            Form_GRS_editor.ShowElementsToolStripMenuItem.Text = "Show nuclids without passport's values"
-            Form_GRS_editor.SettingsToolStripMenuItem.Text = "Options"
 
             Form_Intermediate_Table_Concentration.Text = "Intermediate table of concentration"
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Construct graph"
             Form_Intermediate_Table_Concentration.Button_Save.Text = "Close and save into file"
             Form_Intermediate_Table_Concentration.B_Cancel.Text = "Cancel"
-            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Cells with white background color refers to activity's values"
-            Form_Final_Table_Concentration.LabelTableFinalComment.Text = "Cells with white background color refers to activity's values"
+            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Cells with gray background color refers to activity's values"
 
             Me.Monitor_Activity_ToolStripMenuItem.Text = "Calculation of standards activities"
             Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Text = "Choose the basic file of activities for standard monitor"
@@ -898,15 +892,19 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Exit Sub
                 End If
                 Dim conTable As New DataTable
+                Dim actTable As New DataTable
                 Dim tempgrs As DataTable
                 tempgrs = DataFromGrs(file_name_Grup_Stand).Copy
-
                 conTable.Columns.Add("Элемент")
                 conTable.Columns.Add("Концентрация")
-                conTable.Columns.Add("Погрешность")
-                conTable.Columns.Add("Предел обнаружения")
-                conTable.Columns.Add("Пометки")
-                conTable.Columns.Add("Номер", GetType(Integer))
+                    conTable.Columns.Add("Погрешность")
+                    conTable.Columns.Add("Предел обнаружения")
+
+                    actTable.Columns.Add("Элемент")
+                    actTable.Columns.Add("Активность")
+                    actTable.Columns.Add("Погрешность")
+                    actTable.Columns.Add("Предел обнаружения")
+
                 Dim conc As Double
                 Dim concErr As Double
                 Dim lim As Double
@@ -937,63 +935,109 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         lim = 0
                     End Try
                     Debug.WriteLine($"{row(2)}, {Format(conc, "0.00E+00")}, {Format(concErr, "0.00")}, {Format(lim, "0.00E+00")}")
-                    If conc <> 0 Then
-                        conTable.Rows.Add(row(2), Format(conc, "0.00E+00"), Format(concErr, "0.00"), Format(lim, "0.00E+00"), "", Convert.ToInt32(row(2).Split("-")(1)))
-                    ElseIf lim <> 0 Then
-                        conTable.Rows.Add(row(2), Format(conc, "0.00E+00"), Format(concErr, "0.00"), Format(lim, "0.00E+00"), "$", Convert.ToInt32(row(2).Split("-")(1)))
-                    Else
-                        Try
-                            conTable.Rows.Add($"{row(2)}", Format(rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & row(2))(4), "0.00E+00"), Format(100 * (rptTablePeaks.Rows.Find(System.IO.Path.GetFileName(fileName) & "_" & src(0) & "_" & Split(row(0), "_")(1))(5) / 100), "0.00"), Format(lim, "0.00E+00"), "*", Convert.ToInt32(row(2).Split("-")(1)))
-                        Catch ex As NullReferenceException
-                            Debug.WriteLine($"Element {row(2)} doesn't exist in file {System.IO.Path.GetFileName(fileName)} ")
-                        End Try
-                    End If
-
+                    conTable.Rows.Add(row(2), Format(conc, "0.00E+00"), Format(concErr, "0.00"), Format(lim, "0.00E+00"))
                 Next
 
                 'check for nuclids which has found in sample, but hasn't found in standard:
                 Dim limit As Double = 0
+                Dim langStr = ""
+                If My.Settings.language = "Русский" Then
+                    langStr = "Нуклид = "
+                Else
+                    langStr = "Nuclid = "
+                End If
                 For Each row As DataRow In rptTablePeaks.Rows
                     limit = 0
+
                     If conTable.Select($"Элемент = '{row(2)}'").Count = 0 Then
-                        If rptTableMda.Select($"Нуклид = '{row(2)}'").Count > 0 Then
-                            limit = rptTableMda.Select($"Нуклид = '{row(2)}'")(0)(6)
+                        If rptTableMda.Select($"{langStr}'{row(2)}'").Count > 0 Then
+                            limit = rptTableMda.Select($"{langStr}'{row(2)}'")(0)(6)
                         End If
-                        conTable.Rows.Add($"{row(2)}", Format(row(4), "0.00E+00"), Format(row(5), "0.00"), Format(limit, "0.00E+00"), "&", Convert.ToInt32(row(2).Split("-")(1)))
+                        actTable.Rows.Add($"{row(2)}", Format(row(4), "0.00E+00"), Format(row(5), "0.00"), Format(limit, "0.00E+00"))
                     End If
                 Next
 
-                conTable.DefaultView.Sort = "Номер"
-                conTable = conTable.DefaultView.ToTable()
-
                 ' save to file
-                Dim outputString As String = ""
-
+                Dim outputString As String = $"{vbTab}{vbTab}"
+                ' Return {NameSamp, mesType, experimentator, id, geometry}
                 Using sw As New IO.StreamWriter($"{FolderBrowserDialog_Conc_Elem.SelectedPath}/{System.IO.Path.GetFileNameWithoutExtension(fileName)}.CON")
-                    sw.WriteLine("Концентрации элементов в образце  :  " + src(0) & vbCrLf)
-                    sw.WriteLine("Тип измерений  :  " + src(1) & vbCrLf)
-                    sw.WriteLine("Групповой стандарт  :  " + System.IO.Path.GetFileName(file_name_Grup_Stand) & vbCrLf)
-                    ' my version sw.WriteLine("Элемент" & "_" & "Концентрация, мг/гр" & "_" & "Погрешность, %" & "_" & "Предел обнаружения, мг/гр")
-                    'for correct work old version of program
-                    sw.WriteLine("элемент	концентр.,	погр.,	предел      пометки")
-                    sw.WriteLine("	uг/гр		%	обнаруж.,")
-                    sw.WriteLine("				uг/гр" & vbCrLf)
-
-
+                    sw.WriteLine("*************************************************************************")
+                    If My.Settings.language = "Русский" Then
+                        sw.WriteLine("*****                    РАСЧЕТ КОНЦЕНТРАЦИЙ ЭЛЕМЕНТОВ              *****")
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine()
+                        sw.WriteLine($"Дата создания файла			     : {Date.Now}")
+                        sw.WriteLine($"Имя образца                      : {src(0)}")
+                        sw.WriteLine($"Описание                         : {src(2)}")
+                        sw.WriteLine($"Код                              : {src(3)}")
+                        sw.WriteLine($"Тип                              : {src(1)}")
+                        sw.WriteLine($"Геометрия                        : {src(4)}")
+                        sw.WriteLine($"Групповой стандарт               : {System.IO.Path.GetFileName(file_name_Grup_Stand)}")
+                        sw.WriteLine()
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine("*****           ЗНАЧЕНИЯ КОНЦЕНТРАЦИЙ ЭЛЕМЕНТОВ В ОБРАЗЦЕ           *****")
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine()
+                        sw.WriteLine("		элемент	концентр.,	погр.,	предел")
+                        sw.WriteLine("					uг/гр		%	обнаруж.,")
+                        sw.WriteLine("										uг/гр")
+                        sw.WriteLine()
+                    Else
+                        sw.WriteLine("*****            CALCULATION CONCENTRATIONS OF ELEMENTS             *****")
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine()
+                        sw.WriteLine($"DateTime creation of file		 : {Date.Now}")
+                        sw.WriteLine($"Sample name                      : {src(0)}")
+                        sw.WriteLine($"Description                      : {src(2)}")
+                        sw.WriteLine($"Id                               : {src(3)}")
+                        sw.WriteLine($"Type                             : {src(1)}")
+                        sw.WriteLine($"Geometry                         : {src(4)}")
+                        sw.WriteLine($"GRS                              : {System.IO.Path.GetFileName(file_name_Grup_Stand)}")
+                        sw.WriteLine()
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine("*****          CONCENTRATIONS VALUES OF ELEMENTS IN SAMPLE          *****")
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine()
+                        sw.WriteLine("		element	concentr.,	err.,	detection")
+                        sw.WriteLine("					ug/gr		%	limit.,")
+                        sw.WriteLine("										ug/gr")
+                        sw.WriteLine()
+                    End If
                     For i As Integer = 0 To conTable.Rows.Count - 1
-                        For j As Integer = 0 To conTable.Columns.Count - 2
+                        For j As Integer = 0 To conTable.Columns.Count - 1
                             outputString = outputString & vbTab & Replace(conTable(i)(j), ",", ".")
                         Next
                         sw.WriteLine(outputString.Substring(1, outputString.Length - 1))
-                        outputString = ""
+                        outputString = $"{vbTab}{vbTab}"
                     Next
                     sw.WriteLine()
+                    sw.WriteLine()
                     If My.Settings.language = "Русский" Then
-                        comment = $"* - Нуклид найден в образце и в эталоне, но в паспорте отсутствует значение концентрации (указана активность и ее погрешность){vbCrLf}& - Нуклид найден в образце, но отсутствует в эталоне (указана активность и ее погрешность){vbCrLf}$ - Нуклид найден в эталоне, но отсутствует в образце"
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine("*****        ЭЛЕМЕНТЫ БЕЗ РАССЧИТАННЫХ ЗНАЧЕНИЙ КОНЦЕНТРАЦИЙ        *****")
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine()
+                        sw.WriteLine("		элемент	активност.,	погр.,	предел")
+                        sw.WriteLine("				uCi/gram		%	обнаруж.,")
+                        sw.WriteLine("									uCi/gram")
                     Else
-                        comment = $"* - Nuclid has found in sample and standard, but reference doesn't contain value of concentration for this nuclid (specified activity and it error){vbCrLf}& - Nuclid has found in sample, but doesn't exist in standard (specified activity and it error){vbCrLf}$ - Nuclid has found in standard, but hasn't found in sample"
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine("*****                ELEMENTS WITHOUT CONCENTRATIONS                *****")
+                        sw.WriteLine("*************************************************************************")
+                        sw.WriteLine()
+                        sw.WriteLine("		element	activity.,	err.,	detection")
+                        sw.WriteLine("				uCi/gram		%	limit.,")
+                        sw.WriteLine("									uCi/gram")
                     End If
-                    sw.WriteLine(comment)
+                    sw.WriteLine()
+                    For i As Integer = 0 To actTable.Rows.Count - 1
+                        For j As Integer = 0 To actTable.Columns.Count - 1
+                            outputString = outputString & vbTab & Replace(actTable(i)(j), ",", ".")
+                        Next
+                        sw.WriteLine(outputString.Substring(1, outputString.Length - 1))
+                        outputString = $"{vbTab}{vbTab}"
+                    Next
+
                 End Using
             Next
 
@@ -1227,6 +1271,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Dim NameSamp As String = ""
                 Dim LastNuclid As String = ""
                 Dim mesType As String = ""
+                Dim experimentator As String = ""
+                Dim id As String = ""
+                Dim geometry As String = ""
 
                 Dim nuclid As String = ""
                 Dim nuclNum As Integer
@@ -1258,13 +1305,16 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         ElseIf line.StartsWith("Имя образца") Or line.StartsWith("Sample Title") Then
                             NameSamp = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
                         ElseIf line.StartsWith("Описание") Or line.StartsWith("Sample Description") Then
+                            experimentator = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
                             FileInfo.Add(Split(line, ":")(0).Trim & ":" & Split(line, ":")(1))
                         ElseIf line.StartsWith("Код") Or line.StartsWith("Sample Identification") Then
+                            id = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
                             FileInfo.Add(Split(line, ":")(0).Trim & ":" & Split(line, ":")(1))
                         ElseIf line.StartsWith("Тип") Or line.StartsWith("Sample Type") Then
                             mesType = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
                             FileInfo.Add(Split(line, ":")(0).Trim & ":" & Split(line, ":")(1))
                         ElseIf line.StartsWith("Геометрия") Or line.StartsWith("Sample Geometry") Then
+                            geometry = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
                             FileInfo.Add(Split(line, ":")(0).Trim & ":" & Split(line, ":")(1))
                         ElseIf String.Equals(Replace(line, "*", "").Trim, "Нуклид Достоверность Средневзвешенная  Погрешность") Or String.Equals(Replace(line, "*", "").Trim, "Nuclide       Wt mean         Wt mean") Then
                             Debug.WriteLine("Start interference peaks parsing:")
@@ -1352,7 +1402,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Next
                 End If
                 If Not Split(GRSName, "-").Contains(NameSamp) Then GRSName += NameSamp & "-"
-                Return {NameSamp, mesType}
+                Return {NameSamp, mesType, experimentator, id, geometry}
             Else
                 MsgBox("Неверный тип файла")
                 Return Nothing
@@ -1424,14 +1474,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         ppm = refTable.Rows.Find(el)("Passport concentration, mg/kg")
                         pasErr = refTable.Rows.Find(el)("Passport error, %")
                     End If
-                Else
-                    If Form_GRS_editor.IsShowing() Then
-                        ppm = 0
-                        pasErr = 0
-                    Else Continue For
-                    End If
+                Else Continue For
                 End If
-                    stdErr = Math.Sqrt(row(5) ^ 2 + pasErr ^ 2)
+                stdErr = Math.Sqrt(row(5) ^ 2 + pasErr ^ 2)
                     If stdErr > 99 Then Continue For
                     Try ' если ключи одинаковые выбираем ту строку, в которой меньше ошибка
                         grsTable.Rows.Add(row(0), row(1), row(2), row(3), row(4), row(5), ppm, pasErr, stdErr, Convert.ToInt16(Replace(Split(row(2), "-")(1), "m", "")), 0)
