@@ -5,20 +5,20 @@ Imports File = System.IO.File
 Imports System.Globalization
 
 Module ConcForms
-    Sub ElementsSort()
+    Sub ElementsSort(ByRef arr As ArrayList)
         Try
             Debug.WriteLine("ElementsSort")
             Dim OrderedNulcidList As New ArrayList
             For Each nucl_type As String In Form_Main.NuclidFromTable
                 For Each key In Form_Main.TypeEngRu.Keys
-                    If Form_Main.GlobalNuclidsForCon.Contains(Split(nucl_type, "_")(0) & "_" & key) Then
+                    If arr.Contains(Split(nucl_type, "_")(0) & "_" & key) Then
                         OrderedNulcidList.Add(Split(nucl_type, "_")(0) & "_" & key)
                     End If
                 Next
             Next
 
-            Form_Main.GlobalNuclidsForCon.Clear()
-            Form_Main.GlobalNuclidsForCon = OrderedNulcidList
+            arr.Clear()
+            arr = OrderedNulcidList
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try
@@ -166,12 +166,12 @@ Module ConcForms
     End Function
 
     Public NuclStartStop As New Dictionary(Of String, Integer())
-    Sub TableContentLoad(ByVal DataGridViewTable As DataGridView, ByVal FinalFlag As Boolean)
+    Sub TableContentLoad(ByVal DataGridViewTable As DataGridView, ByVal FinalFlag As Boolean, ByRef arr As ArrayList, ByRef dict As Dictionary(Of String, ArrayList), ByVal MainUnit As String, ByVal MDAUnit As String)
         Try
             Debug.WriteLine("TableContentLoad: ")
             Dim columnMap As New Dictionary(Of String, Integer)
             Dim nucl, type, conFileName, elemName As String
-            ElementsSort()
+            ElementsSort(arr)
 
             'todo: change to lang dictionary
             DataGridViewTable.Columns.Add("sample", "Имя образца")
@@ -204,7 +204,7 @@ Module ConcForms
             'TypeLang.Add("ДЖИ-1", "LLI-1")
             'TypeLang.Add("ДЖИ-2", "LLI-2")
             Debug.WriteLine("Filling content in tables: ")
-            For Each nucl_type As String In Form_Main.GlobalNuclidsForCon
+            For Each nucl_type As String In arr
                 Debug.WriteLine($"nucl_type mark - {nucl_type}")
                 nucl = Split(nucl_type, "_")(0)
                 type = Split(nucl_type, "_")(1)
@@ -221,7 +221,7 @@ Module ConcForms
                 End If
 
                 Try
-                    nameOfColumn = nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type
+                    nameOfColumn = nucl & vbCrLf & MainUnit & vbCrLf & type
                     Debug.WriteLine($"nameOfColumn - {nameOfColumn}")
                     DataGridViewTable.Columns.Add(nameOfColumn, nameOfColumn)
                     columnMap.Add(nameOfColumn, 3 * i + 5)
@@ -230,7 +230,7 @@ Module ConcForms
                     DataGridViewTable.Columns.Add(nameOfColumn, nameOfColumn)
                     columnMap.Add(nameOfColumn, 3 * i + 6)
                     DataGridViewTable.Columns(3 * i + 6).SortMode = DataGridViewColumnSortMode.NotSortable
-                    nameOfColumn = nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type
+                    nameOfColumn = nucl & vbCrLf & MDAUnit & vbCrLf & type
                     DataGridViewTable.Columns.Add(nameOfColumn, nameOfColumn)
                     columnMap.Add(nameOfColumn, 3 * i + 7)
                     DataGridViewTable.Columns(3 * i + 7).SortMode = DataGridViewColumnSortMode.NotSortable
@@ -268,13 +268,11 @@ Module ConcForms
             Dim conc, err, lim As Decimal
             Dim rown As Integer
             Dim decimalSeparator As String = Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
-            Dim mark As String
 
             'todo: could be parallel, but for it I should switch dotnet framework version to 4.7.2 I'm not sure that it's will work on users computers
-            For Each key As String In Form_Main.conDict.Keys
+            For Each key As String In dict.Keys
                 nucl = Split(key, "_")(3)
                 type = Split(key, "_")(2)
-                mark = Form_Main.conDict(key)(4)
 
                 If FinalFlag Then
                     If Not Form_Main.NuclidFromTable.Contains(nucl & "_" & type) Then Continue For
@@ -290,13 +288,13 @@ Module ConcForms
                 rown = Form_Main.rowMap(elemName)
                 Try
                     If decimalSeparator = "." Then
-                        conc = Double.Parse(Form_Main.conDict(key)(1).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo)
-                        err = Math.Ceiling(Double.Parse(Form_Main.conDict(key)(2).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo))
-                        lim = Double.Parse(Form_Main.conDict(key)(3).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo)
+                        conc = Double.Parse(dict(key)(1).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo)
+                        err = Math.Ceiling(Double.Parse(dict(key)(2).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo))
+                        lim = Double.Parse(dict(key)(3).ToString.Replace(",", "."), NumberFormatInfo.InvariantInfo)
                     Else
-                        conc = Double.Parse(Form_Main.conDict(key)(1).ToString, CultureInfo.CurrentCulture)
-                        err = Math.Ceiling(Double.Parse(Form_Main.conDict(key)(2).ToString, CultureInfo.CurrentCulture))
-                        lim = Double.Parse(Form_Main.conDict(key)(3).ToString, CultureInfo.CurrentCulture)
+                        conc = Double.Parse(dict(key)(1).ToString, CultureInfo.CurrentCulture)
+                        err = Math.Ceiling(Double.Parse(dict(key)(2).ToString, CultureInfo.CurrentCulture))
+                        lim = Double.Parse(dict(key)(3).ToString, CultureInfo.CurrentCulture)
                     End If
 
                     Debug.WriteLine("conc err lim: " & "|" & conc & "|" & err & "|" & lim)
@@ -309,18 +307,33 @@ Module ConcForms
                 End Try
                 Try
                     DataGridViewTable(columnMap(type), rown).Value = System.IO.Path.GetFileName(conFileName)
-                    DataGridViewTable(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type), rown).Value = Rounding(conc, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
-                    DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = Math.Ceiling(err)
-                    DataGridViewTable(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
-                    If (mark = "*" Or mark = "&") And Not FinalFlag Then
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.LightGray
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
-                    ElseIf mark = "$" And FinalFlag Then ' удаляем активности из финальной таблицы
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Value = ""
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Value = ""
-                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Value = ""
+                    If conc <> 0 Then
+                        DataGridViewTable(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type), rown).Value = Rounding(conc, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                    Else
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type)).Value = ""
                     End If
+
+                    If err <> 0 Then
+                        DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = Math.Ceiling(err)
+                    Else
+                        DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = ""
+                    End If
+                    If lim <> 0 Then
+                        DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                    Else
+                        DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type)).Value = ""
+                    End If
+
+                    DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                    'If (mark = "*" Or mark = "&") And Not FinalFlag Then
+                    '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
+                    '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.LightGray
+                    '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
+                    'ElseIf mark = "$" And FinalFlag Then ' удаляем активности из финальной таблицы
+                    '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Value = ""
+                    '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Value = ""
+                    '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "MDC, mg/kg" & vbCrLf & type)).Value = ""
+                    'End If
                 Catch keyNF As KeyNotFoundException
                     Debug.WriteLine(keyNF.ToString)
                     Dim result As Integer = MessageBox.Show($"Вероятно этот элемент {nucl} из файла {conFileName} не надйен в таблице нуклидов. Вы можете добавить его самостоятельно в таблицу нуклидов (будьте осторожны это может повлиять на сортировку в промежуточной и окончательной таблицах) или нажать ok. В этом случае он будет пропущен.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
@@ -470,6 +483,13 @@ Module ConcForms
                             ws.Range(1, NuclStartStop(nucl)(0) + 1, 1, NuclStartStop(nucl)(1) + 1).Merge()
                             ws.Range(1, NuclStartStop(nucl)(0) + 1, 1, NuclStartStop(nucl)(1) + 1).Style.Alignment.Horizontal = ClosedXML.Excel.XLAlignmentHorizontalValues.Center
                             ws.Range(1, NuclStartStop(nucl)(0) + 1, 1, NuclStartStop(nucl)(1) + 1).Style.Font.Bold = True
+
+                            If fillMarker Mod 2 = 0 Then
+                                ws.Range(1, NuclStartStop(nucl)(0) + 1, DataGridViewTable.Rows.Count + 3, NuclStartStop(nucl)(1) + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.SkyBlue
+                            Else
+                                ws.Range(1, NuclStartStop(nucl)(0) + 1, DataGridViewTable.Rows.Count + 3, NuclStartStop(nucl)(1) + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.Moccasin
+                            End If
+
                             If nucl <> Split(DataGridViewTable.Columns(coln - 1).HeaderText, vbCrLf)(0) Then fillMarker += 1
                             'Nuclid
 
@@ -492,14 +512,8 @@ Module ConcForms
                             If coln > 4 Then
                                 If DataGridViewTable(coln, rown).Value = 0 Then Continue For
                                 ws.Cell(rown + 4, coln + 1).Value = DataGridViewTable(coln, rown).Value
-                                If DataGridViewTable(coln, rown).Style.BackColor.Name = "0" Then
-                                    ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.FromName(DataGridViewTable.Columns(coln).DefaultCellStyle.BackColor.Name)
-                                Else
-                                    ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.FromName(DataGridViewTable(coln, rown).Style.BackColor.Name)
-                                End If
                             Else
                                 ws.Cell(rown + 4, coln + 1).Value = "'" & DataGridViewTable(coln, rown).Value ' "'" нужен из-за того, что такие имена как 2710-1 без апострофа он переводит в дату
-                                ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.White
                             End If
                         Next
                     Next

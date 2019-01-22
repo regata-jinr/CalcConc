@@ -99,7 +99,7 @@ Public Class Form_Main
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Построить график"
             Form_Intermediate_Table_Concentration.Button_Save.Text = "Закрыть и сохранить в файл"
             Form_Intermediate_Table_Concentration.B_Cancel.Text = "Отмена"
-            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Ячейки с серым фоновым цветом содержат значения относящиеся к активности"
+
 
             Me.TextBox_Coef.Text = "1.0"
             Me.Monitor_Activity_ToolStripMenuItem.Text = "Пересчёт активностей стандартов"
@@ -128,6 +128,7 @@ Public Class Form_Main
             Me.B_TablConcElemPromezh_CON.Text = "Создать промежуточную таблицу концентраций элементов"
             Me.B_TablConcElemOkonchat_CON.Text = "Создать окончательную таблицу концентраций элементов"
             Me.L_SLI_Source.Text = "Источник данных КЖИ"
+            ButtonShowWOConc.Text = "Элементы без рассчитанных значений концентраций"
 
             Me.L_Aktivn_Issl_Obr.Text = "Файл(ы) активностей исследуемого образца: не выбран"
             Me.L_Grup_Stand.Text = "Файл группового стандарта: не выбран"
@@ -217,7 +218,6 @@ Public Class Form_Main
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Construct graph"
             Form_Intermediate_Table_Concentration.Button_Save.Text = "Close and save into file"
             Form_Intermediate_Table_Concentration.B_Cancel.Text = "Cancel"
-            Form_Intermediate_Table_Concentration.LabelTableInterComment.Text = "Cells with gray background color refers to activity's values"
 
             Me.Monitor_Activity_ToolStripMenuItem.Text = "Calculation of standards activities"
             Me.VibrBazFileAktMonitStand_MON_ToolStripMenuItem.Text = "Choose the basic file of activities for standard monitor"
@@ -258,6 +258,9 @@ Public Class Form_Main
             Me.Text = "Calculation of concentration "
             Me.SavePereschAktStand_MON_ToolStripMenuItem.Text = "Save counted file(s) of standards activity"
             Me.OpenFileGrupStand_ToolStripMenuItem.Text = "Open file of group standard"
+            ButtonShowWOConc.Text = "Elements without calculated concentration"
+
+
 
             Me.L_Aktivn_Issl_Obr.Text = "File(s) of observable sampl.s activity: not choosen"
             Me.L_Grup_Stand.Text = "File of group standard: not choosen"
@@ -403,6 +406,15 @@ a:                                  currentRow_copy = currentRow ' обход X 
             Exit Function
         End Try
     End Function
+
+    Private Sub ButtonShowWOConc_Click(sender As Object, e As EventArgs) Handles ButtonShowWOConc.Click
+        Dim forAct As New FormWoConcTable
+        forAct.Show()
+        LocalizedForm()
+        Debug.WriteLine("Show Table With Activity values:")
+
+
+    End Sub
 
     Function array_length_RPT_MDA(ByVal file_name_p As String) As Integer
         array_length_RPT_MDA = 0
@@ -713,12 +725,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
             Dim first_File As System.IO.FileInfo
             first_File = My.Computer.FileSystem.GetFileInfo(OpenFileDialog_Aktivn_Issl_Obr.FileNames(0))
             OpenFileDialog_Aktivn_Issl_Obr.InitialDirectory = first_File.DirectoryName
-            My.MySettings.Default.pathTo31 = first_File.DirectoryName
-            'If My.Settings.language = "Русский" Then
-            '    L_Aktivn_Issl_Obr.Text = "Файл(ы) активностей исследуемого образца: " + OpenFileDialog_Aktivn_Issl_Obr.InitialDirectory + "\" + L_Aktivn_Issl_Obr_File_list
-            'Else
-            '    L_Aktivn_Issl_Obr.Text = "File(s) of observable sample's activity: " + OpenFileDialog_Aktivn_Issl_Obr.InitialDirectory + "\" + L_Aktivn_Issl_Obr_File_list
-            'End If
+            L_Aktivn_Issl_Obr.Text = ""
+            L_Aktivn_Issl_Obr.Text += OpenFileDialog_Aktivn_Issl_Obr.InitialDirectory + "\" + L_Aktivn_Issl_Obr_File_list
 
             File_Aktivn_Issl_Obr_Select = True
             If (File_Aktivn_Issl_Obr_Select And File_Grup_Stand_Select) Then B_calc_conc.Enabled = True
@@ -2018,7 +2026,8 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             Dim first_File As System.IO.FileInfo
             first_File = My.Computer.FileSystem.GetFileInfo(OpenFileDialog_Grup_Stand.FileNames(0))
             OpenFileDialog_Grup_Stand.InitialDirectory = first_File.DirectoryName
-            My.MySettings.Default.pathTo32 = first_File.DirectoryName
+            L_Grup_Stand.Text = ""
+            L_Grup_Stand.Text = file_name_Grup_Stand
         Catch ex As Exception
             If My.Settings.language = "Русский" Then
                 MsgBox("Операция была отменена (ошибка в OpenFileGrupStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -2162,7 +2171,9 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 Dim result As Integer = MessageBox.Show("Файлы концентраций уже загружены. Хотите добавить новые файлы к уже загруженным?", "Программа расчета концентраций", MessageBoxButtons.YesNo)
                 If result = DialogResult.No Then
                     conDict.Clear()
+                    actDict.Clear()
                     GlobalNuclidsForCon.Clear()
+                    GlobalNuclidsForAct.Clear()
                     elements.Clear()
                     xNA24SLI2.Clear()
                     yNA24LLI1.Clear()
@@ -2186,6 +2197,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
                 Dim fileNum As Integer = 0
                 Dim fileString As String = ""
+                Dim checkStr As String = ""
                 ' Tasks.Parallel.ForEach(OpenFileDialog_Conc_Issl_Obr_CON.FileNames, Sub(fileName)
                 For Each fileName In OpenFileDialog_Conc_Issl_Obr_CON.FileNames
                     If System.IO.Path.GetFileName(fileName).Contains("_") Then
@@ -2193,7 +2205,17 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                         Exit Sub
                     End If
                     fileString += System.IO.Path.GetFileName(fileName) & ";"
-                    DataFromCON(fileName)
+                    Using sw As New IO.StreamReader($"{fileName}")
+                        checkStr = sw.ReadLine()
+                    End Using
+                    Debug.WriteLine($"First row from CON so that detect new or old file type is {checkStr}")
+                    If checkStr.StartsWith("*") Then
+                        Debug.WriteLine($"New file was found")
+                        DataFromCONnew(fileName)
+                    Else
+                        Debug.WriteLine($"Old file was found")
+                        DataFromCON(fileName)
+                    End If
                     fileNum += 1
                 Next
                 ' End Sub)
@@ -2212,8 +2234,9 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
     End Sub
 
     Public conDict As New Dictionary(Of String, ArrayList)
+    Public actDict As New Dictionary(Of String, ArrayList)
     Public GlobalNuclidsForCon As New ArrayList
-    Public GlobalNuclidsForConDict As New Dictionary(Of String, String)
+    Public GlobalNuclidsForAct As New ArrayList
     Public elements As List(Of String) = New List(Of String)
     Public xNA24SLI2, yNA24LLI1, xSB122LLI1, ySB124LLI2, xCE141LLI2, yLA140LLI1, xNP239LLI1, yPA233LLI2 As New Dictionary(Of String, Double)
     Public rowMap As New Dictionary(Of String, Integer)
@@ -2227,62 +2250,113 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             '  Dim i As Integer = 0
             Debug.WriteLine("DataFromCON " & conFileName)
             Debug.WriteLine("{sampleName}|{type}|{elemName}|{conc}|{err}|{limit}")
-            Dim conc As Double
             For Each line As String In File.ReadLines(conFileName, System.Text.Encoding.Default)
                 Debug.WriteLine($"The line is [{line}]")
                 If rown = 1 Then sampleName = Split(line, ":")(1).Trim 'this is sampleName not elemName
                 If rown = 3 Then type = Split(line, ":")(1).Trim
                 If rown > 10 Then
                     If String.IsNullOrEmpty(line) Then Exit For
-                    'If line = Environment.NewLine Then Exit For
-                    Dim values As New ArrayList
-                    line = line.Replace("M" & vbTab, "m" & vbTab)
-                    line = line.Replace(",", ".")
-                    ' For Each elem As String In Split(line, vbTab)
-                    values.Add(Split(line, vbTab)(0).Replace("*", ""))
-                    values.Add(Double.Parse(Split(line, vbTab)(1), CultureInfo.InvariantCulture))
-                    values.Add(Double.Parse(Split(line, vbTab)(2), CultureInfo.InvariantCulture))
-                    values.Add(Double.Parse(Split(line, vbTab)(3), CultureInfo.InvariantCulture))
-                    values.Add(Split(line, vbTab)(4))
-                    ' Next
-                    If Not GlobalNuclidsForCon.Contains(values(0) & "_" & type) Then
-                        GlobalNuclidsForCon.Add(values(0) & "_" & type)
-                        GlobalNuclidsForConDict.Add(values(0) & "_" & type, values(4))
-                        '  Debug.WriteLine(GlobalNuclidsForCon(i).ToString)
-                        ' i += 1
-                    End If
-
-                    Try
-                        'conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
-                        conc = values(1)
-                        Debug.WriteLine($"{sampleName}|{type}|{values(0)}|{values(1)}|{values(2)}|{values(3)}|{values(4)}")
-                        conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
-                        If type = "LLI-1" Then
-                            If values(0) = "NA-24" Then yNA24LLI1.Add(sampleName, conc)
-                            If values(0) = "SB-122" Then xSB122LLI1.Add(sampleName, conc)
-                            'If values(0) = "CE-141" Then xCE141LLI1.Add(elemName, conc)
-                            If values(0) = "LA-140" Then yLA140LLI1.Add(sampleName, conc)
-                            If values(0) = "NP-239" Then xNP239LLI1.Add(sampleName, conc)
-                            'If values(0) = "PA-233" Then yPA233LLI1.Add(elemName, conc)
-                        ElseIf type = "LLI-2" Then
-                            If values(0) = "CE-141" Then xCE141LLI2.Add(sampleName, conc)
-                            If values(0) = "SB-124" Then ySB124LLI2.Add(sampleName, conc)
-                            If values(0) = "PA-233" Then yPA233LLI2.Add(sampleName, conc)
-                        ElseIf type = "SLI-2" Then
-                            If values(0) = "NA-24" Then xNA24SLI2.Add(sampleName, conc)
-                        End If
-                    Catch ex As NullReferenceException
-                    Catch key As ArgumentException
-                        Dim result As Integer = MessageBox.Show($"Вероятно произошло дублирование имен образцов в файлах {conFileName}: проверьте образец с именем {sampleName}.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
-                        If result = DialogResult.Cancel Then
-                            Application.Restart()
-                        ElseIf result = DialogResult.OK Then
-                        End If
-                    End Try
+                    ParseLine4Values(line, GlobalNuclidsForCon, conDict, type, sampleName, conFileName)
                 End If
                 rown += 1
             Next
 
+            If Not elements.Contains(sampleName) Then
+                rowMap.Add(sampleName, elements.Count)
+                elements.Add(sampleName)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+            Exit Sub
+        End Try
+    End Sub
+
+    Sub ParseLine4Values(ByVal line As String, ByRef arr As ArrayList, ByRef dict As Dictionary(Of String, ArrayList), Type As String, ByVal sampleName As String, ByVal conFileName As String)
+        Dim conc As Double
+        Dim values As New ArrayList
+        Debug.WriteLine($"Current line with values: [{line}]")
+        line = line.Replace("M" & vbTab, "m" & vbTab)
+        line = line.Replace(",", ".")
+        values.Add(Split(line, vbTab)(0))
+        values.Add(Double.Parse(Split(line, vbTab)(1), CultureInfo.InvariantCulture))
+        values.Add(Double.Parse(Split(line, vbTab)(2), CultureInfo.InvariantCulture))
+        values.Add(Double.Parse(Split(line, vbTab)(3), CultureInfo.InvariantCulture))
+
+        If Not arr.Contains(values(0) & "_" & Type) Then
+            arr.Add(values(0) & "_" & Type)
+        End If
+
+        Try
+            'conDict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & type & "_" & values(0), values)
+            conc = values(1)
+            Debug.WriteLine($"{sampleName}|{Type}|{values(0)}|{values(1)}|{values(2)}|{values(3)}")
+            dict.Add(System.IO.Path.GetFileName(conFileName) & "_" & sampleName & "_" & Type & "_" & values(0), values)
+            If Type = "LLI-1" Then
+                If values(0) = "NA-24" Then yNA24LLI1.Add(sampleName, conc)
+                If values(0) = "SB-122" Then xSB122LLI1.Add(sampleName, conc)
+                'If values(0) = "CE-141" Then xCE141LLI1.Add(elemName, conc)
+                If values(0) = "LA-140" Then yLA140LLI1.Add(sampleName, conc)
+                If values(0) = "NP-239" Then xNP239LLI1.Add(sampleName, conc)
+                'If values(0) = "PA-233" Then yPA233LLI1.Add(elemName, conc)
+            ElseIf Type = "LLI-2" Then
+                If values(0) = "CE-141" Then xCE141LLI2.Add(sampleName, conc)
+                If values(0) = "SB-124" Then ySB124LLI2.Add(sampleName, conc)
+                If values(0) = "PA-233" Then yPA233LLI2.Add(sampleName, conc)
+            ElseIf Type = "SLI-2" Then
+                If values(0) = "NA-24" Then xNA24SLI2.Add(sampleName, conc)
+            End If
+        Catch ex As NullReferenceException
+        Catch key As ArgumentException
+            Dim result As Integer = MessageBox.Show($"Вероятно произошло дублирование имен образцов в файлах {conFileName}: проверьте образец с именем {sampleName}.", "Крах программы расчета концентраций", MessageBoxButtons.OKCancel)
+            If result = DialogResult.Cancel Then
+                Application.Restart()
+            ElseIf result = DialogResult.OK Then
+            End If
+        End Try
+    End Sub
+
+    'todo: new parsing method
+    'todo: add opportunity to save final table right to DB if new format of .con files used
+    Sub DataFromCONnew(ByVal conFileName As String)
+        Try
+            Debug.WriteLine($"Start parsing file {conFileName} like file with new format")
+            Dim rowNum As Integer = 0
+            Dim line As String = ""
+            Dim sampleName As String = ""
+            Dim description As String = ""
+            Dim id As String = ""
+            Dim type As String = ""
+            Dim geometry As String = ""
+            Dim grs As String = ""
+            Dim isFirstTable As Boolean = True
+            Dim newStartsRow As Integer = 0
+            Using sw As New IO.StreamReader($"{conFileName}")
+                While Not sw.EndOfStream
+                    line = sw.ReadLine()
+                    If rowNum = 5 Then sampleName = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
+                    If rowNum = 6 Then description = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
+                    If rowNum = 7 Then id = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
+                    If rowNum = 8 Then type = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
+                    If rowNum = 9 Then geometry = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
+                    If rowNum = 10 Then grs = StrPars.Right(Trim(line), Trim(line).Length - Trim(line).LastIndexOf(" ") - 1)
+                    If rowNum >= 20 And isFirstTable Then
+                        If line.StartsWith("*") Then
+                            isFirstTable = False
+                            newStartsRow = rowNum + 7
+                            Continue While
+                        End If
+                        If String.IsNullOrEmpty(line) Then Continue While
+                        ParseLine4Values(line.TrimStart(), GlobalNuclidsForCon, conDict, type, sampleName, conFileName)
+                    End If
+
+                    If Not isFirstTable And rowNum >= newStartsRow Then
+                        If String.IsNullOrEmpty(line) Then Continue While
+                        ParseLine4Values(line.TrimStart(), GlobalNuclidsForAct, actDict, type, sampleName, conFileName)
+                    End If
+
+                    rowNum += 1
+                End While
+            End Using
             If Not elements.Contains(sampleName) Then
                 rowMap.Add(sampleName, elements.Count)
                 elements.Add(sampleName)

@@ -39,6 +39,7 @@ Partial Class Form_Main
         Me.OpenConcIsslObr_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Table_Nuclides_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Clear_Form_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LangEngToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog_Aktivn_Issl_Obr = New System.Windows.Forms.OpenFileDialog()
         Me.L_Aktivn_Issl_Obr = New System.Windows.Forms.Label()
         Me.B_calc_conc = New System.Windows.Forms.Button()
@@ -86,7 +87,7 @@ Partial Class Form_Main
         Me.GroupBox_Concentration = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
-        Me.LangEngToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ButtonShowWOConc = New System.Windows.Forms.Button()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -196,6 +197,11 @@ Partial Class Form_Main
         Me.Clear_Form_ToolStripMenuItem.Size = New System.Drawing.Size(135, 20)
         Me.Clear_Form_ToolStripMenuItem.Text = "Re-launch application"
         '
+        'LangEngToolStripMenuItem
+        '
+        Me.LangEngToolStripMenuItem.Name = "LangEngToolStripMenuItem"
+        Me.LangEngToolStripMenuItem.Size = New System.Drawing.Size(12, 20)
+        '
         'OpenFileDialog_Aktivn_Issl_Obr
         '
         Me.OpenFileDialog_Aktivn_Issl_Obr.Filter = "Файлы активностей (*.rpt)|*.rpt|Все файлы|*.*"
@@ -252,7 +258,7 @@ Partial Class Form_Main
         'B_TablConcElemOkonchat_CON
         '
         Me.B_TablConcElemOkonchat_CON.BackColor = System.Drawing.SystemColors.Control
-        Me.B_TablConcElemOkonchat_CON.Location = New System.Drawing.Point(4, 286)
+        Me.B_TablConcElemOkonchat_CON.Location = New System.Drawing.Point(5, 317)
         Me.B_TablConcElemOkonchat_CON.Name = "B_TablConcElemOkonchat_CON"
         Me.B_TablConcElemOkonchat_CON.Size = New System.Drawing.Size(685, 25)
         Me.B_TablConcElemOkonchat_CON.TabIndex = 19
@@ -504,6 +510,7 @@ Partial Class Form_Main
         'GroupBox_Concentration
         '
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
+        Me.GroupBox_Concentration.Controls.Add(Me.ButtonShowWOConc)
         Me.GroupBox_Concentration.Controls.Add(Me.Label1)
         Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
         Me.GroupBox_Concentration.Controls.Add(Me.B_TablConcElemOkonchat_CON)
@@ -524,7 +531,7 @@ Partial Class Form_Main
         Me.GroupBox_Concentration.ForeColor = System.Drawing.SystemColors.ControlText
         Me.GroupBox_Concentration.Location = New System.Drawing.Point(5, 214)
         Me.GroupBox_Concentration.Name = "GroupBox_Concentration"
-        Me.GroupBox_Concentration.Size = New System.Drawing.Size(696, 317)
+        Me.GroupBox_Concentration.Size = New System.Drawing.Size(696, 345)
         Me.GroupBox_Concentration.TabIndex = 13
         Me.GroupBox_Concentration.TabStop = False
         Me.GroupBox_Concentration.Text = "Concentration"
@@ -547,16 +554,21 @@ Partial Class Form_Main
         Me.TextBoxAcc.Text = "1"
         Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'LangEngToolStripMenuItem
+        'ButtonShowWOConc
         '
-        Me.LangEngToolStripMenuItem.Name = "LangEngToolStripMenuItem"
-        Me.LangEngToolStripMenuItem.Size = New System.Drawing.Size(12, 20)
+        Me.ButtonShowWOConc.BackColor = System.Drawing.SystemColors.Control
+        Me.ButtonShowWOConc.Location = New System.Drawing.Point(5, 286)
+        Me.ButtonShowWOConc.Name = "ButtonShowWOConc"
+        Me.ButtonShowWOConc.Size = New System.Drawing.Size(684, 25)
+        Me.ButtonShowWOConc.TabIndex = 24
+        Me.ButtonShowWOConc.Text = "label"
+        Me.ButtonShowWOConc.UseVisualStyleBackColor = False
         '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(707, 531)
+        Me.ClientSize = New System.Drawing.Size(707, 562)
         Me.Controls.Add(Me.GroupBox_Concentration)
         Me.Controls.Add(Me.GroupBox_GroupStandart)
         Me.Controls.Add(Me.GroupBox_L_Aktivnosti)
@@ -642,4 +654,5 @@ Partial Class Form_Main
     Friend WithEvents Label1 As Label
     Friend WithEvents TextBoxAcc As TextBox
     Friend WithEvents LangEngToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ButtonShowWOConc As Button
 End Class

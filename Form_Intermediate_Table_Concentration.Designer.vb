@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_Intermediate_Table_Concentration
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form_Intermediate_Table_Concentration
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -50,7 +50,6 @@ Partial Class Form_Intermediate_Table_Concentration
         Me.Chart_Ce_La = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Chart_Pa_Np = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.SaveInterTable = New System.Windows.Forms.SaveFileDialog()
-        Me.LabelTableInterComment = New System.Windows.Forms.Label()
         CType(Me.DataGridView_Intermediate_Table_Concentration, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart_Na_Na, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart_Sb122_Sb124, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -95,7 +94,7 @@ Partial Class Form_Intermediate_Table_Concentration
         DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.DataGridView_Intermediate_Table_Concentration.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.DataGridView_Intermediate_Table_Concentration.RowHeadersVisible = False
-        Me.DataGridView_Intermediate_Table_Concentration.Size = New System.Drawing.Size(930, 301)
+        Me.DataGridView_Intermediate_Table_Concentration.Size = New System.Drawing.Size(930, 318)
         Me.DataGridView_Intermediate_Table_Concentration.TabIndex = 0
         '
         'Chart_Na_Na
@@ -246,23 +245,12 @@ Partial Class Form_Intermediate_Table_Concentration
         Me.SaveInterTable.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
         Me.SaveInterTable.RestoreDirectory = True
         '
-        'LabelTableInterComment
-        '
-        Me.LabelTableInterComment.AutoSize = True
-        Me.LabelTableInterComment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.LabelTableInterComment.Location = New System.Drawing.Point(13, 307)
-        Me.LabelTableInterComment.Name = "LabelTableInterComment"
-        Me.LabelTableInterComment.Size = New System.Drawing.Size(55, 16)
-        Me.LabelTableInterComment.TabIndex = 9
-        Me.LabelTableInterComment.Text = "Label1"
-        '
         'Form_Intermediate_Table_Concentration
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(933, 751)
-        Me.Controls.Add(Me.LabelTableInterComment)
         Me.Controls.Add(Me.Chart_Pa_Np)
         Me.Controls.Add(Me.Chart_Ce_La)
         Me.Controls.Add(Me.Chart_Sb122_Sb124)
@@ -281,7 +269,6 @@ Partial Class Form_Intermediate_Table_Concentration
         CType(Me.Chart_Ce_La, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart_Pa_Np, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents DataGridView_Intermediate_Table_Concentration As System.Windows.Forms.DataGridView
@@ -293,5 +280,4 @@ Partial Class Form_Intermediate_Table_Concentration
     Friend WithEvents Chart_Ce_La As System.Windows.Forms.DataVisualization.Charting.Chart
     Friend WithEvents Chart_Pa_Np As System.Windows.Forms.DataVisualization.Charting.Chart
     Friend WithEvents SaveInterTable As System.Windows.Forms.SaveFileDialog
-    Friend WithEvents LabelTableInterComment As Label
 End Class
