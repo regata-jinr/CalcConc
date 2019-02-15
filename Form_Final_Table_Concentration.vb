@@ -6,7 +6,13 @@
 
     Private Sub Button_Save_Click(sender As System.Object, e As System.EventArgs) Handles Button_Save.Click
         Dim valuesRange As New Dictionary(Of String, String())
-        valuesRange = SaveToExcel(DataGridView_Final_Table_Concentration, SaveFinalTable, True)
+        Dim unit As String = ""
+        If Not Form_Main.RadioButtonFilter.Checked Then
+            unit = "Conc, mg/kg"
+        Else
+            unit = "Conc, mg"
+        End If
+        valuesRange = SaveToExcel(DataGridView_Final_Table_Concentration, SaveFinalTable, True, unit)
         If IsNothing(valuesRange) Then Exit Sub
 
         Try
@@ -56,7 +62,13 @@
 
     Private Sub Form_Final_Table_Concentartion_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
-            ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, "Conc, mg/kg", "MDC, mg/kg")
+            Dim unit As String = ""
+            If Not Form_Main.RadioButtonFilter.Checked Then
+                unit = "mg/kg"
+            Else
+                unit = "mg"
+            End If
+            ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
             Form_Main.LocalizedForm()
             BuildGraph(Form_Main.xCE141LLI2, Form_Main.yLA140LLI1, "Ce-La", Chart_Ce_La)
             BuildGraph(Form_Main.xNP239LLI1, Form_Main.yPA233LLI2, "U-Th", Chart_Th_U)

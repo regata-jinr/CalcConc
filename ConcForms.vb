@@ -405,7 +405,7 @@ Module ConcForms
         End Try
     End Sub
 
-    Function SaveToExcel(ByVal DataGridViewTable As DataGridView, ByVal SaveDialog As SaveFileDialog, ByVal FinalTable As Boolean) As Dictionary(Of String, String())
+    Function SaveToExcel(ByVal DataGridViewTable As DataGridView, ByVal SaveDialog As SaveFileDialog, ByVal FinalTable As Boolean, ByVal MainUnit As String) As Dictionary(Of String, String())
         Try
             If FinalTable Then
                 SaveDialog.FileName = "finalTable.xlsx"
@@ -431,19 +431,19 @@ Module ConcForms
 
                     Dim GraphHeader As New ArrayList
                     If FinalTable Then
-                        GraphHeader.Add("LA" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-1")
-                        GraphHeader.Add("CE" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-2")
-                        GraphHeader.Add("TH" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-2")
-                        GraphHeader.Add("U" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-1")
+                        GraphHeader.Add("LA" & vbCrLf & MainUnit & vbCrLf & "LLI-1")
+                        GraphHeader.Add("CE" & vbCrLf & MainUnit & vbCrLf & "LLI-2")
+                        GraphHeader.Add("TH" & vbCrLf & MainUnit & vbCrLf & "LLI-2")
+                        GraphHeader.Add("U" & vbCrLf & MainUnit & vbCrLf & "LLI-1")
                     Else
-                        GraphHeader.Add("NA-24" & vbCrLf & "Conc, mg/kg" & vbCrLf & "SLI-2")
-                        GraphHeader.Add("NA-24" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-1")
-                        GraphHeader.Add("SB-122" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-1")
-                        GraphHeader.Add("SB-124" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-2")
-                        GraphHeader.Add("LA-140" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-1")
-                        GraphHeader.Add("CE-141" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-2")
-                        GraphHeader.Add("PA-233" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-2")
-                        GraphHeader.Add("NP-239" & vbCrLf & "Conc, mg/kg" & vbCrLf & "LLI-1")
+                        GraphHeader.Add("NA-24" & vbCrLf & MainUnit & vbCrLf & "SLI-2")
+                        GraphHeader.Add("NA-24" & vbCrLf & MainUnit & vbCrLf & "LLI-1")
+                        GraphHeader.Add("SB-122" & vbCrLf & MainUnit & vbCrLf & "LLI-1")
+                        GraphHeader.Add("SB-124" & vbCrLf & MainUnit & vbCrLf & "LLI-2")
+                        GraphHeader.Add("LA-140" & vbCrLf & MainUnit & vbCrLf & "LLI-1")
+                        GraphHeader.Add("CE-141" & vbCrLf & MainUnit & vbCrLf & "LLI-2")
+                        GraphHeader.Add("PA-233" & vbCrLf & MainUnit & vbCrLf & "LLI-2")
+                        GraphHeader.Add("NP-239" & vbCrLf & MainUnit & vbCrLf & "LLI-1")
                     End If
                     Dim valuesRange As New Dictionary(Of String, String())
                     Dim RangeStart, RangeFinish As String
@@ -510,7 +510,6 @@ Module ConcForms
                         End If
                         For rown As Integer = 0 To DataGridViewTable.Rows.Count - 1
                             If coln > 4 Then
-                                If DataGridViewTable(coln, rown).Value = 0 Then Continue For
                                 ws.Cell(rown + 4, coln + 1).Value = DataGridViewTable(coln, rown).Value
                             Else
                                 ws.Cell(rown + 4, coln + 1).Value = "'" & DataGridViewTable(coln, rown).Value ' "'" нужен из-за того, что такие имена как 2710-1 без апострофа он переводит в дату
@@ -524,9 +523,10 @@ Module ConcForms
                     For coln As Integer = 0 To DataGridViewTable.Columns.Count - 1
                         For rown As Integer = 0 To DataGridViewTable.Rows.Count - 1
                             If coln > 4 And coln < DataGridViewTable.ColumnCount - 3 Then
-                                If Split(DataGridViewTable.Columns(coln).HeaderText, vbCrLf)(1) = "Conc, mg/kg" And DataGridViewTable(coln, rown).Value <= DataGridViewTable(coln + 2, rown).Value And DataGridViewTable(coln, rown).Value <> 0 Then
-
-                                    ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.Bittersweet
+                                If Split(DataGridViewTable.Columns(coln).HeaderText, vbCrLf)(1) = MainUnit And Not String.IsNullOrEmpty(DataGridViewTable(coln, rown).Value) Then
+                                    If DataGridViewTable(coln, rown).Value <= DataGridViewTable(coln + 2, rown).Value Then
+                                        ws.Cell(rown + 4, coln + 1).Style.Fill.BackgroundColor = ClosedXML.Excel.XLColor.Bittersweet
+                                    End If
                                 End If
                                 ws.Column(coln + 1).Width = 7.57
                             End If

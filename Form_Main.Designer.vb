@@ -85,9 +85,10 @@ Partial Class Form_Main
         Me.GroupBox_L_Aktivnosti = New System.Windows.Forms.GroupBox()
         Me.GroupBox_GroupStandart = New System.Windows.Forms.GroupBox()
         Me.GroupBox_Concentration = New System.Windows.Forms.GroupBox()
+        Me.ButtonShowWOConc = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
-        Me.ButtonShowWOConc = New System.Windows.Forms.Button()
+        Me.RadioButtonFilter = New System.Windows.Forms.RadioButton()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -510,6 +511,7 @@ Partial Class Form_Main
         'GroupBox_Concentration
         '
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
+        Me.GroupBox_Concentration.Controls.Add(Me.RadioButtonFilter)
         Me.GroupBox_Concentration.Controls.Add(Me.ButtonShowWOConc)
         Me.GroupBox_Concentration.Controls.Add(Me.Label1)
         Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
@@ -536,6 +538,16 @@ Partial Class Form_Main
         Me.GroupBox_Concentration.TabStop = False
         Me.GroupBox_Concentration.Text = "Concentration"
         '
+        'ButtonShowWOConc
+        '
+        Me.ButtonShowWOConc.BackColor = System.Drawing.SystemColors.Control
+        Me.ButtonShowWOConc.Location = New System.Drawing.Point(5, 286)
+        Me.ButtonShowWOConc.Name = "ButtonShowWOConc"
+        Me.ButtonShowWOConc.Size = New System.Drawing.Size(684, 25)
+        Me.ButtonShowWOConc.TabIndex = 24
+        Me.ButtonShowWOConc.Text = "label"
+        Me.ButtonShowWOConc.UseVisualStyleBackColor = False
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -554,15 +566,16 @@ Partial Class Form_Main
         Me.TextBoxAcc.Text = "1"
         Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'ButtonShowWOConc
+        'RadioButtonFilter
         '
-        Me.ButtonShowWOConc.BackColor = System.Drawing.SystemColors.Control
-        Me.ButtonShowWOConc.Location = New System.Drawing.Point(5, 286)
-        Me.ButtonShowWOConc.Name = "ButtonShowWOConc"
-        Me.ButtonShowWOConc.Size = New System.Drawing.Size(684, 25)
-        Me.ButtonShowWOConc.TabIndex = 24
-        Me.ButtonShowWOConc.Text = "label"
-        Me.ButtonShowWOConc.UseVisualStyleBackColor = False
+        Me.RadioButtonFilter.AutoSize = True
+        Me.RadioButtonFilter.Location = New System.Drawing.Point(299, 110)
+        Me.RadioButtonFilter.Name = "RadioButtonFilter"
+        Me.RadioButtonFilter.Size = New System.Drawing.Size(90, 17)
+        Me.RadioButtonFilter.TabIndex = 25
+        Me.RadioButtonFilter.TabStop = True
+        Me.RadioButtonFilter.Text = "RadioButton1"
+        Me.RadioButtonFilter.UseVisualStyleBackColor = True
         '
         'Form_Main
         '
@@ -655,4 +668,5 @@ Partial Class Form_Main
     Friend WithEvents TextBoxAcc As TextBox
     Friend WithEvents LangEngToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonShowWOConc As Button
+    Friend WithEvents RadioButtonFilter As RadioButton
 End Class

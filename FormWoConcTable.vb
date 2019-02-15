@@ -24,7 +24,7 @@
 
     Private Sub Button_Save_Click(sender As Object, e As EventArgs) Handles Button_Save.Click
         Dim valuesRange As New Dictionary(Of String, String())
-        valuesRange = SaveToExcel(DataGridView_WoConcElements, SaveWoConcTable, False)
+        valuesRange = SaveToExcel(DataGridView_WoConcElements, SaveWoConcTable, False, "Activity, uCi/gr")
         If IsNothing(valuesRange) Then Exit Sub
         Try
             'chart save
