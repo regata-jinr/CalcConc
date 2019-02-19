@@ -220,6 +220,7 @@ Module ConcForms
                     End If
                 End If
 
+
                 Try
                     nameOfColumn = nucl & vbCrLf & MainUnit & vbCrLf & type
                     Debug.WriteLine($"nameOfColumn - {nameOfColumn}")
@@ -255,8 +256,10 @@ Module ConcForms
                         DataGridViewTable.Columns(3 * i + 7).DefaultCellStyle.BackColor = Color.Moccasin
                     End If
                     i += 1
+                Catch ex As ArgumentException
+                    MsgBox($"Вы пытаетесть добавить уже существующий элемент {vbCrLf}{nucl}{vbCrLf} в окончательную таблицу. Проверьте таблицу нуклидов.", MsgBoxStyle.Critical)
                 Catch ex As DuplicateNameException
-                    MsgBox(ex.ToString)
+                    MsgBox(ex.ToString, MsgBoxStyle.Critical)
                 End Try
             Next
 
