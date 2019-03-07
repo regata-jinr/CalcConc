@@ -28,8 +28,7 @@
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Стандартное отклонение, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Z-значение", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Разница между расч. и пасп. значениями, %", GetType(Double))
                 Next
             Else
                 CheckGRSSrc.Columns.Add("File Name")
@@ -39,8 +38,7 @@
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport Concentration, mg/kg", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated error, %", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport error, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Std. deviation, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Z-value", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Diff. betw. calc. and passp. vals, %", GetType(Double))
                 Next
             End If
 
@@ -55,7 +53,7 @@
                 End Try
             Next
 
-            Dim calcConc, pasConc, calcErr, StdErr, passErr, zVal As Double
+            Dim calcConc, pasConc, calcErr, StdErr, passErr As Double
 
             For Each grsRow As DataGridViewRow In Form_GRS_editor.DataGridView_GRS_Editor.Rows
                 If Not grsRow.DefaultCellStyle.Font.Strikeout Then
@@ -66,8 +64,6 @@
                             calcConc = Math.Round(Convert.ToDouble(grsRow.Cells(6).Value) * Convert.ToDouble(Form_Main.rptTablePeaks.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("Средне-взвешенная активность, uCi/gram")) / Convert.ToDouble(grsRow.Cells(4).Value), 3)
                             If calcConc <> Double.NaN And calcConc <> Double.PositiveInfinity And calcConc <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Расчетная концентрация, mg/kg") = calcConc
                         Catch ex As Exception
-
-                            ' MsgBox(grsCheckRow(0) & "_" & grsRow.Cells(2).Value & vbCrLf & ex.ToString)
                         End Try
 
                         Try
@@ -87,7 +83,9 @@
                         Try
                             StdErr = Convert.ToDouble(Form_Main.grsTable.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("paspConc"))
                             StdErr = Math.Round(100 * (calcConc - pasConc) / pasConc, 1)
-                            If StdErr <> Double.NaN And StdErr <> Double.PositiveInfinity And StdErr <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Стандартное отклонение, %") = StdErr
+                            If StdErr <> Double.NaN And StdErr <> Double.PositiveInfinity And StdErr <> Double.NegativeInfinity Then
+                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Разница между расч. и пасп. значениями, %") = StdErr
+                            End If
                         Catch ex As Exception
                         End Try
 
@@ -96,19 +94,16 @@
                             If passErr <> Double.NaN And passErr <> Double.PositiveInfinity And passErr <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Паспортная погрешность, %") = passErr
                         Catch ex As Exception
                         End Try
-
-                        Try
-                            zVal = Convert.ToDouble(Form_Main.grsTable.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("paspConc"))
-                            zVal = Math.Round((calcConc - pasConc) / Math.Sqrt((calcConc * calcErr / 100) ^ 2 + (passErr * pasConc / 100) ^ 2), 2)
-                            If zVal <> Double.NaN And zVal <> Double.PositiveInfinity And zVal <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Z-значение") = zVal
-                        Catch ex As Exception
-                        End Try
                     Next
                 End If
             Next
-
+            DataGridViewForCheckGRS.ColumnHeadersVisible = False
             DataGridViewForCheckGRS.DataSource = CheckGRSSrc
             CheckGrsEditorFill()
+            DataGridViewForCheckGRS.ColumnHeadersVisible = True
+
+            CheckBoxPer.Checked = True
+
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
@@ -144,49 +139,38 @@
                 End If
                 DataGridViewForCheckGRS.Columns(ci).DefaultCellStyle.BackColor = Color.LightSalmon
             End If
+            For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
+                If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
+                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Разница") Then row.Cells(ci).Style.BackColor = Color.LightCoral
+            Next
+        Next
+    End Sub
+
+
+    Private Sub CheckBoxPer_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxPer.CheckedChanged
+        CheckGrsEditorFill()
+        Dim HiddenElements As New ArrayList
+        For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
+            For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
+                If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
+                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Разница") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
+            Next
         Next
 
-    End Sub
-
-    Private Sub CheckBoxZVal_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBoxZVal.CheckedChanged
-        If CheckBoxZVal.Checked Then
-            For Each col As DataGridViewColumn In DataGridViewForCheckGRS.Columns
-                If Strings.Right(col.HeaderText, "Z-значение".Length) = "Z-значение" Then col.Visible = False
+        If CheckBoxPer.Checked Then
+            For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
+                If Not HiddenElements.Contains(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0)) Then DataGridViewForCheckGRS.Columns(ci).Visible = False
             Next
         Else
-            For Each col As DataGridViewColumn In DataGridViewForCheckGRS.Columns
-                If Strings.Right(col.HeaderText, "Z-значение".Length) = "Z-значение" Then col.Visible = True
+            For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
+                DataGridViewForCheckGRS.Columns(ci).Visible = True
             Next
         End If
     End Sub
 
-    Private Sub CheckBoxCaclErr_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBoxCaclErr.CheckedChanged
-        If CheckBoxCaclErr.Checked Then
-            For Each col As DataGridViewColumn In DataGridViewForCheckGRS.Columns
-                If Strings.Right(col.HeaderText, "Расчетная погрешность, %".Length) = "Расчетная погрешность, %" Then col.Visible = False
-            Next
-        Else
-            For Each col As DataGridViewColumn In DataGridViewForCheckGRS.Columns
-                If Strings.Right(col.HeaderText, "Расчетная погрешность, %".Length) = "Расчетная погрешность, %" Then col.Visible = True
-            Next
-        End If
-    End Sub
-
-    Private Sub CheckBoxPassErr_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CheckBoxPassErr.CheckedChanged
-        If CheckBoxPassErr.Checked Then
-            For Each col As DataGridViewColumn In DataGridViewForCheckGRS.Columns
-                If Strings.Right(col.HeaderText, "Паспортная погрешность, %".Length) = "Паспортная погрешность, %" Then col.Visible = False
-            Next
-        Else
-            For Each col As DataGridViewColumn In DataGridViewForCheckGRS.Columns
-                If Strings.Right(col.HeaderText, "Паспортная погрешность, %".Length) = "Паспортная погрешность, %" Then col.Visible = True
-            Next
-        End If
-    End Sub
 
     Private Sub BExportCheckTable_Click(sender As System.Object, e As System.EventArgs) Handles BExportCheckTable.Click
         Try
-
             SaveCheckTable.FileName = "Standard check table.xlsx"
             If SaveCheckTable.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then 'Эта строчка открывает диалог и сравнивает результат с cancel 
                 Exit Sub
@@ -195,15 +179,6 @@
                 Dim fillMarker As Integer = 0
                 Dim qnt As Integer = 0
                 'учитываем скрытые
-                If CheckBoxZVal.Checked Then
-                    qnt += 1
-                End If
-                If CheckBoxCaclErr.Checked Then
-                    qnt += 1
-                End If
-                If CheckBoxPassErr.Checked Then
-                    qnt += 1
-                End If
 
                 Dim HiddenColumnsIndex As New ArrayList
 
@@ -282,4 +257,6 @@
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
         End Try
     End Sub
+
+
 End Class

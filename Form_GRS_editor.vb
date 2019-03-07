@@ -379,7 +379,7 @@
             Next
 
             B_Del_String.Enabled = False
-
+            CheckGRS.Enabled = False
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
             Exit Sub

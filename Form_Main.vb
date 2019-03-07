@@ -181,10 +181,7 @@ Public Class Form_Main
             SaveFileDialog_Tabl_Conc_Elem_Okonchat_XLS_CON.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
 
             FormCheckGRS.BExportCheckTable.Text = "Сохранить в Excel"
-            FormCheckGRS.CheckBoxCaclErr.Text = "Рассчитанная погрешность"
-            FormCheckGRS.CheckBoxPassErr.Text = "Пасспортная погрешность"
-            FormCheckGRS.CheckBoxZVal.Text = "Z-значение"
-            FormCheckGRS.HideGroupBox.Text = "Отметить для сокрытия выбранных величин"
+            FormCheckGRS.CheckBoxPer.Text = "Показывать только расхождения более"
 
             Label1.Text = "Точность округления%:"
 
@@ -310,10 +307,7 @@ Public Class Form_Main
 
 
             FormCheckGRS.BExportCheckTable.Text = "Export to Excel"
-            FormCheckGRS.CheckBoxCaclErr.Text = "Calculated error"
-            FormCheckGRS.CheckBoxPassErr.Text = "Passport error"
-            FormCheckGRS.CheckBoxZVal.Text = "Z-value"
-            FormCheckGRS.HideGroupBox.Text = "Hide selected vars"
+            FormCheckGRS.CheckBoxPer.Text = "Show only values exceeding"
 
             Label1.Text = "Rounding accuracy %:"
         End If
