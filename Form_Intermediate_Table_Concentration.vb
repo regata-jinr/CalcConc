@@ -17,7 +17,7 @@ Public Class Form_Intermediate_Table_Concentration
     Private Sub Form_Intermediate_Table_Concentration_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
             Dim unit As String = ""
-            If Not Form_Main.RadioButtonFilter.Checked Then
+            If Not Form_Main.CheckBoxFilter.Checked Then
                 unit = "mg/kg"
             Else
                 unit = "mg"
@@ -35,7 +35,7 @@ Public Class Form_Intermediate_Table_Concentration
             MsgBox(ex.ToString)
         End Try
         Try
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 Me.Text = "Промежуточная таблица концентраций."
                 Button_Draw_Graph.Text = "Построить график"
                 Button_Save.Text = "Закрыть и сохранить в файл"
@@ -47,7 +47,7 @@ Public Class Form_Intermediate_Table_Concentration
                 B_Cancel.Text = "Cancel"
             End If
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Form_Intermediate_Table_Concentration_Load)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Form_Intermediate_Table_Concentration_Load)!", MsgBoxStyle.Critical, Me.Text)
@@ -63,7 +63,7 @@ Public Class Form_Intermediate_Table_Concentration
     Private Sub Button_Save_Click(sender As System.Object, e As System.EventArgs) Handles Button_Save.Click
         Dim valuesRange As New Dictionary(Of String, String())
         Dim unit As String = ""
-        If Not Form_Main.RadioButtonFilter.Checked Then
+        If Not Form_Main.CheckBoxFilter.Checked Then
             unit = "Conc, mg/kg"
         Else
             unit = "Conc, mg"
@@ -113,7 +113,7 @@ Public Class Form_Intermediate_Table_Concentration
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)

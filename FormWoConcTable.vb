@@ -1,7 +1,7 @@
 ﻿Public Class FormWoConcTable
     Private Sub FormWoConcTable_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 Me.Text = "Таблица элементов ненайденных в эталоне"
                 LabelTableInterComment.Text = "Таблица содержит значения активностей элементов, которые не удалось найти в эталоне"
                 Button_Save.Text = "Закрыть и сохранить в файл"
@@ -10,16 +10,20 @@
                 LabelTableInterComment.Text = "Table has an elements which was not found in standard."
                 Button_Save.Text = "Close and save into file"
             End If
-            ConcForms.TableContentLoad(DataGridView_WoConcElements, False, Form_Main.GlobalNuclidsForAct, Form_Main.actDict, "Activity, uCi/gr", "MDC, uCi/gr")
+
+            Dim unit As String = ""
+            If Not Form_Main.CheckBoxFilter.Checked Then
+                unit = "uCi/gr"
+            Else
+                unit = "uCi"
+            End If
+
+            ConcForms.TableContentLoad(DataGridView_WoConcElements, False, Form_Main.GlobalNuclidsForAct, Form_Main.actDict, $"Activity, {unit}", $"MDC, {unit}")
             Form_Main.LocalizedForm()
             DataGridView_WoConcElements.ClearSelection()
         Catch ex As Exception
             MsgBox(ex.ToString)
         End Try
-    End Sub
-
-    Private Sub FormWoConcTable_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-
     End Sub
 
     Private Sub Button_Save_Click(sender As Object, e As EventArgs) Handles Button_Save.Click
@@ -56,7 +60,7 @@
 
         Catch ex As Exception
             MsgBox(ex.ToString, MsgBoxStyle.Critical)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Button_Save_Click)!", MsgBoxStyle.Critical, Me.Text)

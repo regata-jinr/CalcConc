@@ -68,7 +68,7 @@ Public Class Form_Main
 
 
     Public Sub LocalizedForm()
-        If My.Settings.language = "Русский" Then
+        If My.Settings.language = "Russian" Then
             Form_Final_Table_Concentration.Text = "Окончательная таблица концентраций"
             Form_Final_Table_Concentration.Button_Draw_Graph.Text = "Построить график"
             Form_Final_Table_Concentration.Button_Save.Text = "Закрыть и сохранить в файл"
@@ -128,7 +128,7 @@ Public Class Form_Main
             Me.B_TablConcElemPromezh_CON.Text = "Создать промежуточную таблицу концентраций элементов"
             Me.B_TablConcElemOkonchat_CON.Text = "Создать окончательную таблицу концентраций элементов"
             Me.L_SLI_Source.Text = "Источник данных КЖИ"
-            RadioButtonFilter.Text = $"Рассчитать{vbCrLf}для фильтров"
+            CheckBoxFilter.Text = $"Рассчитать{vbCrLf}для фильтров"
 
             ButtonShowWOConc.Text = "Элементы без рассчитанных значений концентраций"
 
@@ -257,7 +257,7 @@ Public Class Form_Main
             Me.Text = "Calculation of concentration "
             Me.SavePereschAktStand_MON_ToolStripMenuItem.Text = "Save counted file(s) of standards activity"
             Me.OpenFileGrupStand_ToolStripMenuItem.Text = "Open file of group standard"
-            RadioButtonFilter.Text = $"Calculates{vbCrLf}for filters"
+            CheckBoxFilter.Text = $"Calculates{vbCrLf}for filters"
             ButtonShowWOConc.Text = "Elements without calculated concentration"
 
 
@@ -316,10 +316,10 @@ Public Class Form_Main
     End Sub
 
     Private Sub LangEngToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LangEngToolStripMenuItem.Click
-        If LangEngToolStripMenuItem.Text = "Русский" Then
+        If LangEngToolStripMenuItem.Text = "Russian" Then
             LangEngToolStripMenuItem.Text = "English"
         Else
-            LangEngToolStripMenuItem.Text = "Русский"
+            LangEngToolStripMenuItem.Text = "Russian"
         End If
         My.Settings.language = LangEngToolStripMenuItem.Text
         LocalizedForm()
@@ -395,7 +395,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 End While
             End Using
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в array_length_RPT)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in array_length_RPT)!", MsgBoxStyle.Critical, Me.Text)
@@ -473,7 +473,7 @@ a:                              currentRow_copy = currentRow ' обход > и @
                 End While
             End Using
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в array_length_RPT_MDA)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in array_length_RPT_MDA)!", MsgBoxStyle.Critical, Me.Text)
@@ -538,7 +538,7 @@ a:                              currentRow_copy = currentRow ' обход > и @
             'только русские рег. параметры pogreshn_p = CDbl(Replace(Mid(currentRow_p, 1, InStr(1, currentRow_p, " ") - 1), ".", ",", 1, 1))
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в data_ident_RPT)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in data_ident_RPT)!", MsgBoxStyle.Critical, Me.Text)
@@ -660,7 +660,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 End While
             End Using
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в data_search_RPT)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in data_search_RPT)!", MsgBoxStyle.Critical, Me.Text)
@@ -682,7 +682,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             ' OpenFileDialog_Aktivn_Issl_Obr.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Aktivn_Issl_Obr.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
                 If Not File_Aktivn_Issl_Obr_Select Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Файл(ы) активностей исследуемого образца не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                     Else
                         MsgBox("File(s) of observable sample's activity not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -708,7 +708,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         L_Aktivn_Issl_Obr_File_list = L_Aktivn_Issl_Obr_File_list + OpenFileDialog_Aktivn_Issl_Obr.SafeFileNames(i)
                     End If
                     If OpenFileDialog_Aktivn_Issl_Obr.SafeFileNames(i) = file_name_Grup_Stand_SafeFileName Then
-                        If My.Settings.language = "Русский" Then
+                        If My.Settings.language = "Russian" Then
                             MsgBox("Имя файла(ов) активностей исследуемого образца не должно совпадать с именем файла группового стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                         Else
                             MsgBox("File(s) name of observable sample's activity should not coincide with file name of group standard!", MsgBoxStyle.Exclamation, Me.Text)
@@ -730,7 +730,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             'If (File_Aktivn_Issl_Obr_Select And File_Aktivn_Stand_Obr_Select And File_Sert_Conc_Elem_Select) Then B_calc_conc.Enabled = True
 
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в OpenAktIsslObr_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in OpenAktIsslObr_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -754,7 +754,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 grsTable.PrimaryKey = grsKeys
 
 
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     grsTable.Columns.Add("Имя образца")
                     grsTable.Columns.Add("nucl")
                     grsTable.Columns.Add("Достоверность идентификации", GetType(Double))
@@ -830,7 +830,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             'только русские рег. параметры  Coef = CSng(Replace(TextBox_Coef.Text, ".", ","))
             Coef = Val(TextBox_Coef.Text)
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Введите корректное значение коэффициента изменения потока нейтронов!", MsgBoxStyle.Exclamation, Me.Text)
             Else
                 MsgBox("Enter correct value of coefficient of change of neutrons's flux!", MsgBoxStyle.Exclamation, Me.Text)
@@ -841,7 +841,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             system_Pogr = Val(TextBox_system_Pogr.Text)
             'только русские рег. параметры system_Pogr = CSng(Replace(TextBox_system_Pogr.Text, ".", ","))
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Введите корректное значение систематической погрешности!", MsgBoxStyle.Exclamation, Me.Text)
             Else
                 MsgBox("Enter correct value of regular error!", MsgBoxStyle.Exclamation, Me.Text)
@@ -851,7 +851,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
         Try
             If system_Pogr >= 100 Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     MsgBox("Введите корректное значение систематической погрешности!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     MsgBox("Enter correct value of regular error!", MsgBoxStyle.Exclamation, Me.Text)
@@ -875,7 +875,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Dim src As String() = DataFromRPT(fileName, False)
                     measurements_type = src(1)
                     If measurements_type = "" Then
-                        If My.Settings.language = "Русский" Then
+                        If My.Settings.language = "Russian" Then
                             MsgBox("Поле 'Тип' в файле " + fileName + " пустое! Заполните его и повторите расчёт концентраций!", MsgBoxStyle.Critical, Me.Text)
                         Else
                             MsgBox("Field 'Type' in file " + fileName + " is empty! Fill it and repeat calculation of concentration!", MsgBoxStyle.Critical, Me.Text)
@@ -887,7 +887,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                    measurements_type <> "КЖИ-2" And measurements_type <> "SLI-2" And
                    measurements_type <> "ДЖИ-1" And measurements_type <> "LLI-1" And
                    measurements_type <> "ДЖИ-2" And measurements_type <> "LLI-2" Then
-                        If My.Settings.language = "Русский" Then
+                        If My.Settings.language = "Russian" Then
                             MsgBox("Поле 'Тип' в файле " + fileName + " содержит некорректные данные!", MsgBoxStyle.Critical, Me.Text)
                         Else
                             MsgBox("Field 'Type' in file " + fileName + " contains incorrect data!", MsgBoxStyle.Critical, Me.Text)
@@ -944,7 +944,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     'check for nuclids which has found in sample, but hasn't found in standard:
                     Dim limit As Double = 0
                     Dim langStr = ""
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         langStr = "Нуклид = "
                     Else
                         langStr = "Nuclid = "
@@ -965,7 +965,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     ' Return {NameSamp, mesType, experimentator, id, geometry}
                     Using sw As New IO.StreamWriter($"{FolderBrowserDialog_Conc_Elem.SelectedPath}/{System.IO.Path.GetFileNameWithoutExtension(fileName)}.CON")
                         sw.WriteLine("*************************************************************************")
-                        If My.Settings.language = "Русский" Then
+                        If My.Settings.language = "Russian" Then
                             sw.WriteLine("*****                    РАСЧЕТ КОНЦЕНТРАЦИЙ ЭЛЕМЕНТОВ              *****")
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
@@ -982,7 +982,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
                             sw.WriteLine("		элемент	концентр.,	погр.,	предел")
-                            If Not RadioButtonFilter.Checked Then
+                            If Not CheckBoxFilter.Checked Then
                                 sw.WriteLine("					uг/гр		%	обнаруж.,")
                                 sw.WriteLine("										uг/гр")
                             Else
@@ -990,8 +990,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("										мк.гр")
                             End If
                             sw.WriteLine()
-                            Else
-                                sw.WriteLine("*****            CALCULATION CONCENTRATIONS OF ELEMENTS             *****")
+                        Else
+                            sw.WriteLine("*****            CALCULATION CONCENTRATIONS OF ELEMENTS             *****")
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
                             sw.WriteLine($"DateTime creation of file		 : {Date.Now}")
@@ -1007,7 +1007,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
                             sw.WriteLine("		element	concentr.,	err.,	detection")
-                            If Not RadioButtonFilter.Checked Then
+                            If Not CheckBoxFilter.Checked Then
                                 sw.WriteLine("					ug/gr		%	limit.,")
                                 sw.WriteLine("									  ug/gr")
                             Else
@@ -1026,22 +1026,32 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         Next
                         sw.WriteLine()
                         sw.WriteLine()
-                        If My.Settings.language = "Русский" Then
+                        If My.Settings.language = "Russian" Then
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine("*****        ЭЛЕМЕНТЫ БЕЗ РАССЧИТАННЫХ ЗНАЧЕНИЙ КОНЦЕНТРАЦИЙ        *****")
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
                             sw.WriteLine("		элемент	активност.,	погр.,	предел")
-                            sw.WriteLine("				uCi/gram		%	обнаруж.,")
-                            sw.WriteLine("									uCi/gram")
+                            If Not CheckBoxFilter.Checked Then
+                                sw.WriteLine("					uCi/gr		%	limit.,")
+                                sw.WriteLine("									  ug/gr")
+                            Else
+                                sw.WriteLine("					uCi          %	limit.,")
+                                sw.WriteLine("								         ug")
+                            End If
                         Else
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine("*****                ELEMENTS WITHOUT CONCENTRATIONS                *****")
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
                             sw.WriteLine("		element	activity.,	err.,	detection")
-                            sw.WriteLine("				uCi/gram		%	limit.,")
-                            sw.WriteLine("									uCi/gram")
+                            If Not CheckBoxFilter.Checked Then
+                                sw.WriteLine("					uCi/gr		%	limit.,")
+                                sw.WriteLine("									  ug/gr")
+                            Else
+                                sw.WriteLine("					uCi          %	limit.,")
+                                sw.WriteLine("								         ug")
+                            End If
                         End If
                         sw.WriteLine()
                         For i As Integer = 0 To actTable.Rows.Count - 1
@@ -1082,7 +1092,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 e.Handled = True
             End If
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в TextBox_Coef_KeyPress)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in TextBox_Coef_KeyPress)!", MsgBoxStyle.Critical, Me.Text)
@@ -1132,7 +1142,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Exit Sub
             ElseIf System.Windows.Forms.DialogResult.OK Then ' Эта строчка только сравнивает результат с OK 
 
-1:              If My.Settings.language = "Русский" Then
+1:              If My.Settings.language = "Russian" Then
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Концентрации элементов в образце  :  " + sample_title_Issl_Obr + vbCrLf + vbCrLf, False) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Тип измерений  :  " + measurements_type + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Групповой стандарт  :  " + file_name_Grup_Stand_SafeFileName + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
@@ -1183,7 +1193,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
             End If
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в SaveConcIsslObr_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in SaveConcIsslObr_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -1212,7 +1222,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     refKeys(0) = refKeyColumn
                     refTable.Columns.Add(refKeyColumn)
                     refTable.PrimaryKey = refKeys
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         refTable.Columns.Add("Имя образца")
                         refTable.Columns.Add("Нуклид")
                         refTable.Columns.Add("Паспортная концентрация, mg/kg", GetType(Double))
@@ -1233,7 +1243,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     peakKeys(0) = peakKeyColumn
                     rptTablePeaks.Columns.Add(peakKeyColumn)
                     rptTablePeaks.PrimaryKey = peakKeys
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         rptTablePeaks.Columns.Add("Имя образца")
                         rptTablePeaks.Columns.Add("Нуклид")
                         rptTablePeaks.Columns.Add("Достоверность идентификации", GetType(Double))
@@ -1258,7 +1268,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     mdaKeys(0) = mdaKeyColumn
                     rptTableMda.Columns.Add(mdaKeyColumn)
                     rptTableMda.PrimaryKey = mdaKeys
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         rptTableMda.Columns.Add("Имя образца")
                         rptTableMda.Columns.Add("Нуклид")
                         rptTableMda.Columns.Add("Энергия, кэВ", GetType(Double))
@@ -1444,7 +1454,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 grsTable.Columns.Add("refname")
                 grsTable.Columns.Add("nucl")
 
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     grsTable.Columns.Add("Достоверность идентификации", GetType(Double))
                     grsTable.Columns.Add("act", GetType(Double))
                     grsTable.Columns.Add("Погрешность, %", GetType(Double))
@@ -1481,7 +1491,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 If Not uniqElemForGRS.Contains(row(2)) Then uniqElemForGRS.Add(row(2))
 
                 If Not refTable.Rows.Find(el) Is Nothing Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         ppm = refTable.Rows.Find(el)("Паспортная концентрация, mg/kg")
                         pasErr = refTable.Rows.Find(el)("Паспортная погрешность, %")
                     Else
@@ -1491,14 +1501,14 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Else Continue For
                 End If
                 stdErr = Math.Sqrt(row(5) ^ 2 + pasErr ^ 2)
-                    If stdErr > 99 Then Continue For
-                    Try ' если ключи одинаковые выбираем ту строку, в которой меньше ошибка
-                        grsTable.Rows.Add(row(0), row(1), row(2), row(3), row(4), row(5), ppm, pasErr, stdErr, Convert.ToInt16(Replace(Split(row(2), "-")(1), "m", "")), 0)
-                    Catch ce As ConstraintException
-                        Debug.WriteLine(ce.ToString)
-                    Catch ex As Exception
-                        MsgBox(ex.ToString, MsgBoxStyle.Critical)
-                    End Try
+                If stdErr > 99 Then Continue For
+                Try ' если ключи одинаковые выбираем ту строку, в которой меньше ошибка
+                    grsTable.Rows.Add(row(0), row(1), row(2), row(3), row(4), row(5), ppm, pasErr, stdErr, Convert.ToInt16(Replace(Split(row(2), "-")(1), "m", "")), 0)
+                Catch ce As ConstraintException
+                    Debug.WriteLine(ce.ToString)
+                Catch ex As Exception
+                    MsgBox(ex.ToString, MsgBoxStyle.Critical)
+                End Try
 
             Next
             '   refTable.Clear()
@@ -1564,7 +1574,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Next
             End If
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в SaveSvodnFileAktivn_GRS_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in SaveSvodnFileAktivn_GRS_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -1578,7 +1588,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             Dim L_Akt_Stand_File_list_MON As String
             ' OpenFileDialog_Akt_Stand_MON.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Akt_Stand_MON.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     If Not File_Akt_Stand_Select_MON Then MsgBox("Файл(ы) активностей стандарта не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     If Not File_Akt_Stand_Select_MON Then MsgBox("File(s) of standard's activity: not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1606,7 +1616,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                         L_Akt_Stand_File_list_MON = L_Akt_Stand_File_list_MON + OpenFileDialog_Akt_Stand_MON.SafeFileNames(i)
                     End If
                     'If OpenFileDialog_Akt_Stand_MON.SafeFileNames(i) = file_name_Baz_File_Akt_Mon_Stand_SafeFileName_MON Then
-                    '    If My.Settings.language = "Русский" Then
+                    '    If My.Settings.language = "Russian" Then
                     '        MsgBox("Имя файла активностей стандарта не должно совпадать с именем базового файла активностей монитора стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                     '    Else
                     '        MsgBox("File name of standard's activity should not coincide with file name of base file of standard's monitor activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1621,7 +1631,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             first_File = My.Computer.FileSystem.GetFileInfo(OpenFileDialog_Akt_Stand_MON.FileNames(0))
             OpenFileDialog_Akt_Stand_MON.InitialDirectory = first_File.DirectoryName
             My.MySettings.Default.pathTo11 = first_File.DirectoryName
-            'If My.Settings.language = "Русский" Then
+            'If My.Settings.language = "Russian" Then
             '    L_File_Aktivn_Stand_Dlia_Peresch_MON.Text = "Файл(ы) активностей стандарта: " + OpenFileDialog_Akt_Stand_MON.InitialDirectory + "\" + L_Akt_Stand_File_list_MON
             'Else
             '    L_File_Aktivn_Stand_Dlia_Peresch_MON.Text = "File(s) of standard's activity: " + OpenFileDialog_Akt_Stand_MON.InitialDirectory + "\" + L_Akt_Stand_File_list_MON
@@ -1630,7 +1640,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             File_Akt_Stand_Select_MON = True
             If (File_Baz_File_Akt_Monit_Stand_Select_MON And File_Akt_Stand_Select_MON And File_Akt_Monit_Stand_Select_MON) Then B_Perschet_Aktivn_Stand.Enabled = True
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в OpenFileAktMonStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in OpenFileAktMonStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -1643,7 +1653,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
         Try
             ' OpenFileDialog_Baz_File_Akt_Mon_Stand_MON.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Baz_File_Akt_Mon_Stand_MON.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     If Not File_Baz_File_Akt_Monit_Stand_Select_MON Then MsgBox("Базовый файл активностей монитора стандарта не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     If Not File_Baz_File_Akt_Monit_Stand_Select_MON Then MsgBox("Base file of standard's monitor activity not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1657,7 +1667,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 If Akt_Stand_Files_MON_Quant > 0 Then
                     For i = 0 To Akt_Stand_Files_MON_Quant - 1
                         If OpenFileDialog_Baz_File_Akt_Mon_Stand_MON.SafeFileName = file_name_Akt_Stand_SafeFileNames_MON_Array(i) Then
-                            If My.Settings.language = "Русский" Then
+                            If My.Settings.language = "Russian" Then
                                 MsgBox("Имя базового файла активностей монитора стандарта не должно совпадать с именем файла активностей стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                             Else
                                 MsgBox("Name of base file of standard's monitor activity should not coincide with file name of standard's activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1667,7 +1677,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Next
                 End If
                 If OpenFileDialog_Baz_File_Akt_Mon_Stand_MON.SafeFileName = file_name_Akt_Mon_Stand_MON Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Имя базового файла активностей монитора стандарта не должно совпадать с именем файла активностей монитора стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                     Else
                         MsgBox("Name of base file of standard's monitor activity should not coincide with file name of standard's monitor activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1683,7 +1693,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
             If (File_Baz_File_Akt_Monit_Stand_Select_MON And File_Akt_Stand_Select_MON And File_Akt_Monit_Stand_Select_MON) Then B_Perschet_Aktivn_Stand.Enabled = True
 
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в VibrBazFileAktMonitStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in VibrBazFileAktMonitStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -1701,7 +1711,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 'file_name_Aktivn_Issl_Obr = OpenFileDialog_Aktivn_Issl_Obr.FileName
                 arr_length_Akt_Stand_MON = array_length_RPT(file_name_Akt_Stand_Array_MON(m))
                 If arr_length_Akt_Stand_MON = 0 Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Неправильный формат файла " + file_name_Akt_Stand_Array_MON(m) + "!", MsgBoxStyle.Critical, Me.Text)
                     Else
                         MsgBox("Incorrect file format " + file_name_Akt_Stand_Array_MON(m) + "!", MsgBoxStyle.Critical, Me.Text)
@@ -1718,7 +1728,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 'file_name_Aktivn_Stand_Obr:=OpenDialog_Aktivn_Stand_Obr.FileName;
                 arr_length_Baz_File_Akt_Mon_Stand_MON = array_length_RPT(file_name_Baz_File_Akt_Mon_Stand_MON)
                 If arr_length_Baz_File_Akt_Mon_Stand_MON = 0 Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Неправильный формат файла " + file_name_Baz_File_Akt_Mon_Stand_MON + "!", MsgBoxStyle.Critical, Me.Text)
                     Else
                         MsgBox("Incorrect file format " + file_name_Baz_File_Akt_Mon_Stand_MON + "!", MsgBoxStyle.Critical, Me.Text)
@@ -1733,7 +1743,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
                 arr_length_Akt_Mon_Stand_MON = array_length_RPT(file_name_Akt_Mon_Stand_MON)
                 If arr_length_Akt_Mon_Stand_MON = 0 Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Неправильный формат файла " + file_name_Akt_Mon_Stand_MON + "!", MsgBoxStyle.Critical, Me.Text)
                     Else
                         MsgBox("Incorrect file format " + file_name_Akt_Mon_Stand_MON + "!", MsgBoxStyle.Critical, Me.Text)
@@ -1785,7 +1795,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 SavePereschAktMonitorStand_ToolStripMenuItem_Click(sender, e)
             Next
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в B_Perschet_Aktivn_Monitor_Stand_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in B_Perschet_Aktivn_Monitor_Stand_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -1952,7 +1962,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 SaveFileDialog_PereschAktStand_MON.InitialDirectory = current_File.DirectoryName
             End If
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в SavePereschAktMonitorStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in SavePereschAktMonitorStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -1965,7 +1975,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Try
             ' OpenFileDialog_Akt_Mon_Stand_MON.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Akt_Mon_Stand_MON.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     If Not File_Baz_File_Akt_Monit_Stand_Select_MON Then MsgBox("Файл активностей монитора стандарта не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     If Not File_Baz_File_Akt_Monit_Stand_Select_MON Then MsgBox("File of standard's monitor activity: not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1979,7 +1989,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 If Akt_Stand_Files_MON_Quant > 0 Then
                     For i = 0 To Akt_Stand_Files_MON_Quant - 1
                         If OpenFileDialog_Akt_Mon_Stand_MON.SafeFileName = file_name_Akt_Stand_SafeFileNames_MON_Array(i) Then
-                            If My.Settings.language = "Русский" Then
+                            If My.Settings.language = "Russian" Then
                                 MsgBox("Имя файла активностей монитора стандарта не должно совпадать с именем файла активностей стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                             Else
                                 MsgBox("File name of standard's monitor activity should not coincide with file name of standard's activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -1989,7 +1999,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                     Next
                 End If
                 If OpenFileDialog_Akt_Mon_Stand_MON.SafeFileName = file_name_Baz_File_Akt_Mon_Stand_SafeFileName_MON Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Имя файла активностей монитора стандарта не должно совпадать с именем базового файла активностей монитора стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                     Else
                         MsgBox("File name of standard's monitor activity should not coincide with name of base file of standard's monitor activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -2003,7 +2013,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             File_Akt_Monit_Stand_Select_MON = True
             If (File_Baz_File_Akt_Monit_Stand_Select_MON And File_Akt_Stand_Select_MON And File_Akt_Monit_Stand_Select_MON) Then B_Perschet_Aktivn_Stand.Enabled = True
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в OpenFileAktMonStand_ToolStripMenuItem_Click_1)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in OpenFileAktMonStand_ToolStripMenuItem_Click_1)!", MsgBoxStyle.Critical, Me.Text)
@@ -2016,7 +2026,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Try
             ' OpenFileDialog_Grup_Stand.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Grup_Stand.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     If Not File_Grup_Stand_Select Then MsgBox("Файл группового стандарта не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     If Not File_Grup_Stand_Select Then MsgBox("File of group standard not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -2035,7 +2045,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             L_Grup_Stand.Text = ""
             L_Grup_Stand.Text = file_name_Grup_Stand
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в OpenFileGrupStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in OpenFileGrupStand_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -2048,7 +2058,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Try
             ' OpenFileDialog_Baz_File_Akt_Mon_Stand.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Baz_File_Akt_Mon_Stand.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     If Not File_Baz_File_Akt_Monit_Stand_Select Then MsgBox("Базовый файл активностей монитора стандарта не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     If Not File_Baz_File_Akt_Monit_Stand_Select Then MsgBox("Base file of standard's monitor activity not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -2059,7 +2069,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 first_File = My.Computer.FileSystem.GetFileInfo(OpenFileDialog_Baz_File_Akt_Mon_Stand.FileNames(0))
                 OpenFileDialog_Baz_File_Akt_Mon_Stand.InitialDirectory = first_File.DirectoryName
                 My.MySettings.Default.pathTo33 = first_File.DirectoryName
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     MsgBox("Имя базового файла активностей монитора стандарта не должно совпадать с именем файла активностей монитора стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     MsgBox("Name of base file of standard's monitor activity should not coincide with file name of standard's monitor activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -2075,7 +2085,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             File_Baz_File_Akt_Monit_Stand_Select = True
             If (File_Baz_File_Akt_Monit_Stand_Select And File_Akt_Monit_Stand_Select) Then rasch_coef()
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в VibrBazFileAktMonitStand_ToolStripMenuItem_Click_1)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in VibrBazFileAktMonitStand_ToolStripMenuItem_Click_1)!", MsgBoxStyle.Critical, Me.Text)
@@ -2090,7 +2100,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             'file_name_Aktivn_Stand_Obr:=OpenDialog_Aktivn_Stand_Obr.FileName;
             arr_length_Baz_File_Akt_Mon_Stand = array_length_RPT(file_name_Baz_File_Akt_Mon_Stand)
             If arr_length_Baz_File_Akt_Mon_Stand = 0 Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     MsgBox("Неправильный формат файла " + file_name_Baz_File_Akt_Mon_Stand + "!", MsgBoxStyle.Critical, Me.Text)
                 Else
                     MsgBox("Incorrect file format " + file_name_Baz_File_Akt_Mon_Stand + "!", MsgBoxStyle.Critical, Me.Text)
@@ -2105,7 +2115,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
             arr_length_Akt_Mon_Stand = array_length_RPT(file_name_Akt_Mon_Stand)
             If arr_length_Akt_Mon_Stand = 0 Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     MsgBox("Неправильный формат файла " + file_name_Akt_Mon_Stand + "!", MsgBoxStyle.Critical, Me.Text)
                 Else
                     MsgBox("Incorrect file format " + file_name_Akt_Mon_Stand + "!", MsgBoxStyle.Critical, Me.Text)
@@ -2122,7 +2132,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             TextBox_Coef.Text = (data_array_Akt_Baz_Mon_Stand(0, 1) / data_array_Akt_Mon_Stand(0, 1)).ToString("F4", CultureInfo.CreateSpecificCulture("en-US"))
 
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в rasch_coef)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in rasch_coef)!", MsgBoxStyle.Critical, Me.Text)
@@ -2135,7 +2145,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Try
             ' OpenFileDialog_Akt_Mon_Stand.InitialDirectory = "C:\GENIE2K\CONFILES"
             If OpenFileDialog_Akt_Mon_Stand.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     If Not File_Baz_File_Akt_Monit_Stand_Select Then MsgBox("Файл активностей монитора стандарта не выбран!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     If Not File_Baz_File_Akt_Monit_Stand_Select Then MsgBox("File of standard's monitor activity not choosen!", MsgBoxStyle.Exclamation, Me.Text)
@@ -2147,7 +2157,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 OpenFileDialog_Akt_Mon_Stand.InitialDirectory = first_File.DirectoryName
                 My.MySettings.Default.pathTo34 = first_File.DirectoryName
                 If OpenFileDialog_Akt_Mon_Stand.SafeFileName = file_name_Baz_File_Akt_Mon_Stand_SafeFileName Then
-                    If My.Settings.language = "Русский" Then
+                    If My.Settings.language = "Russian" Then
                         MsgBox("Имя файла активностей монитора стандарта не должно совпадать с именем базового файла активностей монитора стандарта!", MsgBoxStyle.Exclamation, Me.Text)
                     Else
                         MsgBox("File name of standard's monitor activity should not coincide with name of base file of standard's monitor activity!", MsgBoxStyle.Exclamation, Me.Text)
@@ -2162,7 +2172,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             File_Akt_Monit_Stand_Select = True
             If (File_Baz_File_Akt_Monit_Stand_Select And File_Akt_Monit_Stand_Select) Then rasch_coef()
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в OpenFileAktMonStand_ToolStripMenuItem_Click_2)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in OpenFileAktMonStand_ToolStripMenuItem_Click_2)!", MsgBoxStyle.Critical, Me.Text)
@@ -2381,7 +2391,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             Form_Intermediate_Table_Concentration.Show()
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в B_TablConcElemPromezh_CON_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in B_TablConcElemPromezh_CON_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -2396,7 +2406,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             Form_Final_Table_Concentration.Show()
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в B_TablConcElemPromezh_CON_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in B_TablConcElemPromezh_CON_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -2411,7 +2421,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             File_Akt_Monit_Stand_Select = False
             TextBox_Coef.Text = "1.0"
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в B_Otm_Vib_Fil_Mon_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in B_Otm_Vib_Fil_Mon_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -2425,7 +2435,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
     '        Me.Enabled = False
     '        Form_Language.Show()
     '    Catch ex As Exception
-    '        If My.Settings.language = "Русский" Then
+    '        If My.Settings.language = "Russian" Then
     '            MsgBox("Операция была отменена (ошибка в Language_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
     '        Else
     '            MsgBox("Operation was cancelled (error in Language_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -2448,7 +2458,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
     '    Catch ex As Exception
     '        MsgBox(ex.ToString)
-    '        If My.Settings.language = "Русский" Then
+    '        If My.Settings.language = "Russian" Then
     '            MsgBox("Операция была отменена (ошибка в Form_Main_Shown)!", MsgBoxStyle.Critical, Me.Text)
     '        Else
     '            MsgBox("Operation was cancelled (error in Form_Main_Shown)!", MsgBoxStyle.Critical, Me.Text)
@@ -2488,14 +2498,14 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             TextBox_Coef.Text = "1.0"
             TextBox_system_Pogr.Text = "0"
 
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 ComboBox_SLI_Source.SelectedItem = "КЖИ-1 и КЖИ-2"
             Else
                 ComboBox_SLI_Source.SelectedItem = "SLI-1 and SLI-2"
             End If
 
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Initial_Installations)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Initial_Installations)!", MsgBoxStyle.Critical, Me.Text)
@@ -2509,7 +2519,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             Initial_Installations()
             Application.Restart()
         Catch ex As Exception
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Clear_Form_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Clear_Form_ToolStripMenuItem_Click)!", MsgBoxStyle.Critical, Me.Text)

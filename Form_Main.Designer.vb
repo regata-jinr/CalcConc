@@ -88,7 +88,7 @@ Partial Class Form_Main
         Me.ButtonShowWOConc = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
-        Me.RadioButtonFilter = New System.Windows.Forms.RadioButton()
+        Me.CheckBoxFilter = New System.Windows.Forms.CheckBox()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -511,7 +511,7 @@ Partial Class Form_Main
         'GroupBox_Concentration
         '
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
-        Me.GroupBox_Concentration.Controls.Add(Me.RadioButtonFilter)
+        Me.GroupBox_Concentration.Controls.Add(Me.CheckBoxFilter)
         Me.GroupBox_Concentration.Controls.Add(Me.ButtonShowWOConc)
         Me.GroupBox_Concentration.Controls.Add(Me.Label1)
         Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
@@ -566,16 +566,15 @@ Partial Class Form_Main
         Me.TextBoxAcc.Text = "1"
         Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'RadioButtonFilter
+        'CheckBoxFilter
         '
-        Me.RadioButtonFilter.AutoSize = True
-        Me.RadioButtonFilter.Location = New System.Drawing.Point(299, 110)
-        Me.RadioButtonFilter.Name = "RadioButtonFilter"
-        Me.RadioButtonFilter.Size = New System.Drawing.Size(90, 17)
-        Me.RadioButtonFilter.TabIndex = 25
-        Me.RadioButtonFilter.TabStop = True
-        Me.RadioButtonFilter.Text = "RadioButton1"
-        Me.RadioButtonFilter.UseVisualStyleBackColor = True
+        Me.CheckBoxFilter.AutoSize = True
+        Me.CheckBoxFilter.Location = New System.Drawing.Point(299, 114)
+        Me.CheckBoxFilter.Name = "CheckBoxFilter"
+        Me.CheckBoxFilter.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBoxFilter.TabIndex = 26
+        Me.CheckBoxFilter.Text = "CheckBox1"
+        Me.CheckBoxFilter.UseVisualStyleBackColor = True
         '
         'Form_Main
         '
@@ -668,5 +667,5 @@ Partial Class Form_Main
     Friend WithEvents TextBoxAcc As TextBox
     Friend WithEvents LangEngToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonShowWOConc As Button
-    Friend WithEvents RadioButtonFilter As RadioButton
+    Friend WithEvents CheckBoxFilter As CheckBox
 End Class

@@ -130,7 +130,7 @@ Module ConcForms
         Try
             Dim ans As New ArrayList
             If {1, 2, 3, 4}.Contains(datagridview.SelectedColumns(0).Index) And {1, 2, 3, 4}.Contains(datagridview.SelectedColumns(1).Index) And datagridview.SelectedColumns.Count <> 2 Then
-                If My.Settings.language = "Русский" Then
+                If My.Settings.language = "Russian" Then
                     MsgBox("Выделите два столбца с данными!", MsgBoxStyle.Exclamation, Form_Main.Text)
                 Else
                     MsgBox("Select two columns with data!", MsgBoxStyle.Exclamation, Form_Main.Text)
@@ -155,7 +155,7 @@ Module ConcForms
 
         Catch ex As Exception
             MsgBox(ex.ToString(), MsgBoxStyle.Critical)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Form_Intermediate_Table_Concentration.Button_Draw_Graph_Click)!", MsgBoxStyle.Critical)
             Else
                 MsgBox("Operation was cancelled (error in Form_Intermediate_Table_Concentration.Button_Draw_Graph_Click)!", MsgBoxStyle.Critical)
