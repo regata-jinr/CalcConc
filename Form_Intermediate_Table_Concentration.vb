@@ -19,10 +19,12 @@ Public Class Form_Intermediate_Table_Concentration
             Dim unit As String = ""
             If Not Form_Main.CheckBoxFilter.Checked Then
                 unit = "mg/kg"
+                ConcForms.TableContentLoad(DataGridView_Intermediate_Table_Concentration, False, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
             Else
                 unit = "mg"
+                ConcForms.TableContentLoad(DataGridView_Intermediate_Table_Concentration, False, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"{unit}", $"MDC, {unit}")
             End If
-            ConcForms.TableContentLoad(DataGridView_Intermediate_Table_Concentration, False, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
+
             Form_Main.LocalizedForm()
             BuildGraph(Form_Main.xNA24SLI2, Form_Main.yNA24LLI1, "Na24-Na24", Chart_Na_Na)
             BuildGraph(Form_Main.xSB122LLI1, Form_Main.ySB124LLI2, "Sb122-Sb124", Chart_Sb122_Sb124)
@@ -66,7 +68,7 @@ Public Class Form_Intermediate_Table_Concentration
         If Not Form_Main.CheckBoxFilter.Checked Then
             unit = "Conc, mg/kg"
         Else
-            unit = "Conc, mg"
+            unit = "mg"
         End If
         valuesRange = SaveToExcel(DataGridView_Intermediate_Table_Concentration, SaveInterTable, False, unit)
         If IsNothing(valuesRange) Then Exit Sub

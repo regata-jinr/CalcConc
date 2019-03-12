@@ -981,12 +981,13 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             sw.WriteLine("*****           ЗНАЧЕНИЯ КОНЦЕНТРАЦИЙ ЭЛЕМЕНТОВ В ОБРАЗЦЕ           *****")
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
-                            sw.WriteLine("		элемент	концентр.,	погр.,	предел")
                             If Not CheckBoxFilter.Checked Then
+                                sw.WriteLine("		элемент	концентр.,	погр.,	предел")
                                 sw.WriteLine("					uг/гр		%	обнаруж.,")
                                 sw.WriteLine("										uг/гр")
                             Else
-                                sw.WriteLine("					мк.гр  		%	обнаруж.,")
+                                sw.WriteLine("		элемент	        мк.гр,	погр.,	предел")
+                                sw.WriteLine("					        		%	обнаруж.,")
                                 sw.WriteLine("										мк.гр")
                             End If
                             sw.WriteLine()
@@ -1006,13 +1007,14 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             sw.WriteLine("*****          CONCENTRATIONS VALUES OF ELEMENTS IN SAMPLE          *****")
                             sw.WriteLine("*************************************************************************")
                             sw.WriteLine()
-                            sw.WriteLine("		element	concentr.,	err.,	detection")
                             If Not CheckBoxFilter.Checked Then
+                                sw.WriteLine("		element	concentr.,	err.,	detection")
                                 sw.WriteLine("					ug/gr		%	limit.,")
                                 sw.WriteLine("									  ug/gr")
                             Else
-                                sw.WriteLine("					ug          %	limit.,")
-                                sw.WriteLine("								         ug")
+                                sw.WriteLine("		element	        ug, 	err.,	detection")
+                                sw.WriteLine("					            %   	limit.,")
+                                sw.WriteLine("								        ug")
                             End If
 
                             sw.WriteLine()
