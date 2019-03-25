@@ -8,7 +8,7 @@
         Dim valuesRange As New Dictionary(Of String, String())
         Dim unit As String = ""
         If Not Form_Main.CheckBoxFilter.Checked Then
-            unit = "Conc, ug/kg"
+            unit = "Conc, ug/g"
         Else
             unit = "ug"
         End If
@@ -64,7 +64,7 @@
         Try
             Dim unit As String = ""
             If Not Form_Main.CheckBoxFilter.Checked Then
-                unit = "ug/kg"
+                unit = "ug/g"
                 ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
             Else
                 unit = "ug"

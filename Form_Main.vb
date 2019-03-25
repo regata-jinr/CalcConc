@@ -1505,6 +1505,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 stdErr = Math.Sqrt(row(5) ^ 2 + pasErr ^ 2)
                 If stdErr > 99 Then Continue For
                 Try ' если ключи одинаковые выбираем ту строку, в которой меньше ошибка
+                    Debug.WriteLine($"{row(0)}, {row(1)}, {row(2)}, {row(3)}, {row(4)}, {row(5)}, {ppm}, {pasErr}, {stdErr}, {Convert.ToInt16(Replace(Split(row(2), "-")(1), "m", ""))}, {0}")
                     grsTable.Rows.Add(row(0), row(1), row(2), row(3), row(4), row(5), ppm, pasErr, stdErr, Convert.ToInt16(Replace(Split(row(2), "-")(1), "m", "")), 0)
                 Catch ce As ConstraintException
                     Debug.WriteLine(ce.ToString)

@@ -49,7 +49,7 @@ Public Class Form_Table_Nuclides
             DataGridView_Table_Nuclides.Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
             DataGridView_Table_Nuclides.Columns(1).SortMode = DataGridViewColumnSortMode.NotSortable
 
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 Me.Text = "Таблица нуклидов."
                 B_Save_Table_Nuclides.Text = "Cохранить таблицу"
                 B_Cancel.Text = "Отмена"
@@ -72,7 +72,7 @@ Public Class Form_Table_Nuclides
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 MsgBox("Операция была отменена (ошибка в Form_Table_Nuclides.Form_Table_Nuclides_Load)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_Table_Nuclides.Form_Table_Nuclides_Load)!", MsgBoxStyle.Critical, Me.Text)

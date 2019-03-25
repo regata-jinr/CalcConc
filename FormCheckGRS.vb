@@ -19,7 +19,7 @@
             CheckGRSSrcKeyColumns(0) = CheckGRSSrcKeyColumn
             CheckGRSSrc.Columns.Add(CheckGRSSrcKeyColumn)
             CheckGRSSrc.PrimaryKey = CheckGRSSrcKeyColumns
-            If My.Settings.language = "Русский" Then
+            If My.Settings.language = "Russian" Then
                 CheckGRSSrc.Columns.Add("Имя файла")
                 CheckGRSSrc.Columns.Add("Имя стандарта")
 
@@ -28,7 +28,7 @@
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Разница между расч. и пасп. значениями, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %", GetType(Double))
                 Next
             Else
                 CheckGRSSrc.Columns.Add("File Name")
@@ -38,7 +38,7 @@
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport Concentration, mg/kg", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated error, %", GetType(Double))
                     CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport error, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Diff. betw. calc. and passp. vals, %", GetType(Double))
+                    CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - perc. ratio betw. calc. and passp. vals, %", GetType(Double))
                 Next
             End If
 
@@ -84,7 +84,7 @@
                             StdErr = Convert.ToDouble(Form_Main.grsTable.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("paspConc"))
                             StdErr = Math.Round(100 * (calcConc - pasConc) / pasConc, 1)
                             If StdErr <> Double.NaN And StdErr <> Double.PositiveInfinity And StdErr <> Double.NegativeInfinity Then
-                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Разница между расч. и пасп. значениями, %") = StdErr
+                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %") = StdErr
                             End If
                         Catch ex As Exception
                         End Try
@@ -141,7 +141,7 @@
             End If
             For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
                 If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
-                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Разница") Then row.Cells(ci).Style.BackColor = Color.LightCoral
+                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("отношение") Then row.Cells(ci).Style.BackColor = Color.LightCoral
             Next
         Next
     End Sub
@@ -153,7 +153,7 @@
         For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
             For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
                 If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
-                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Разница") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
+                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("отношение") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
             Next
         Next
 
