@@ -70,7 +70,7 @@
             End If
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Russian" Then
+            If My.Settings.language = "English" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.B_Save_GRS_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.B_Save_GRS_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -87,7 +87,7 @@
             Dim First_Displayed_String As Integer
             First_Displayed_String = DataGridView_GRS_Editor.FirstDisplayedScrollingRowIndex
             If DataGridView_GRS_Editor.SelectedRows.Count = 0 Or DataGridView_GRS_Editor.SelectedRows.Count > 1 Then
-                If My.Settings.language = "Russian" Then
+                If My.Settings.language = "English" Then
                     MsgBox("Выберите строку!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     MsgBox("Select row!", MsgBoxStyle.Exclamation, Me.Text)
@@ -119,7 +119,7 @@
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Russian" Then
+            If My.Settings.language = "English" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.B_Del_String_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.B_Del_String_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -145,7 +145,7 @@
 
         Catch ex As Exception
             MsgBox(ex.ToString)
-            If My.Settings.language = "Russian" Then
+            If My.Settings.language = "English" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.B_Undelete_Last_String_Click)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.B_Undelete_Last_String_Click)!", MsgBoxStyle.Critical, Me.Text)
@@ -215,7 +215,7 @@
         DataGridView_GRS_Editor.DataSource = Form_Main.grsTable
 
 
-        If My.Settings.language = "Russian" Then
+        If My.Settings.language = "English" Then
             DataGridView_GRS_Editor.Columns(1).HeaderText = "Имя стандарта"
             DataGridView_GRS_Editor.Columns(2).HeaderText = "Нуклид"
             DataGridView_GRS_Editor.Columns(3).HeaderText = "Достоверность идентификации"
@@ -300,7 +300,7 @@
             GRSAddedFileList.Columns.Add(column4)
             GRSAddedFileList.Columns.Add(column5)
             GRSAddedFileList.Columns.Add(column6)
-            If My.Settings.language = "Russian" Then
+            If My.Settings.language = "English" Then
                 GRSAddedFileList.Columns(0).HeaderText = "Имя файла стандарта"
                 GRSAddedFileList.Columns(1).HeaderText = "Дата создания отчёта"
                 GRSAddedFileList.Columns(2).HeaderText = "Описание"
@@ -336,7 +336,7 @@
                 Next
             End If
         Catch ex As Exception
-            If My.Settings.language = "Russian" Then
+            If My.Settings.language = "English" Then
                 MsgBox("Операция была отменена (ошибка в Form_GRS_editor.DataGridView_GRS_Editor_ColumnHeaderMouseClick)!", MsgBoxStyle.Critical, Me.Text)
             Else
                 MsgBox("Operation was cancelled (error in Form_GRS_editor.DataGridView_GRS_Editor_ColumnHeaderMouseClick)!", MsgBoxStyle.Critical, Me.Text)
@@ -348,7 +348,7 @@
     Private Sub InvSel_Click(sender As System.Object, e As System.EventArgs) Handles InvSel.Click
         Try
             If DataGridView_GRS_Editor.SelectedRows.Count = 0 Or DataGridView_GRS_Editor.SelectedRows.Count > 1 Then
-                If My.Settings.language = "Russian" Then
+                If My.Settings.language = "English" Then
                     MsgBox("Выберите одну строку!", MsgBoxStyle.Exclamation, Me.Text)
                 Else
                     MsgBox("Select one row!", MsgBoxStyle.Exclamation, Me.Text)

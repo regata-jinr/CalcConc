@@ -84,6 +84,7 @@ Partial Class FormWoConcTable
         'SaveWoConcTable
         '
         Me.SaveWoConcTable.DefaultExt = "xlsx"
+        Me.SaveWoConcTable.FileName = "MissedElements"
         Me.SaveWoConcTable.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
         Me.SaveWoConcTable.RestoreDirectory = True
         '

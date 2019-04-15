@@ -22,25 +22,25 @@ Partial Class Form_Intermediate_Table_Concentration
     'Не изменяйте ее в редакторе исходного кода.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series11 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series12 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea7 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend7 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series13 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series14 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea8 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend8 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series15 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series16 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.DataGridView_Intermediate_Table_Concentration = New System.Windows.Forms.DataGridView()
         Me.Chart_Na_Na = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Button_Draw_Graph = New System.Windows.Forms.Button()
@@ -65,34 +65,34 @@ Partial Class Form_Intermediate_Table_Concentration
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DataGridView_Intermediate_Table_Concentration.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_Intermediate_Table_Concentration.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_Intermediate_Table_Concentration.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView_Intermediate_Table_Concentration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView_Intermediate_Table_Concentration.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView_Intermediate_Table_Concentration.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView_Intermediate_Table_Concentration.Location = New System.Drawing.Point(2, 2)
         Me.DataGridView_Intermediate_Table_Concentration.Name = "DataGridView_Intermediate_Table_Concentration"
         Me.DataGridView_Intermediate_Table_Concentration.ReadOnly = True
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView_Intermediate_Table_Concentration.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView_Intermediate_Table_Concentration.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
         Me.DataGridView_Intermediate_Table_Concentration.RowHeadersVisible = False
         Me.DataGridView_Intermediate_Table_Concentration.Size = New System.Drawing.Size(930, 318)
         Me.DataGridView_Intermediate_Table_Concentration.TabIndex = 0
@@ -100,27 +100,27 @@ Partial Class Form_Intermediate_Table_Concentration
         'Chart_Na_Na
         '
         Me.Chart_Na_Na.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart_Na_Na.ChartAreas.Add(ChartArea1)
+        ChartArea5.Name = "ChartArea1"
+        Me.Chart_Na_Na.ChartAreas.Add(ChartArea5)
         Me.Chart_Na_Na.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.Chart_Na_Na.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Legend1.Name = "Legend1"
-        Me.Chart_Na_Na.Legends.Add(Legend1)
+        Legend5.Name = "Legend1"
+        Me.Chart_Na_Na.Legends.Add(Legend5)
         Me.Chart_Na_Na.Location = New System.Drawing.Point(12, 326)
         Me.Chart_Na_Na.Name = "Chart_Na_Na"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
-        Series1.CustomProperties = "EmptyPointValue=Zero"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Na24-Na24"
-        Series1.YValuesPerPoint = 4
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series2.Color = System.Drawing.Color.Red
-        Series2.Legend = "Legend1"
-        Series2.Name = "TrendLine"
-        Me.Chart_Na_Na.Series.Add(Series1)
-        Me.Chart_Na_Na.Series.Add(Series2)
+        Series9.ChartArea = "ChartArea1"
+        Series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
+        Series9.CustomProperties = "EmptyPointValue=Zero"
+        Series9.Legend = "Legend1"
+        Series9.Name = "Na24-Na24"
+        Series9.YValuesPerPoint = 4
+        Series10.ChartArea = "ChartArea1"
+        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series10.Color = System.Drawing.Color.Red
+        Series10.Legend = "Legend1"
+        Series10.Name = "TrendLine"
+        Me.Chart_Na_Na.Series.Add(Series9)
+        Me.Chart_Na_Na.Series.Add(Series10)
         Me.Chart_Na_Na.Size = New System.Drawing.Size(449, 184)
         Me.Chart_Na_Na.TabIndex = 1
         Me.Chart_Na_Na.Text = "Chart_1"
@@ -158,27 +158,27 @@ Partial Class Form_Intermediate_Table_Concentration
         'Chart_Sb122_Sb124
         '
         Me.Chart_Sb122_Sb124.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart_Sb122_Sb124.ChartAreas.Add(ChartArea2)
+        ChartArea6.Name = "ChartArea1"
+        Me.Chart_Sb122_Sb124.ChartAreas.Add(ChartArea6)
         Me.Chart_Sb122_Sb124.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.Chart_Sb122_Sb124.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Legend2.Name = "Legend1"
-        Me.Chart_Sb122_Sb124.Legends.Add(Legend2)
+        Legend6.Name = "Legend1"
+        Me.Chart_Sb122_Sb124.Legends.Add(Legend6)
         Me.Chart_Sb122_Sb124.Location = New System.Drawing.Point(472, 326)
         Me.Chart_Sb122_Sb124.Name = "Chart_Sb122_Sb124"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
-        Series3.CustomProperties = "EmptyPointValue=Zero"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Sb122-Sb124"
-        Series3.YValuesPerPoint = 4
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series4.Color = System.Drawing.Color.Red
-        Series4.Legend = "Legend1"
-        Series4.Name = "TrendLine"
-        Me.Chart_Sb122_Sb124.Series.Add(Series3)
-        Me.Chart_Sb122_Sb124.Series.Add(Series4)
+        Series11.ChartArea = "ChartArea1"
+        Series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
+        Series11.CustomProperties = "EmptyPointValue=Zero"
+        Series11.Legend = "Legend1"
+        Series11.Name = "Sb122-Sb124"
+        Series11.YValuesPerPoint = 4
+        Series12.ChartArea = "ChartArea1"
+        Series12.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series12.Color = System.Drawing.Color.Red
+        Series12.Legend = "Legend1"
+        Series12.Name = "TrendLine"
+        Me.Chart_Sb122_Sb124.Series.Add(Series11)
+        Me.Chart_Sb122_Sb124.Series.Add(Series12)
         Me.Chart_Sb122_Sb124.Size = New System.Drawing.Size(449, 184)
         Me.Chart_Sb122_Sb124.TabIndex = 6
         Me.Chart_Sb122_Sb124.Text = "Chart1"
@@ -186,27 +186,27 @@ Partial Class Form_Intermediate_Table_Concentration
         'Chart_Ce_La
         '
         Me.Chart_Ce_La.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart_Ce_La.ChartAreas.Add(ChartArea3)
+        ChartArea7.Name = "ChartArea1"
+        Me.Chart_Ce_La.ChartAreas.Add(ChartArea7)
         Me.Chart_Ce_La.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.Chart_Ce_La.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Legend3.Name = "Legend1"
-        Me.Chart_Ce_La.Legends.Add(Legend3)
+        Legend7.Name = "Legend1"
+        Me.Chart_Ce_La.Legends.Add(Legend7)
         Me.Chart_Ce_La.Location = New System.Drawing.Point(12, 527)
         Me.Chart_Ce_La.Name = "Chart_Ce_La"
-        Series5.ChartArea = "ChartArea1"
-        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
-        Series5.CustomProperties = "EmptyPointValue=Zero"
-        Series5.Legend = "Legend1"
-        Series5.Name = "Ce141-La140"
-        Series5.YValuesPerPoint = 4
-        Series6.ChartArea = "ChartArea1"
-        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series6.Color = System.Drawing.Color.Red
-        Series6.Legend = "Legend1"
-        Series6.Name = "TrendLine"
-        Me.Chart_Ce_La.Series.Add(Series5)
-        Me.Chart_Ce_La.Series.Add(Series6)
+        Series13.ChartArea = "ChartArea1"
+        Series13.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
+        Series13.CustomProperties = "EmptyPointValue=Zero"
+        Series13.Legend = "Legend1"
+        Series13.Name = "Ce141-La140"
+        Series13.YValuesPerPoint = 4
+        Series14.ChartArea = "ChartArea1"
+        Series14.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series14.Color = System.Drawing.Color.Red
+        Series14.Legend = "Legend1"
+        Series14.Name = "TrendLine"
+        Me.Chart_Ce_La.Series.Add(Series13)
+        Me.Chart_Ce_La.Series.Add(Series14)
         Me.Chart_Ce_La.Size = New System.Drawing.Size(449, 184)
         Me.Chart_Ce_La.TabIndex = 7
         Me.Chart_Ce_La.Text = "Chart_1"
@@ -214,27 +214,27 @@ Partial Class Form_Intermediate_Table_Concentration
         'Chart_Pa_Np
         '
         Me.Chart_Pa_Np.Anchor = System.Windows.Forms.AnchorStyles.Bottom
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart_Pa_Np.ChartAreas.Add(ChartArea4)
+        ChartArea8.Name = "ChartArea1"
+        Me.Chart_Pa_Np.ChartAreas.Add(ChartArea8)
         Me.Chart_Pa_Np.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.Chart_Pa_Np.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Legend4.Name = "Legend1"
-        Me.Chart_Pa_Np.Legends.Add(Legend4)
+        Legend8.Name = "Legend1"
+        Me.Chart_Pa_Np.Legends.Add(Legend8)
         Me.Chart_Pa_Np.Location = New System.Drawing.Point(472, 527)
         Me.Chart_Pa_Np.Name = "Chart_Pa_Np"
-        Series7.ChartArea = "ChartArea1"
-        Series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
-        Series7.CustomProperties = "EmptyPointValue=Zero"
-        Series7.Legend = "Legend1"
-        Series7.Name = "Np239-Pa233"
-        Series7.YValuesPerPoint = 4
-        Series8.ChartArea = "ChartArea1"
-        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series8.Color = System.Drawing.Color.Red
-        Series8.Legend = "Legend1"
-        Series8.Name = "TrendLine"
-        Me.Chart_Pa_Np.Series.Add(Series7)
-        Me.Chart_Pa_Np.Series.Add(Series8)
+        Series15.ChartArea = "ChartArea1"
+        Series15.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point
+        Series15.CustomProperties = "EmptyPointValue=Zero"
+        Series15.Legend = "Legend1"
+        Series15.Name = "Np239-Pa233"
+        Series15.YValuesPerPoint = 4
+        Series16.ChartArea = "ChartArea1"
+        Series16.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series16.Color = System.Drawing.Color.Red
+        Series16.Legend = "Legend1"
+        Series16.Name = "TrendLine"
+        Me.Chart_Pa_Np.Series.Add(Series15)
+        Me.Chart_Pa_Np.Series.Add(Series16)
         Me.Chart_Pa_Np.Size = New System.Drawing.Size(449, 184)
         Me.Chart_Pa_Np.TabIndex = 8
         Me.Chart_Pa_Np.Text = "Chart_1"
@@ -242,6 +242,7 @@ Partial Class Form_Intermediate_Table_Concentration
         'SaveInterTable
         '
         Me.SaveInterTable.DefaultExt = "xlsx"
+        Me.SaveInterTable.FileName = "InterTable"
         Me.SaveInterTable.Filter = "Excel files (*.xlsx)|*.xlsx|All files (*.*)|*.*"
         Me.SaveInterTable.RestoreDirectory = True
         '

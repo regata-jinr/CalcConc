@@ -19,7 +19,7 @@
             CheckGRSSrcKeyColumns(0) = CheckGRSSrcKeyColumn
             CheckGRSSrc.Columns.Add(CheckGRSSrcKeyColumn)
             CheckGRSSrc.PrimaryKey = CheckGRSSrcKeyColumns
-            If My.Settings.language = "Russian" Then
+            If My.Settings.language = "English" Then
                 CheckGRSSrc.Columns.Add("Имя файла")
                 CheckGRSSrc.Columns.Add("Имя стандарта")
 
@@ -123,7 +123,7 @@
             nucl = Split(DataGridViewForCheckGRS.Columns(ci).HeaderText, Convert.ToChar(Keys.Enter))(0)
             If nucl <> Split(DataGridViewForCheckGRS.Columns(ci - 1).HeaderText, Convert.ToChar(Keys.Enter))(0) Then changeFlag = Not changeFlag
             If changeFlag Then
-                DataGridViewForCheckGRS.Columns(ci).DefaultCellStyle.BackColor = Color.MediumTurquoise
+                DataGridViewForCheckGRS.Columns(ci).DefaultCellStyle.BackColor = Color.SkyBlue
                 If Not NuclStartStopForCheckGRS.ContainsKey(nucl) Then
                     NuclStartStopForCheckGRS.Add(nucl, {ci, ci, ci})
                 Else
@@ -137,7 +137,7 @@
                     NuclStartStopForCheckGRS(nucl)(1) = ci
                     NuclStartStopForCheckGRS(nucl)(2) = (ci - 2) / 6
                 End If
-                DataGridViewForCheckGRS.Columns(ci).DefaultCellStyle.BackColor = Color.LightSalmon
+                DataGridViewForCheckGRS.Columns(ci).DefaultCellStyle.BackColor = Color.Moccasin
             End If
             For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
                 If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
@@ -161,10 +161,12 @@
             For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
                 If Not HiddenElements.Contains(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0)) Then DataGridViewForCheckGRS.Columns(ci).Visible = False
             Next
+            BExportCheckTable.Enabled = False
         Else
             For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
                 DataGridViewForCheckGRS.Columns(ci).Visible = True
             Next
+            BExportCheckTable.Enabled = True
         End If
     End Sub
 
