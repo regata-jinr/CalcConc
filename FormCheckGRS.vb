@@ -102,7 +102,7 @@
             CheckGrsEditorFill()
             DataGridViewForCheckGRS.ColumnHeadersVisible = True
 
-            CheckBoxPer.Checked = True
+            CheckBoxPer.Checked = False
 
 
         Catch ex As Exception

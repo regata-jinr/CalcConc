@@ -120,22 +120,13 @@
   <metadata name="SaveFileDialog_Grup_Stand_GRS_Editor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="AutoGRSToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>644, 15</value>
-  </metadata>
-  <data name="AutoGRS.ToolTip" xml:space="preserve">
-    <value>Автоматическое формирование ГРС происходит по следующему алгоритму:
-Для Mg-27 строка выбирается из стандарта, у которого наименьшая паспортная концентрация Al-28
-Для отсальных элементов:
-1. Если паспортная погрешность менее 30%, то 
-2. В интервале +- 5% от минимума "среднеквадратичного отклонения", выбирается такая строка, 
-у которой максимальна паспортная концентрация.
-3. Если паспортная погрешность не менее 30%, то выбирается элемент с минимальным "среднеквадратичным отклонением".</value>
-  </data>
   <metadata name="OpenFileDialog_Akt_Stand_Obr_GRS_1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>269, 15</value>
   </metadata>
   <metadata name="OpenGRSFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>516, 15</value>
+  </metadata>
+  <metadata name="AutoGRSToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>644, 15</value>
   </metadata>
 </root>

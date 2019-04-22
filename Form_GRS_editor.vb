@@ -182,7 +182,7 @@
             For Each elem As String In Form_Main.uniqElemForGRS
                 'Debug.WriteLine(elem)
                 If PaspConcErrDict(elem).ToArray.Min < 30 Then
-                    needRow = Form_Main.grsTable.Select("nucl = '" & elem & "' AND pasErr < 30 AND stdEr > '" & (StdErrDict(elem).ToArray.Min - 0.05 * StdErrDict(elem).ToArray.Min).ToString & "' AND stdEr < '" & (StdErrDict(elem).ToArray.Min + 0.05 * StdErrDict(elem).ToArray.Min).ToString & "'", "paspConc DESC")
+                    needRow = Form_Main.grsTable.Select("nucl = '" & elem & "' AND stdEr < '" & (StdErrDict(elem).ToArray.Min + 2).ToString & "'", "paspConc DESC")
                 Else
                     needRow = Form_Main.grsTable.Select("nucl = '" & elem & "'", "stdEr ASC")
                 End If
@@ -369,7 +369,15 @@
         End Try
     End Sub
 
+    Private Sub AutoGRS_RightClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles AutoGRS.MouseDown
+        If e.Button = MouseButtons.Right Then
+            MessageBox.Show($"Автоматическое формирование ГРС происходит по следующему алгоритму:{vbCrLf}Для Mg-27 строка выбирается из стандарта, у которого наименьшая паспортная концентрация Al-28.{vbCrLf}Для отсальных элементов:{vbCrLf}  1. Если паспортная погрешность менее 30%, то {vbCrLf}    1.1 Выбираются строки со значениями лежащими в интервале от минимума среднеквадратичной погрешности до (минимума среднеквадратичной погрешности + 2)%{vbCrLf}    1.2 Из выбранных строк, выбирается такая строка, у которой максимальна паспортная концентрация.{vbCrLf}   2. Если паспортная погрешность не менее 30%, то выбирается элемент с минимальной среднеквадратичной погрешностью.", "Описание алгоритма автоматического формирования ГРС", MessageBoxButtons.OK, MessageBoxIcon.Question)
+        End If
+
+    End Sub
+
     Private Sub AutoGRS_Click(sender As System.Object, e As System.EventArgs) Handles AutoGRS.Click
+
         Try
             DataGridView_GRS_Editor.ClearSelection()
             DataGridView_GRS_Editor.CurrentCell = Nothing
