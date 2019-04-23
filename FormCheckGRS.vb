@@ -19,28 +19,41 @@
             CheckGRSSrcKeyColumns(0) = CheckGRSSrcKeyColumn
             CheckGRSSrc.Columns.Add(CheckGRSSrcKeyColumn)
             CheckGRSSrc.PrimaryKey = CheckGRSSrcKeyColumns
-            If My.Settings.language = "English" Then
-                CheckGRSSrc.Columns.Add("Имя файла")
-                CheckGRSSrc.Columns.Add("Имя стандарта")
+            CheckGRSSrc.Columns.Add("Имя файла")
+            CheckGRSSrc.Columns.Add("Имя стандарта")
 
-                For Each element As String In UniqElements
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная концентрация, mg/kg", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %", GetType(Double))
-                Next
-            Else
-                CheckGRSSrc.Columns.Add("File Name")
-                CheckGRSSrc.Columns.Add("Standart name")
-                For Each element As String In UniqElements
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated concentration, mg/kg", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport Concentration, mg/kg", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated error, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport error, %", GetType(Double))
-                    CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - perc. ratio betw. calc. and passp. vals, %", GetType(Double))
-                Next
-            End If
+            For Each element As String In UniqElements
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная концентрация, mg/kg", GetType(Double))
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %", GetType(Double))
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "хи квадрат", GetType(Double))
+            Next
+            'If My.Settings.language = "English" Then
+            '    CheckGRSSrc.Columns.Add("Имя файла")
+            '    CheckGRSSrc.Columns.Add("Имя стандарта")
+
+            '    For Each element As String In UniqElements
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная концентрация, mg/kg", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "хи квадрат", GetType(Double))
+            '    Next
+            'Else
+            '    CheckGRSSrc.Columns.Add("File Name")
+            '    CheckGRSSrc.Columns.Add("Standart name")
+            '    For Each element As String In UniqElements
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated concentration, mg/kg", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport Concentration, mg/kg", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated error, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport error, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - perc. ratio betw. calc. and passp. vals, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "chi square", GetType(Double))
+            '    Next
+            'End If
 
 
             For Each row As DataRow In Form_Main.rptTablePeaks.Rows
@@ -52,12 +65,14 @@
                     MsgBox(ex.ToString, MsgBoxStyle.Critical)
                 End Try
             Next
-
-            Dim calcConc, pasConc, calcErr, StdErr, passErr As Double
-
+            Dim columnIndex As Integer = 0
+            Dim calcConc, pasConc, calcErr, StdErr, passErr, chiSq, chiSqSum As Double
+            Dim elementSum As String = ""
             For Each grsRow As DataGridViewRow In Form_GRS_editor.DataGridView_GRS_Editor.Rows
                 If Not grsRow.DefaultCellStyle.Font.Strikeout Then
                     For Each grsCheckRow As DataRow In CheckGRSSrc.Rows
+                        elementSum = grsRow.Cells(2).Value
+                        pasConc = 0.0
                         CheckGRSSrc.Rows.Find(grsCheckRow(0))("Имя файла") = Split(grsCheckRow(0), "_")(0)
                         CheckGRSSrc.Rows.Find(grsCheckRow(0))("Имя стандарта") = Split(grsCheckRow(0), "_")(1)
                         Try
@@ -69,11 +84,13 @@
                         Try
                             pasConc = Convert.ToDouble(Form_Main.grsTable.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("paspConc"))
                             If pasConc <> Double.NaN And pasConc <> Double.PositiveInfinity And pasConc <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Паспортная концентрация, mg/kg") = pasConc
+
+
+
                         Catch ex As Exception
                         End Try
 
                         Try
-                            calcErr = Convert.ToDouble(Form_Main.grsTable.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("paspConc"))
                             calcErr = Math.Round(100 * Math.Sqrt((Convert.ToDouble(Form_Main.rptTablePeaks.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("Погрешность, %")) / 100) ^ 2 + (Convert.ToDouble(grsRow.Cells(5).Value) / 100) ^ 2 + (Convert.ToDouble(grsRow.Cells(7).Value) / 100) ^ 2), 1)
 
                             If calcErr <> Double.NaN And calcErr <> Double.PositiveInfinity And calcErr <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Расчетная погрешность, %") = calcErr
@@ -81,7 +98,6 @@
                         End Try
 
                         Try
-                            StdErr = Convert.ToDouble(Form_Main.grsTable.Rows.Find(grsCheckRow(0) & "_" & grsRow.Cells(2).Value)("paspConc"))
                             StdErr = Math.Round(100 * (calcConc - pasConc) / pasConc, 1)
                             If StdErr <> Double.NaN And StdErr <> Double.PositiveInfinity And StdErr <> Double.NegativeInfinity Then
                                 CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %") = StdErr
@@ -94,7 +110,23 @@
                             If passErr <> Double.NaN And passErr <> Double.PositiveInfinity And passErr <> Double.NegativeInfinity Then CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Паспортная погрешность, %") = passErr
                         Catch ex As Exception
                         End Try
+
+                        Try
+                            chiSq = (1 / pasConc) * (calcConc - pasConc) * (calcConc - pasConc)
+                            If String.IsNullOrEmpty(CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Паспортная концентрация, mg/kg")) Then chiSq = 0.0
+                            If chiSq <> Double.NaN And chiSq <> Double.PositiveInfinity And chiSq <> Double.NegativeInfinity Then
+                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат") = ConcForms.Rounding(chiSq, 0.02)
+                                chiSqSum += chiSq
+                            End If
+                            elementSum = Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат"
+                        Catch ex As Exception
+                        End Try
                     Next
+                    Try
+                        CheckGRSSrc.Columns(elementSum).ColumnName = $"{elementSum}: {ConcForms.Rounding(chiSqSum, 0.05)}"
+                    Catch ex As Exception
+                    End Try
+                    chiSqSum = 0.0
                 End If
             Next
             DataGridViewForCheckGRS.ColumnHeadersVisible = False
