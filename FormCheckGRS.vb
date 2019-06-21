@@ -27,7 +27,7 @@
                 CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
                 CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
                 CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
-                CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %", GetType(Double))
+                CheckGRSSrc.Columns.Add(element & vbCrLf & "Относительная погрешность, %", GetType(Double))
                 CheckGRSSrc.Columns.Add(element & vbCrLf & "хи квадрат", GetType(Double))
             Next
             'If My.Settings.language = "English" Then
@@ -39,7 +39,7 @@
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная концентрация, mg/kg", GetType(Double))
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Расчетная погрешность, %", GetType(Double))
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Паспортная погрешность, %", GetType(Double))
-            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Относительная погрешность, %", GetType(Double))
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "хи квадрат", GetType(Double))
             '    Next
             'Else
@@ -50,7 +50,7 @@
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport Concentration, mg/kg", GetType(Double))
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Calculated error, %", GetType(Double))
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Passport error, %", GetType(Double))
-            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "1 - perc. ratio betw. calc. and passp. vals, %", GetType(Double))
+            '        CheckGRSSrc.Columns.Add(element & vbCrLf & "Relative Error, %", GetType(Double))
             '        CheckGRSSrc.Columns.Add(element & vbCrLf & "chi square", GetType(Double))
             '    Next
             'End If
@@ -66,7 +66,7 @@
                 End Try
             Next
             Dim columnIndex As Integer = 0
-            Dim calcConc, pasConc, calcErr, StdErr, passErr, chiSq, chiSqSum As Double
+            Dim calcConc, pasConc, calcErr, StdErr, passErr, chiSq As Double
             Dim elementSum As String = ""
             For Each grsRow As DataGridViewRow In Form_GRS_editor.DataGridView_GRS_Editor.Rows
                 If Not grsRow.DefaultCellStyle.Font.Strikeout Then
@@ -116,17 +116,14 @@
                             If String.IsNullOrEmpty(CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Паспортная концентрация, mg/kg")) Then chiSq = 0.0
                             If chiSq <> Double.NaN And chiSq <> Double.PositiveInfinity And chiSq <> Double.NegativeInfinity Then
                                 CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат") = ConcForms.Rounding(chiSq, 0.02)
-                                chiSqSum += chiSq
                             End If
                             elementSum = Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат"
                         Catch ex As Exception
                         End Try
                     Next
                     Try
-                        CheckGRSSrc.Columns(elementSum).ColumnName = $"{elementSum}: {ConcForms.Rounding(chiSqSum, 0.05)}"
                     Catch ex As Exception
                     End Try
-                    chiSqSum = 0.0
                 End If
             Next
             DataGridViewForCheckGRS.ColumnHeadersVisible = False

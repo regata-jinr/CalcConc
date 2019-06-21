@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form_Main
     Inherits System.Windows.Forms.Form
 
     'Форма переопределяет dispose для очистки списка компонентов.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Form_Main
     'Примечание: следующая процедура является обязательной для конструктора форм Windows Forms
     'Для ее изменения используйте конструктор форм Windows Form.  
     'Не изменяйте ее в редакторе исходного кода.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form_Main))
         Me.MenuStrip = New System.Windows.Forms.MenuStrip()
@@ -88,7 +88,10 @@ Partial Class Form_Main
         Me.ButtonShowWOConc = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
-        Me.CheckBoxFilter = New System.Windows.Forms.CheckBox()
+        Me.FiltersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChooseSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChooseBlanksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog_ChooseBlankFile = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -97,7 +100,7 @@ Partial Class Form_Main
         '
         'MenuStrip
         '
-        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Monitor_Activity_ToolStripMenuItem, Me.Concentration_ToolStripMenuItem, Me.Table_Nuclides_ToolStripMenuItem, Me.Clear_Form_ToolStripMenuItem, Me.LangEngToolStripMenuItem})
+        Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Monitor_Activity_ToolStripMenuItem, Me.Concentration_ToolStripMenuItem, Me.FiltersToolStripMenuItem, Me.Table_Nuclides_ToolStripMenuItem, Me.Clear_Form_ToolStripMenuItem, Me.LangEngToolStripMenuItem})
         Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip.Name = "MenuStrip"
         Me.MenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
@@ -511,7 +514,6 @@ Partial Class Form_Main
         'GroupBox_Concentration
         '
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
-        Me.GroupBox_Concentration.Controls.Add(Me.CheckBoxFilter)
         Me.GroupBox_Concentration.Controls.Add(Me.ButtonShowWOConc)
         Me.GroupBox_Concentration.Controls.Add(Me.Label1)
         Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
@@ -566,15 +568,31 @@ Partial Class Form_Main
         Me.TextBoxAcc.Text = "1"
         Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'CheckBoxFilter
+        'FiltersToolStripMenuItem
         '
-        Me.CheckBoxFilter.AutoSize = True
-        Me.CheckBoxFilter.Location = New System.Drawing.Point(299, 114)
-        Me.CheckBoxFilter.Name = "CheckBoxFilter"
-        Me.CheckBoxFilter.Size = New System.Drawing.Size(81, 17)
-        Me.CheckBoxFilter.TabIndex = 26
-        Me.CheckBoxFilter.Text = "CheckBox1"
-        Me.CheckBoxFilter.UseVisualStyleBackColor = True
+        Me.FiltersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChooseSamplesToolStripMenuItem, Me.ChooseBlanksToolStripMenuItem})
+        Me.FiltersToolStripMenuItem.Name = "FiltersToolStripMenuItem"
+        Me.FiltersToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
+        Me.FiltersToolStripMenuItem.Text = "Filters"
+        '
+        'ChooseSamplesToolStripMenuItem
+        '
+        Me.ChooseSamplesToolStripMenuItem.Name = "ChooseSamplesToolStripMenuItem"
+        Me.ChooseSamplesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChooseSamplesToolStripMenuItem.Text = "Choose samples"
+        '
+        'ChooseBlanksToolStripMenuItem
+        '
+        Me.ChooseBlanksToolStripMenuItem.Name = "ChooseBlanksToolStripMenuItem"
+        Me.ChooseBlanksToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChooseBlanksToolStripMenuItem.Text = "Choose blanks"
+        '
+        'OpenFileDialog_ChooseBlankFile
+        '
+        Me.OpenFileDialog_ChooseBlankFile.Filter = "Файлы концентраций (*.con)|*.con|Все файлы (*.*)|*.*"
+        Me.OpenFileDialog_ChooseBlankFile.RestoreDirectory = True
+        Me.OpenFileDialog_ChooseBlankFile.SupportMultiDottedExtensions = True
+        Me.OpenFileDialog_ChooseBlankFile.Title = "Выберите файл бланка"
         '
         'Form_Main
         '
@@ -667,5 +685,8 @@ Partial Class Form_Main
     Friend WithEvents TextBoxAcc As TextBox
     Friend WithEvents LangEngToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonShowWOConc As Button
-    Friend WithEvents CheckBoxFilter As CheckBox
+    Friend WithEvents FiltersToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChooseSamplesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ChooseBlanksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFileDialog_ChooseBlankFile As OpenFileDialog
 End Class

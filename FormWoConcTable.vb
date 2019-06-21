@@ -12,11 +12,7 @@
             End If
 
             Dim unit As String = ""
-            If Not Form_Main.CheckBoxFilter.Checked Then
-                unit = "uCi/gr"
-            Else
-                unit = "uCi"
-            End If
+            unit = "uCi/gr"
 
             ConcForms.TableContentLoad(DataGridView_WoConcElements, False, Form_Main.GlobalNuclidsForAct, Form_Main.actDict, $"Activity, {unit}", $"MDC, {unit}")
             Form_Main.LocalizedForm()

@@ -4,7 +4,7 @@ Module UpdateMessenger
     Sub ShowMessage()
         Try
             Dim UpdMsg As String
-            UpdMsg = $"Поправлен алгоритм автоматического формирования ГРС.{vbCrLf}Получить информацию об алгоритме можно нажав правой кнопкой мыши на кнопку 'Создать ГРС автоматически'.{vbCrLf}Добавлена метрика сравнения паспортной и расчетной концентраций - хи квадрат.{vbCrLf}В проверке стандартов отметка об ограниченном показе элементов больше не ставится по умолчанию."
+            UpdMsg = $"{vbTab}Изменены названия некоторых столбцов в таблицах.{vbCrLf}{vbTab}Добавлено сохранение веса в файл концентраций{vbCrLf}{vbTab}Добавлены улучшения в парсинг файлов.{vbCrLf}{vbTab}Добавлен функционал работы с фильтрами. За инструкцией обращаться к Сергею Сергеевичу.{vbCrLf}"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
                 Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment

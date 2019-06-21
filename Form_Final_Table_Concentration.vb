@@ -9,11 +9,7 @@
 
             Dim valuesRange As New Dictionary(Of String, String())
             Dim unit As String = ""
-            If Not Form_Main.CheckBoxFilter.Checked Then
-                unit = "Conc, ug/g"
-            Else
-                unit = "ug"
-            End If
+            unit = "Conc, ug/g"
             valuesRange = SaveToExcel(DataGridView_Final_Table_Concentration, SaveFinalTable, True, unit)
             If IsNothing(valuesRange) Then Exit Sub
 
@@ -64,13 +60,8 @@
     Private Sub Form_Final_Table_Concentartion_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
             Dim unit As String = ""
-            If Not Form_Main.CheckBoxFilter.Checked Then
-                unit = "ug/g"
-                ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
-            Else
-                unit = "ug"
-                ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"{unit}", $"MDC, {unit}")
-            End If
+            unit = "ug/g"
+            ConcForms.TableContentLoad(DataGridView_Final_Table_Concentration, True, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
 
             Form_Main.LocalizedForm()
             BuildGraph(Form_Main.xCE141LLI2, Form_Main.yLA140LLI1, "Ce-La", Chart_Ce_La)
