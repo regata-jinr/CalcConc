@@ -17,7 +17,11 @@ Public Class Form_Intermediate_Table_Concentration
     Private Sub Form_Intermediate_Table_Concentration_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Try
             Dim unit As String = ""
-            unit = "ug/g"
+            If Not Form_Main.isFilters Then
+                unit = "ug/g"
+            Else
+                unit = "gram"
+            End If
             ConcForms.TableContentLoad(DataGridView_Intermediate_Table_Concentration, False, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
 
             Form_Main.LocalizedForm()

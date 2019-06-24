@@ -20,6 +20,7 @@ namespace Extensions
         public string Type { get; }
         public string GRSName { get; }
         public double Weight { get; }
+        
 
         private string OriginalDirectory { get; }
         private string OriginalFileName { get; }
@@ -78,9 +79,9 @@ namespace Extensions
             var concAncMDAPattern = new Regex(@"\d[.]\d{2}E[+-]\d{2,3}");
             var errPattern = new Regex(@"\d{1,2}[.]\d{2}");
 
-            Weight = -1.0;
-
             var el = "";
+
+            Weight = -1.0;
 
             var rLine = "";
 
@@ -194,11 +195,11 @@ namespace Extensions
 
             using (TextWriter file = File.CreateText(path))
             {
-                file.Write(_fileHead.Replace("КОНЦЕНТРАЦИЙ","МАССОВЫХ ДОЛЕЙ").Replace("концентр.","м.д.").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("uг/гр","гр").Replace("ug/gr","gr")); // sorry :(
+                file.Write(_fileHead.Replace("КОНЦЕНТРАЦИЙ  ","МАССОВЫХ ДОЛЕЙ").Replace("концентр.,","масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр","грамм   ").Replace("    ug/gr","gram")); // sorry :(
 
                 foreach (var el in Elements.Keys)
                 {
-                    file.WriteLine($"\t\t{Elements[el].ToString()} ");               
+                    file.WriteLine(Elements[el].ToString());               
                 }
             }
 
@@ -279,7 +280,11 @@ namespace Extensions
 
         public override string ToString()
         {
-            return $"{Name}\t{Concentration:E2}\t{Error:f2}\t{MDA:E2}";
+            var s1 = Name;
+            var s2 = $"{Concentration:E2}";
+            var s3 = $"{Error:f2}";
+            var s4 = $"{MDA:E2}";
+            return $"\t{s1,-7}\t{s2,-9}\t{s3,-5}\t{s4,-9}";
         }
 
 

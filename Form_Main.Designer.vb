@@ -37,6 +37,9 @@ Partial Class Form_Main
         Me.SaveConcIsslObr_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripSeparator()
         Me.OpenConcIsslObr_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FiltersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChooseSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ChooseBlanksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Table_Nuclides_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Clear_Form_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LangEngToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -88,10 +91,9 @@ Partial Class Form_Main
         Me.ButtonShowWOConc = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
-        Me.FiltersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChooseSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ChooseBlanksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog_ChooseBlankFile = New System.Windows.Forms.OpenFileDialog()
+        Me.LoadMDEFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFileDialog_ChooseFilterForTables = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -188,6 +190,25 @@ Partial Class Form_Main
         Me.OpenConcIsslObr_ToolStripMenuItem.Name = "OpenConcIsslObr_ToolStripMenuItem"
         Me.OpenConcIsslObr_ToolStripMenuItem.Size = New System.Drawing.Size(328, 22)
         Me.OpenConcIsslObr_ToolStripMenuItem.Text = "Open CON files"
+        '
+        'FiltersToolStripMenuItem
+        '
+        Me.FiltersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChooseSamplesToolStripMenuItem, Me.ChooseBlanksToolStripMenuItem, Me.LoadMDEFilesToolStripMenuItem})
+        Me.FiltersToolStripMenuItem.Name = "FiltersToolStripMenuItem"
+        Me.FiltersToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
+        Me.FiltersToolStripMenuItem.Text = "Filters"
+        '
+        'ChooseSamplesToolStripMenuItem
+        '
+        Me.ChooseSamplesToolStripMenuItem.Name = "ChooseSamplesToolStripMenuItem"
+        Me.ChooseSamplesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChooseSamplesToolStripMenuItem.Text = "Choose samples"
+        '
+        'ChooseBlanksToolStripMenuItem
+        '
+        Me.ChooseBlanksToolStripMenuItem.Name = "ChooseBlanksToolStripMenuItem"
+        Me.ChooseBlanksToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChooseBlanksToolStripMenuItem.Text = "Choose blanks"
         '
         'Table_Nuclides_ToolStripMenuItem
         '
@@ -471,7 +492,7 @@ Partial Class Form_Main
         '
         'OpenFileDialog_Conc_Issl_Obr_CON
         '
-        Me.OpenFileDialog_Conc_Issl_Obr_CON.Filter = "Файлы концентраций (*.con)|*.con|Все файлы (*.*)|*.*"
+        Me.OpenFileDialog_Conc_Issl_Obr_CON.Filter = "Файлы концентраций (*.con, *.mde)|*.con;*.mde|Все файлы (*.*)|*.*"
         Me.OpenFileDialog_Conc_Issl_Obr_CON.Multiselect = True
         Me.OpenFileDialog_Conc_Issl_Obr_CON.RestoreDirectory = True
         '
@@ -568,31 +589,24 @@ Partial Class Form_Main
         Me.TextBoxAcc.Text = "1"
         Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'FiltersToolStripMenuItem
-        '
-        Me.FiltersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ChooseSamplesToolStripMenuItem, Me.ChooseBlanksToolStripMenuItem})
-        Me.FiltersToolStripMenuItem.Name = "FiltersToolStripMenuItem"
-        Me.FiltersToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
-        Me.FiltersToolStripMenuItem.Text = "Filters"
-        '
-        'ChooseSamplesToolStripMenuItem
-        '
-        Me.ChooseSamplesToolStripMenuItem.Name = "ChooseSamplesToolStripMenuItem"
-        Me.ChooseSamplesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ChooseSamplesToolStripMenuItem.Text = "Choose samples"
-        '
-        'ChooseBlanksToolStripMenuItem
-        '
-        Me.ChooseBlanksToolStripMenuItem.Name = "ChooseBlanksToolStripMenuItem"
-        Me.ChooseBlanksToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ChooseBlanksToolStripMenuItem.Text = "Choose blanks"
-        '
         'OpenFileDialog_ChooseBlankFile
         '
         Me.OpenFileDialog_ChooseBlankFile.Filter = "Файлы концентраций (*.con)|*.con|Все файлы (*.*)|*.*"
         Me.OpenFileDialog_ChooseBlankFile.RestoreDirectory = True
         Me.OpenFileDialog_ChooseBlankFile.SupportMultiDottedExtensions = True
         Me.OpenFileDialog_ChooseBlankFile.Title = "Выберите файл бланка"
+        '
+        'LoadMDEFilesToolStripMenuItem
+        '
+        Me.LoadMDEFilesToolStripMenuItem.Name = "LoadMDEFilesToolStripMenuItem"
+        Me.LoadMDEFilesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LoadMDEFilesToolStripMenuItem.Text = "Load MDE files"
+        '
+        'OpenFileDialog_ChooseFilterForTables
+        '
+        Me.OpenFileDialog_ChooseFilterForTables.Filter = "Файлы фильтров (*.mde)|*.mde|Все файлы (*.*)|*.*"
+        Me.OpenFileDialog_ChooseFilterForTables.Multiselect = True
+        Me.OpenFileDialog_ChooseFilterForTables.RestoreDirectory = True
         '
         'Form_Main
         '
@@ -689,4 +703,6 @@ Partial Class Form_Main
     Friend WithEvents ChooseSamplesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ChooseBlanksToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFileDialog_ChooseBlankFile As OpenFileDialog
+    Friend WithEvents LoadMDEFilesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFileDialog_ChooseFilterForTables As OpenFileDialog
 End Class

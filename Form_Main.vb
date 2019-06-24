@@ -149,6 +149,7 @@ Public Class Form_Main
             FiltersToolStripMenuItem.Text = "Фильтры"
             ChooseSamplesToolStripMenuItem.Text = "Выбрать файлы образцов"
             ChooseBlanksToolStripMenuItem.Text = "Выбрать файл бланка"
+            LoadMDEFilesToolStripMenuItem.Text = "Загрузить файлы фильтров"
 
 
             Form_Table_Nuclides.Text = "Таблица нуклидов"
@@ -177,7 +178,7 @@ Public Class Form_Main
 
             SaveFileDialog_Svodn_Akt_Stand_Obr_GRS.Filter = "Сводные файлы активностей стандартных образцов (*.sta)|*.sta|Все файлы (*.*)|*.*"
 
-            OpenFileDialog_Conc_Issl_Obr_CON.Filter = "Файлы концентраций (*.con)|*.con|Все файлы (*.*)|*.*"
+            OpenFileDialog_Conc_Issl_Obr_CON.Filter = "Файлы концентраций (*.con)|*.con|Файлы фильтров (*.mde)|*.mde|Все файлы (*.*)|*.*"
             SaveFileDialog_Conc_Elem.Filter = "Файлы концентраций (*.con)|*.con|Все файлы (*.*)|*.*"
 
             SaveFileDialog_TablProvStand_XLS_GRS.Filter = "Файлы Excel (*.xlsx)|*.xlsx|Все файлы (*.*)|*.*"
@@ -286,6 +287,8 @@ Public Class Form_Main
             FiltersToolStripMenuItem.Text = "Filters"
             ChooseSamplesToolStripMenuItem.Text = "Choose sample files"
             ChooseBlanksToolStripMenuItem.Text = "Choose blank file"
+            LoadMDEFilesToolStripMenuItem.Text = "Upload filters files"
+
 
             OpenFileDialog_Aktivn_Stand_Obr.Filter = "Files of activity (*.rpt)|*.rpt|All files|*.*"
             OpenFileDialog_Akt_Mon_Stand.Filter = "Files of activity (*.rpt)|*.rpt|All files|*.*"
@@ -306,7 +309,8 @@ Public Class Form_Main
 
             SaveFileDialog_Svodn_Akt_Stand_Obr_GRS.Filter = "Summary files of standards's activity (*.sta)|*.sta|All files (*.*)|*.*"
 
-            OpenFileDialog_Conc_Issl_Obr_CON.Filter = "Files of concentrations (*.con)|*.con|All files (*.*)|*.*"
+            OpenFileDialog_Conc_Issl_Obr_CON.Filter = "Files of concentrations (*.con)|*.con|Filters files (*.mde)|*.mde|All files (*.*)|*.*"
+
             SaveFileDialog_Conc_Elem.Filter = "Files of concentrations (*.con)|*.con|All files (*.*)|*.*"
 
             SaveFileDialog_TablProvStand_XLS_GRS.Filter = "Files Excel (*.xlsx)|*.xlsx|All files (*.*)|*.*"
@@ -425,7 +429,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
     Dim samples As List(Of Extensions.Sample)
     Dim blank As Extensions.Sample
-    Dim isFilters As Boolean
+    Public isFilters As Boolean
 
     Private Sub ChooseSamplesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ChooseSamplesToolStripMenuItem.Click
         Try
@@ -443,12 +447,15 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     L_Aktivn_Issl_Obr.Text += Path.GetFileNameWithoutExtension(fileName) + ","
                     samples.Add(New Extensions.Sample(fileName))
                     Debug.WriteLine($"Sample {fileName} added to list")
-                    isFilters = True
                 Next
-
-
+                isFilters = True
+                If L_Grup_Stand.Text.Contains("Бланк") Or L_Grup_Stand.Text.Contains("Blank") Then B_calc_conc.Enabled = True
             End If
+        Catch ex As ArgumentException
+            MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.")
         Catch ex As Exception
+            MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.")
+
         End Try
 
     End Sub
@@ -462,10 +469,23 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 L_Grup_Stand.Text = $"Бланк: { Path.GetFileNameWithoutExtension(OpenFileDialog_ChooseBlankFile.FileName)}"
                 blank = New Extensions.Sample(OpenFileDialog_ChooseBlankFile.FileName, True)
                 Debug.WriteLine($"Blank {OpenFileDialog_ChooseBlankFile.FileName} added to list")
+                isFilters = True
+                If L_Aktivn_Issl_Obr.Text.Contains("фильтров") Then B_calc_conc.Enabled = True
 
             End If
+        Catch ex As ArgumentException
+            MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.")
         Catch ex As Exception
+            MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.")
+
         End Try
+    End Sub
+
+    Private Sub LoadMDEFilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LoadMDEFilesToolStripMenuItem.Click
+        OpenFileDialog_Conc_Issl_Obr_CON.FilterIndex = 2
+        OpenConcIsslObr_ToolStripMenuItem_Click(sender, e)
+        ButtonShowWOConc.Enabled = False
+        isFilters = True
     End Sub
 
     Function array_length_RPT_MDA(ByVal file_name_p As String) As Integer
@@ -782,7 +802,6 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
             File_Aktivn_Issl_Obr_Select = True
             If (File_Aktivn_Issl_Obr_Select And File_Grup_Stand_Select) Then B_calc_conc.Enabled = True
-            'If (File_Aktivn_Issl_Obr_Select And File_Aktivn_Stand_Obr_Select And File_Sert_Conc_Elem_Select) Then B_calc_conc.Enabled = True
 
         Catch ex As Exception
             If My.Settings.language = "English" Then
@@ -1040,7 +1059,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("*****           ЗНАЧЕНИЯ КОНЦЕНТРАЦИЙ ЭЛЕМЕНТОВ В ОБРАЗЦЕ           *****")
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
-                                sw.WriteLine("		элемент	концентр.,	погр.,	предел")
+                                sw.WriteLine("     элемент	концентр.,	погр.,	предел")
                                 sw.WriteLine("                  uг/гр       %   обнаруж.,")
                                 sw.WriteLine("                                      uг/гр")
                                 sw.WriteLine()
@@ -1048,7 +1067,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("*****            CALCULATION CONCENTRATIONS OF ELEMENTS             *****")
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
-                                sw.WriteLine($"DateTime creation of file        : {Date.Now}")
+                                sw.WriteLine($"DateTime creation of file        :  {Date.Now}")
                                 sw.WriteLine($"Sample name                      : {src(0)}")
                                 sw.WriteLine($"Description                      : {src(2)}")
                                 sw.WriteLine($"Id                               : {src(3)}")
@@ -1111,14 +1130,19 @@ a:                                  currentRow_copy = currentRow ' обход X 
             End Try
 
         Else ' filters processing
+            Try
+                For Each sample As Extensions.Sample In samples
+                    Debug.WriteLine($"Sample processing:{sample.Name}")
+                    Dim filter As Extensions.Sample = (sample - blank) * sample.Weight
+                    filter.Save()
+                Next
 
-            For Each sample As Extensions.Sample In samples
-                Debug.WriteLine($"Sample processing:{sample.Name}")
-                Dim filter As Extensions.Sample = (sample - blank) * sample.Weight
-                filter.Save()
-            Next
+                MsgBox("Файлы успешно сохранены с расширением .mde в директорию с .con файлами", MsgBoxStyle.OkOnly)
 
+            Catch ex As Exception
+                MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.", MsgBoxStyle.Critical)
 
+            End Try
         End If
 
     End Sub
@@ -2235,7 +2259,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
     Private Sub OpenConcIsslObr_ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenConcIsslObr_ToolStripMenuItem.Click
         Try
             If conDict.Keys.Count <> 0 Then
-                Dim result As Integer = MessageBox.Show("Файлы концентраций уже загружены. Хотите добавить новые файлы к уже загруженным?", "Программа расчета концентраций", MessageBoxButtons.YesNo)
+                Dim result As Integer = MessageBox.Show("Файлы были загружены. Хотите добавить новые файлы?", "Программа расчета концентраций", MessageBoxButtons.YesNo)
                 If result = DialogResult.No Then
                     conDict.Clear()
                     actDict.Clear()
@@ -2256,7 +2280,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             End If
 
             If OpenFileDialog_Conc_Issl_Obr_CON.ShowDialog = System.Windows.Forms.DialogResult.Cancel Then
-                MsgBox("Файлы активностей стандартных образцов не выбраны!", MsgBoxStyle.Exclamation, Me.Text)
+                OpenFileDialog_Conc_Issl_Obr_CON.FilterIndex = 1
                 Exit Sub
             Else
 
@@ -2293,6 +2317,11 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 B_TablConcElemOkonchat_CON.Enabled = True
 
             End If
+            B_TablConcElemPromezh_CON.Enabled = True
+            B_TablConcElemOkonchat_CON.Enabled = True
+            ButtonShowWOConc.Enabled = True
+            OpenFileDialog_Conc_Issl_Obr_CON.FilterIndex = 1
+            isFilters = False
 
         Catch ex As Exception
             MsgBox(ex.ToString)
@@ -2344,7 +2373,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Debug.WriteLine($"Current line with values: [{line}]")
         line = line.Replace("M" & vbTab, "m" & vbTab)
         line = line.Replace(",", ".")
-        values.Add(Split(line, vbTab)(0))
+        values.Add(Split(line, vbTab)(0).Trim())
         values.Add(Double.Parse(Split(line, vbTab)(1), CultureInfo.InvariantCulture))
         values.Add(Double.Parse(Split(line, vbTab)(2), CultureInfo.InvariantCulture))
         values.Add(Double.Parse(Split(line, vbTab)(3), CultureInfo.InvariantCulture))
@@ -2653,13 +2682,19 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
         LangEngToolStripMenuItem.Text = My.Settings.language
 
+        B_calc_conc.Enabled = False
+
+        B_TablConcElemPromezh_CON.Enabled = False
+        B_TablConcElemOkonchat_CON.Enabled = False
+        ButtonShowWOConc.Enabled = False
+
         LocalizedForm()
 
         excp.Add("AL-29", "SI")
         excp.Add("CO-58", "NI")
         excp.Add("NP-239", "U")
         excp.Add("PA-233", "TH")
-        UpdateMessenger.ShowMessage()
+        ShowMessage()
     End Sub
 
     Private Sub Form_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

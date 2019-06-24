@@ -100,7 +100,7 @@
                         Try
                             StdErr = Math.Round(100 * (calcConc - pasConc) / pasConc, 1)
                             If StdErr <> Double.NaN And StdErr <> Double.PositiveInfinity And StdErr <> Double.NegativeInfinity Then
-                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "1 - процентное отношение между расч. и пасп. значениями, %") = StdErr
+                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Относительная погрешность, %") = StdErr
                             End If
                         Catch ex As Exception
                         End Try
