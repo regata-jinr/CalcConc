@@ -99,7 +99,7 @@ namespace Extensions
                     if (rLine.ToLower().Contains(".grs"))
                         GRSName = rLine.Split(':')[1].Trim();
 
-                    if (rLine.ToLower().Contains("gram"))
+                    if (rLine.ToLower().Contains("gram") || rLine.ToLower().Contains("шт.") || rLine.ToLower().Contains("грамм"))
                         Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Trim(), "weight");
 
 
@@ -134,7 +134,7 @@ namespace Extensions
 
 
             if (Weight < 0)
-                throw new ArgumentException("Weight < 0. Seems old file is using.");
+                throw new ArgumentException($"Ошибка при чтении веса в файле {OriginalFileName}");
 
         }
 

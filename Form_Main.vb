@@ -452,9 +452,11 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 If L_Grup_Stand.Text.Contains("Бланк") Or L_Grup_Stand.Text.Contains("Blank") Then B_calc_conc.Enabled = True
             End If
         Catch ex As ArgumentException
-            MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.")
+            MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.", MsgBoxStyle.Critical, "Ошибка при расчете фильтров")
+            L_Aktivn_Issl_Obr.Text = "Список фильтров:"
         Catch ex As Exception
-            MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.")
+            MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.", MsgBoxStyle.Critical, "Ошибка при расчете фильтров")
+            L_Aktivn_Issl_Obr.Text = "Список фильтров:"
 
         End Try
 
@@ -474,9 +476,11 @@ a:                                  currentRow_copy = currentRow ' обход X 
 
             End If
         Catch ex As ArgumentException
-            MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.")
+            MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.", MsgBoxStyle.Critical, "Ошибка при расчете фильтров")
+            L_Aktivn_Issl_Obr.Text = "Список фильтров:"
         Catch ex As Exception
-            MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.")
+            MsgBox($"{ex.Message}{vbCrLf}Обратитесь к автору программы.", MsgBoxStyle.Critical, "Ошибка при расчете фильтров")
+            L_Aktivn_Issl_Obr.Text = "Список фильтров:"
 
         End Try
     End Sub

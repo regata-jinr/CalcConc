@@ -4,7 +4,7 @@ Module UpdateMessenger
     Sub ShowMessage()
         Try
             Dim UpdMsg As String
-            UpdMsg = $"{vbTab}Расширен функционал работы с фильтрами. За инструкцией обращаться к Сергею Сергеевичу.{vbCrLf}{vbTab}Во избежание ошибок кнопки таблиц недоступны до тех пор пока не будут проделаны соответствующие операции.{vbCrLf}{vbTab}Исправлены мелкие ошибки.{vbCrLf}"
+            UpdMsg = $"{vbTab}Исправлена ошибка при работе с единицами измерения'шт.'{vbCrLf}"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
                 Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
