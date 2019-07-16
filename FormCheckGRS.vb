@@ -143,6 +143,7 @@
     Public NuclStartStopForCheckGRS As New Dictionary(Of String, Integer())
 
     Sub CheckGrsEditorFill()
+
         DataGridViewForCheckGRS.Columns(0).Visible = False
         DataGridViewForCheckGRS.Columns(1).Frozen = True
         DataGridViewForCheckGRS.Columns(2).Frozen = True
@@ -170,7 +171,7 @@
             End If
             For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
                 If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
-                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("отношение") Then row.Cells(ci).Style.BackColor = Color.LightCoral
+                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Относительная") Then row.Cells(ci).Style.BackColor = Color.LightCoral
             Next
         Next
     End Sub
@@ -182,7 +183,7 @@
         For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
             For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
                 If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
-                If Math.Abs(row.Cells(ci).Value) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("отношение") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
+                If Math.Abs(Decimal.Parse(row.Cells(ci).Value.ToString)) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Относительная") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
             Next
         Next
 

@@ -100,7 +100,7 @@ namespace Extensions
                         GRSName = rLine.Split(':')[1].Trim();
 
                     if (rLine.ToLower().Contains("gram") || rLine.ToLower().Contains("шт.") || rLine.ToLower().Contains("грамм"))
-                        Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Trim(), "weight");
+                        Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
 
 
                     if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine))
