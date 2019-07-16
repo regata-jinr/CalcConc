@@ -4,7 +4,8 @@ Module UpdateMessenger
     Sub ShowMessage()
         Try
             Dim UpdMsg As String
-            UpdMsg = $"{vbTab}Исправлена ошибка при отображении стандартов, у которых относительная погрешность больше заданного значения.{vbCrLf}"
+            UpdMsg = $"{vbTab}Исправлены замеченные неточности.{vbCrLf}"
+            UpdMsg = $"{vbTab}Исправлены замеченные неточности.{vbCrLf}"
             'update message
             If ApplicationDeployment.IsNetworkDeployed Then
                 Dim current As ApplicationDeployment = ApplicationDeployment.CurrentDeployment
