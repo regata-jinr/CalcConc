@@ -84,58 +84,68 @@ namespace Extensions
             Weight = -1.0;
 
             var rLine = "";
-
+            Debug.WriteLine($"Start process file: {path}");
             Debug.WriteLine("Saved elements:");
-            using (TextReader tr = File.OpenText(path))
+            try
             {
-                while ((rLine = tr.ReadLine()) != null)
+                using (TextReader tr = File.OpenText(path))
                 {
-                    if (rLine.StartsWith("Имя образца") || rLine.StartsWith("Sample name"))
-                        Name = rLine.Split(':')[1].Trim();
-
-                    if (rLine.StartsWith("Тип") || rLine.StartsWith("Type"))
-                        Type = rLine.Split(':')[1].Trim();
-
-                    if (rLine.ToLower().Contains(".grs"))
-                        GRSName = rLine.Split(':')[1].Trim();
-
-                    if (rLine.ToLower().Contains("gram") || rLine.ToLower().Contains("шт.") || rLine.ToLower().Contains("грамм"))
-                        Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
-
-
-                    if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine))
+                    while ((rLine = tr.ReadLine()) != null)
                     {
-                        el = elemPattern.Match(rLine).Value;
+                        Debug.WriteLine($"Current line:");
+                        Debug.WriteLine($"{rLine}");
+
+                        if (rLine.StartsWith("Имя образца") || rLine.StartsWith("Sample name"))
+                            Name = rLine.Split(':')[1].Trim();
+
+                        if (rLine.StartsWith("Тип") || rLine.StartsWith("Type"))
+                            Type = rLine.Split(':')[1].Trim();
+
+                        if (rLine.ToLower().Contains(".grs"))
+                            GRSName = rLine.Split(':')[1].Trim();
+
+                        if (rLine.StartsWith("Вес") || rLine.StartsWith("Weight") || rLine.StartsWith("Mass"))
+                            Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
+
+
+                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine))
+                        {
+                            el = elemPattern.Match(rLine).Value;
 
 
 
 
-                        _elements.Add(el, new Element(elemPattern.Match(rLine).Value,
-                                                      ParseValue(concAncMDAPattern.Matches(rLine)[0].Value, "concentration"),
-                                                      ParseValue(errPattern.Match(rLine, 13).Value, "error"),
-                                                      ParseValue(concAncMDAPattern.Matches(rLine)[1].Value, "mda")));
+                            _elements.Add(el, new Element(elemPattern.Match(rLine).Value,
+                                                          ParseValue(concAncMDAPattern.Matches(rLine)[0].Value, "concentration"),
+                                                          ParseValue(errPattern.Match(rLine, 13).Value, "error"),
+                                                          ParseValue(concAncMDAPattern.Matches(rLine)[1].Value, "mda")));
 
-                        Debug.WriteLine($"{_elements[el].ToString()}");
+                            Debug.WriteLine($"{_elements[el].ToString()}");
 
 
-                        isHeadOfFile = false;
+                            isHeadOfFile = false;
+                        }
+
+                        if (isHeadOfFile)
+                            _fileHead.AppendLine(rLine);
                     }
-
-                    if (isHeadOfFile)
-                        _fileHead.AppendLine(rLine);
+                    tr.Close();
                 }
-                tr.Close();
+
+                Debug.WriteLine($"Parsed sample:   {path}");
+                Debug.WriteLine("{Name}\t{Type}\t{GRSName}\t{Weight}");
+                Debug.WriteLine($"{Name}\t{Type}\t{GRSName}\t{Weight}");
+                Debug.WriteLine($"{_elements.Count} elements were inserted");
+
+
+                if (Weight < 0)
+                    throw new ArgumentException($"Ошибка при чтении веса в файле {OriginalFileName}");
             }
-
-            Debug.WriteLine($"Parsed sample:   {path}");
-            Debug.WriteLine("{Name}\t{Type}\t{GRSName}\t{Weight}");
-            Debug.WriteLine($"{Name}\t{Type}\t{GRSName}\t{Weight}");
-            Debug.WriteLine($"{_elements.Count} elements were inserted");
-
-
-            if (Weight < 0)
-                throw new ArgumentException($"Ошибка при чтении веса в файле {OriginalFileName}");
-
+            catch (Exception ex)
+            { 
+                Debug.WriteLine(ex);
+            
+            }
         }
 
 

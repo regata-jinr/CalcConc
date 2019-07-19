@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="src\Sample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\StaticTools.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
