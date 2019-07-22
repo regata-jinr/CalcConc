@@ -9,27 +9,26 @@ using System.Threading.Tasks;
 
 namespace Extensions
 {
-
-
     public class Sample
     {
 
         public bool IsBlank { get; }
         public string Name { get; }
-        private Dictionary<string, Element> _elements;
+        private List<Element> _elements;
         public string Type { get; }
+        public string Unit { get; }
         public string GRSName { get; }
         public double Weight { get; }
-        
 
-        private string OriginalDirectory { get; }
-        private string OriginalFileName { get; }
-        private string NewFileName { get; }
+
+        public string OriginalDirectory { get; }
+        public string OriginalFileName { get; }
+        public string NewFileName { get; }
 
         private StringBuilder _fileHead;
 
 
-        public Dictionary<string, Element> Elements
+        public List<Element> Elements
         {
             get
             {
@@ -51,14 +50,14 @@ namespace Extensions
         }
 
 
-        private Sample(string name, string type, string grs, double weight, bool isBlank, Dictionary<string, Element> elements, string originalDirectory, string originalFileName, string newFileName, StringBuilder headOfFile)
+        private Sample(string name, string type, string grs, double weight, bool isBlank, List<Element> elements, string originalDirectory, string originalFileName, string newFileName, StringBuilder headOfFile)
         {
             Name = name;
             Type = type;
             GRSName = grs;
             IsBlank = isBlank;
             Weight = weight;
-            _elements = new Dictionary<string, Element>(elements);
+            _elements = new List<Element>(elements);
             OriginalDirectory = originalDirectory;
             OriginalFileName = originalFileName;
             NewFileName = newFileName;
@@ -74,7 +73,7 @@ namespace Extensions
             OriginalDirectory = Path.GetDirectoryName(path);
             NewFileName = $"{Path.GetFileNameWithoutExtension(OriginalFileName)}.mde";
             IsBlank = isBlank;
-            _elements = new Dictionary<string, Element>();
+            _elements = new List<Element>();
             var elemPattern = new Regex(@"[A-Z]{1,2}[-]\d{2,3}[m]{0,1}");
             var concAncMDAPattern = new Regex(@"\d[.]\d{2}E[+-]\d{2,3}");
             var errPattern = new Regex(@"\d{1,2}[.]\d{2}");
@@ -104,6 +103,9 @@ namespace Extensions
                         if (rLine.ToLower().Contains(".grs"))
                             GRSName = rLine.Split(':')[1].Trim();
 
+                        //if (rLine.ToLower().Contains("%") && (rLine.ToLower().Contains("обнаруж") || (rLine.ToLower().Contains("limit"))))
+                            //Unit = rLine.Split('%')[0].Trim();
+
                         if (rLine.StartsWith("Вес") || rLine.StartsWith("Weight") || rLine.StartsWith("Mass"))
                             Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
 
@@ -115,12 +117,12 @@ namespace Extensions
 
 
 
-                            _elements.Add(el, new Element(elemPattern.Match(rLine).Value,
+                            _elements.Add(new Element(elemPattern.Match(rLine).Value,
                                                           ParseValue(concAncMDAPattern.Matches(rLine)[0].Value, "concentration"),
                                                           ParseValue(errPattern.Match(rLine, 13).Value, "error"),
                                                           ParseValue(concAncMDAPattern.Matches(rLine)[1].Value, "mda")));
 
-                            Debug.WriteLine($"{_elements[el].ToString()}");
+                            Debug.WriteLine($"{_elements.Last().ToString()}");
 
 
                             isHeadOfFile = false;
@@ -157,7 +159,7 @@ namespace Extensions
 
         public Element this [ string NameOfElement ]
         {
-            get { return _elements[NameOfElement]; }
+            get { return _elements.Find(e => e.Name == NameOfElement); }
         }
 
 
@@ -168,13 +170,13 @@ namespace Extensions
             Sample newSample = lhs.Clone();
             newSample.Elements.Clear();
 
-            foreach (string el in lhs.Elements.Keys)
+            foreach (var el in lhs.Elements)
             {
-                if (rhs.Elements.ContainsKey(el))
-                    newSample.Elements.Add(el, lhs[el] - rhs[el]);
-                else newSample.Elements.Add(el, lhs[el]);
+                if (rhs.Elements.Any(e => e.Name ==  el.Name ))
+                    newSample.Elements.Add(el - rhs[el.Name]);
+                else newSample.Elements.Add(el);
 
-                Debug.WriteLine($"Element after substraction {newSample.Elements[el].ToString()}");
+                Debug.WriteLine($"Element after substraction {newSample[el.Name].ToString()}");
 
             }
 
@@ -185,10 +187,10 @@ namespace Extensions
 
         public static Sample operator *(Sample lhs, double rhs)
         {
-            foreach (string el in lhs.Elements.Keys)
+            foreach (var el in lhs.Elements)
             {
-                lhs[el].Concentration = lhs[el].Concentration * rhs;
-                lhs[el].MDA = lhs[el].MDA * rhs;
+                el.Concentration = el.Concentration * rhs;
+                el.MDA = el.MDA * rhs;
             }
             return lhs;
         }
@@ -207,9 +209,9 @@ namespace Extensions
             {
                 file.Write(_fileHead.Replace("КОНЦЕНТРАЦИЙ  ","МАССОВЫХ ДОЛЕЙ").Replace("концентр.,","масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр","грамм   ").Replace("    ug/gr","gram")); // sorry :(
 
-                foreach (var el in Elements.Keys)
+                foreach (var el in Elements)
                 {
-                    file.WriteLine(Elements[el].ToString());               
+                    file.WriteLine(el.ToString());               
                 }
             }
 
@@ -239,7 +241,7 @@ namespace Extensions
 
         }
 
-        
+
 
         public string Name
         {

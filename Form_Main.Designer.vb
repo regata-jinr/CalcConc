@@ -40,6 +40,7 @@ Partial Class Form_Main
         Me.FiltersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChooseSamplesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ChooseBlanksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LoadMDEFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Table_Nuclides_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Clear_Form_ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LangEngToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -92,8 +93,8 @@ Partial Class Form_Main
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog_ChooseBlankFile = New System.Windows.Forms.OpenFileDialog()
-        Me.LoadMDEFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenFileDialog_ChooseFilterForTables = New System.Windows.Forms.OpenFileDialog()
+        Me.ButtonConcEditor = New System.Windows.Forms.Button()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -210,6 +211,12 @@ Partial Class Form_Main
         Me.ChooseBlanksToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ChooseBlanksToolStripMenuItem.Text = "Choose blanks"
         '
+        'LoadMDEFilesToolStripMenuItem
+        '
+        Me.LoadMDEFilesToolStripMenuItem.Name = "LoadMDEFilesToolStripMenuItem"
+        Me.LoadMDEFilesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LoadMDEFilesToolStripMenuItem.Text = "Load MDE files"
+        '
         'Table_Nuclides_ToolStripMenuItem
         '
         Me.Table_Nuclides_ToolStripMenuItem.Name = "Table_Nuclides_ToolStripMenuItem"
@@ -225,7 +232,8 @@ Partial Class Form_Main
         'LangEngToolStripMenuItem
         '
         Me.LangEngToolStripMenuItem.Name = "LangEngToolStripMenuItem"
-        Me.LangEngToolStripMenuItem.Size = New System.Drawing.Size(12, 20)
+        Me.LangEngToolStripMenuItem.Size = New System.Drawing.Size(42, 20)
+        Me.LangEngToolStripMenuItem.Text = "lang"
         '
         'OpenFileDialog_Aktivn_Issl_Obr
         '
@@ -246,7 +254,7 @@ Partial Class Form_Main
         Me.B_calc_conc.BackColor = System.Drawing.SystemColors.Control
         Me.B_calc_conc.Location = New System.Drawing.Point(6, 164)
         Me.B_calc_conc.Name = "B_calc_conc"
-        Me.B_calc_conc.Size = New System.Drawing.Size(684, 25)
+        Me.B_calc_conc.Size = New System.Drawing.Size(682, 25)
         Me.B_calc_conc.TabIndex = 4
         Me.B_calc_conc.Text = "Calculate and save concentrations"
         Me.B_calc_conc.UseVisualStyleBackColor = False
@@ -262,7 +270,7 @@ Partial Class Form_Main
         'L_Coef
         '
         Me.L_Coef.AutoSize = True
-        Me.L_Coef.Location = New System.Drawing.Point(402, 115)
+        Me.L_Coef.Location = New System.Drawing.Point(453, 115)
         Me.L_Coef.Name = "L_Coef"
         Me.L_Coef.Size = New System.Drawing.Size(182, 13)
         Me.L_Coef.TabIndex = 8
@@ -283,9 +291,9 @@ Partial Class Form_Main
         'B_TablConcElemOkonchat_CON
         '
         Me.B_TablConcElemOkonchat_CON.BackColor = System.Drawing.SystemColors.Control
-        Me.B_TablConcElemOkonchat_CON.Location = New System.Drawing.Point(5, 317)
+        Me.B_TablConcElemOkonchat_CON.Location = New System.Drawing.Point(5, 348)
         Me.B_TablConcElemOkonchat_CON.Name = "B_TablConcElemOkonchat_CON"
-        Me.B_TablConcElemOkonchat_CON.Size = New System.Drawing.Size(685, 25)
+        Me.B_TablConcElemOkonchat_CON.Size = New System.Drawing.Size(684, 25)
         Me.B_TablConcElemOkonchat_CON.TabIndex = 19
         Me.B_TablConcElemOkonchat_CON.Text = "Create final table concentration"
         Me.B_TablConcElemOkonchat_CON.UseVisualStyleBackColor = False
@@ -293,7 +301,7 @@ Partial Class Form_Main
         'B_TablConcElemPromezh_CON
         '
         Me.B_TablConcElemPromezh_CON.BackColor = System.Drawing.SystemColors.Control
-        Me.B_TablConcElemPromezh_CON.Location = New System.Drawing.Point(6, 255)
+        Me.B_TablConcElemPromezh_CON.Location = New System.Drawing.Point(5, 286)
         Me.B_TablConcElemPromezh_CON.Name = "B_TablConcElemPromezh_CON"
         Me.B_TablConcElemPromezh_CON.Size = New System.Drawing.Size(684, 25)
         Me.B_TablConcElemPromezh_CON.TabIndex = 14
@@ -322,7 +330,7 @@ Partial Class Form_Main
         'L_Name_System_Pogr
         '
         Me.L_Name_System_Pogr.AutoSize = True
-        Me.L_Name_System_Pogr.Location = New System.Drawing.Point(402, 141)
+        Me.L_Name_System_Pogr.Location = New System.Drawing.Point(536, 141)
         Me.L_Name_System_Pogr.Name = "L_Name_System_Pogr"
         Me.L_Name_System_Pogr.Size = New System.Drawing.Size(99, 13)
         Me.L_Name_System_Pogr.TabIndex = 17
@@ -349,9 +357,9 @@ Partial Class Form_Main
         'L_Conc_Issl_Obr_CON
         '
         Me.L_Conc_Issl_Obr_CON.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.L_Conc_Issl_Obr_CON.Location = New System.Drawing.Point(7, 192)
+        Me.L_Conc_Issl_Obr_CON.Location = New System.Drawing.Point(6, 193)
         Me.L_Conc_Issl_Obr_CON.Name = "L_Conc_Issl_Obr_CON"
-        Me.L_Conc_Issl_Obr_CON.Size = New System.Drawing.Size(683, 30)
+        Me.L_Conc_Issl_Obr_CON.Size = New System.Drawing.Size(682, 30)
         Me.L_Conc_Issl_Obr_CON.TabIndex = 15
         Me.L_Conc_Issl_Obr_CON.Text = "L_Conc_Issl_Obr_CON"
         '
@@ -535,6 +543,7 @@ Partial Class Form_Main
         'GroupBox_Concentration
         '
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
+        Me.GroupBox_Concentration.Controls.Add(Me.ButtonConcEditor)
         Me.GroupBox_Concentration.Controls.Add(Me.ButtonShowWOConc)
         Me.GroupBox_Concentration.Controls.Add(Me.Label1)
         Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
@@ -556,7 +565,7 @@ Partial Class Form_Main
         Me.GroupBox_Concentration.ForeColor = System.Drawing.SystemColors.ControlText
         Me.GroupBox_Concentration.Location = New System.Drawing.Point(5, 214)
         Me.GroupBox_Concentration.Name = "GroupBox_Concentration"
-        Me.GroupBox_Concentration.Size = New System.Drawing.Size(696, 345)
+        Me.GroupBox_Concentration.Size = New System.Drawing.Size(696, 374)
         Me.GroupBox_Concentration.TabIndex = 13
         Me.GroupBox_Concentration.TabStop = False
         Me.GroupBox_Concentration.Text = "Concentration"
@@ -564,7 +573,7 @@ Partial Class Form_Main
         'ButtonShowWOConc
         '
         Me.ButtonShowWOConc.BackColor = System.Drawing.SystemColors.Control
-        Me.ButtonShowWOConc.Location = New System.Drawing.Point(5, 286)
+        Me.ButtonShowWOConc.Location = New System.Drawing.Point(5, 317)
         Me.ButtonShowWOConc.Name = "ButtonShowWOConc"
         Me.ButtonShowWOConc.Size = New System.Drawing.Size(684, 25)
         Me.ButtonShowWOConc.TabIndex = 24
@@ -574,7 +583,7 @@ Partial Class Form_Main
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(446, 232)
+        Me.Label1.Location = New System.Drawing.Point(521, 233)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(114, 13)
         Me.Label1.TabIndex = 23
@@ -582,9 +591,9 @@ Partial Class Form_Main
         '
         'TextBoxAcc
         '
-        Me.TextBoxAcc.Location = New System.Drawing.Point(627, 229)
+        Me.TextBoxAcc.Location = New System.Drawing.Point(641, 230)
         Me.TextBoxAcc.Name = "TextBoxAcc"
-        Me.TextBoxAcc.Size = New System.Drawing.Size(35, 20)
+        Me.TextBoxAcc.Size = New System.Drawing.Size(47, 20)
         Me.TextBoxAcc.TabIndex = 22
         Me.TextBoxAcc.Text = "1"
         Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -596,23 +605,28 @@ Partial Class Form_Main
         Me.OpenFileDialog_ChooseBlankFile.SupportMultiDottedExtensions = True
         Me.OpenFileDialog_ChooseBlankFile.Title = "Выберите файл бланка"
         '
-        'LoadMDEFilesToolStripMenuItem
-        '
-        Me.LoadMDEFilesToolStripMenuItem.Name = "LoadMDEFilesToolStripMenuItem"
-        Me.LoadMDEFilesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.LoadMDEFilesToolStripMenuItem.Text = "Load MDE files"
-        '
         'OpenFileDialog_ChooseFilterForTables
         '
         Me.OpenFileDialog_ChooseFilterForTables.Filter = "Файлы фильтров (*.mde)|*.mde|Все файлы (*.*)|*.*"
         Me.OpenFileDialog_ChooseFilterForTables.Multiselect = True
         Me.OpenFileDialog_ChooseFilterForTables.RestoreDirectory = True
         '
+        'ButtonConcEditor
+        '
+        Me.ButtonConcEditor.BackColor = System.Drawing.SystemColors.Control
+        Me.ButtonConcEditor.Enabled = False
+        Me.ButtonConcEditor.Location = New System.Drawing.Point(4, 256)
+        Me.ButtonConcEditor.Name = "ButtonConcEditor"
+        Me.ButtonConcEditor.Size = New System.Drawing.Size(684, 25)
+        Me.ButtonConcEditor.TabIndex = 25
+        Me.ButtonConcEditor.Text = "Edit concentration values"
+        Me.ButtonConcEditor.UseVisualStyleBackColor = False
+        '
         'Form_Main
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(707, 562)
+        Me.ClientSize = New System.Drawing.Size(707, 588)
         Me.Controls.Add(Me.GroupBox_Concentration)
         Me.Controls.Add(Me.GroupBox_GroupStandart)
         Me.Controls.Add(Me.GroupBox_L_Aktivnosti)
@@ -705,4 +719,5 @@ Partial Class Form_Main
     Friend WithEvents OpenFileDialog_ChooseBlankFile As OpenFileDialog
     Friend WithEvents LoadMDEFilesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenFileDialog_ChooseFilterForTables As OpenFileDialog
+    Friend WithEvents ButtonConcEditor As Button
 End Class

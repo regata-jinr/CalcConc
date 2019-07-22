@@ -67,6 +67,7 @@ Partial Class FormCheckGRS
         '
         'BExportCheckTable
         '
+        Me.BExportCheckTable.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BExportCheckTable.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!)
         Me.BExportCheckTable.Location = New System.Drawing.Point(895, 7)
         Me.BExportCheckTable.Name = "BExportCheckTable"

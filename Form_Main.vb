@@ -72,6 +72,9 @@ Public Class Form_Main
 
 
     Public Sub LocalizedForm()
+
+        Extensions.ConcEditor.lang = My.Settings.language
+
         If My.Settings.language = "English" Then
             Form_Final_Table_Concentration.Text = "Окончательная таблица концентраций"
             Form_Final_Table_Concentration.Button_Draw_Graph.Text = "Построить график"
@@ -98,6 +101,8 @@ Public Class Form_Main
             Form_GRS_editor.B_Cancel.Text = "Отмена"
 
             Form_GRS_editor.GroupBox4.Text = "Информация"
+
+
 
             Form_Intermediate_Table_Concentration.Text = "Промежуточная таблица концентраций"
             Form_Intermediate_Table_Concentration.Button_Draw_Graph.Text = "Построить график"
@@ -129,6 +134,7 @@ Public Class Form_Main
             Me.L_Coef.Text = "Коэффициент изменения потока нейтронов:"
             Me.L_Name_System_Pogr.Text = "Систематическая погрешность, %:"
             Me.B_calc_conc.Text = "Рассчитать и сохранить концентрации"
+            Me.ButtonConcEditor.Text = "Просмотр значений концентраций"
             Me.B_TablConcElemPromezh_CON.Text = "Создать промежуточную таблицу концентраций элементов"
             Me.B_TablConcElemOkonchat_CON.Text = "Создать окончательную таблицу концентраций элементов"
             Me.L_SLI_Source.Text = "Источник данных КЖИ"
@@ -237,6 +243,9 @@ Public Class Form_Main
             Me.Table_Nuclides_ToolStripMenuItem.Text = "Nuclids table"
             Me.Clear_Form_ToolStripMenuItem.Text = "Re-launch application"
             Me.L_Aktivn_Issl_Obr.Text = "L_Aktivn_Issl_Obr"
+
+            Me.ButtonConcEditor.Text = "Show concentrations values"
+
             Me.B_calc_conc.Text = "Calculate and save concentrations"
             Me.L_Coef.Text = "Coefficient of neutrons flow changing"
             Me.TextBox_Coef.Text = "1.0"
@@ -263,6 +272,7 @@ Public Class Form_Main
             Me.Text = "Calculation of concentration "
             Me.SavePereschAktStand_MON_ToolStripMenuItem.Text = "Save counted file(s) of standards activity"
             Me.OpenFileGrupStand_ToolStripMenuItem.Text = "Open file of group standard"
+
             ButtonShowWOConc.Text = "Elements without calculated concentration"
 
 
@@ -335,6 +345,7 @@ Public Class Form_Main
             LangEngToolStripMenuItem.Text = "English"
         End If
         My.Settings.language = LangEngToolStripMenuItem.Text
+        Extensions.ConcEditor.lang = LangEngToolStripMenuItem.Text
         LocalizedForm()
     End Sub
 
@@ -449,7 +460,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Debug.WriteLine($"Sample {fileName} added to list")
                 Next
                 isFilters = True
-                If L_Grup_Stand.Text.Contains("Бланк") Or L_Grup_Stand.Text.Contains("Blank") Then B_calc_conc.Enabled = True
+                If L_Grup_Stand.Text.Contains("Бланк") Or L_Grup_Stand.Text.Contains("Blank") Then
+                    B_calc_conc.Enabled = True
+                End If
             End If
         Catch ex As ArgumentException
             MsgBox($"{ex.Message}{vbCrLf}Попробуйте построить файлы концентраций заново.", MsgBoxStyle.Critical, "Ошибка при расчете фильтров")
@@ -472,7 +485,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 blank = New Extensions.Sample(OpenFileDialog_ChooseBlankFile.FileName, True)
                 Debug.WriteLine($"Blank {OpenFileDialog_ChooseBlankFile.FileName} added to list")
                 isFilters = True
-                If L_Aktivn_Issl_Obr.Text.Contains("фильтров") Then B_calc_conc.Enabled = True
+                If L_Aktivn_Issl_Obr.Text.Contains("фильтров") Then
+                    B_calc_conc.Enabled = True
+                End If
 
             End If
         Catch ex As ArgumentException
@@ -490,6 +505,14 @@ a:                                  currentRow_copy = currentRow ' обход X 
         OpenConcIsslObr_ToolStripMenuItem_Click(sender, e)
         ButtonShowWOConc.Enabled = False
         isFilters = True
+    End Sub
+
+
+    Private Sub ButtonConcEditor_Click(sender As Object, e As EventArgs) Handles ButtonConcEditor.Click
+
+        Dim frm As New Extensions.ConcEditor
+        frm.srcs = consSamp
+        frm.Show()
     End Sub
 
     Function array_length_RPT_MDA(ByVal file_name_p As String) As Integer
@@ -805,7 +828,9 @@ a:                                  currentRow_copy = currentRow ' обход X 
             L_Aktivn_Issl_Obr.Text += OpenFileDialog_Aktivn_Issl_Obr.InitialDirectory + "\" + L_Aktivn_Issl_Obr_File_list
 
             File_Aktivn_Issl_Obr_Select = True
-            If (File_Aktivn_Issl_Obr_Select And File_Grup_Stand_Select) Then B_calc_conc.Enabled = True
+            If (File_Aktivn_Issl_Obr_Select And File_Grup_Stand_Select) Then
+                B_calc_conc.Enabled = True
+            End If
 
         Catch ex As Exception
             If My.Settings.language = "English" Then
@@ -2117,7 +2142,9 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             file_name_Grup_Stand_SafeFileName = OpenFileDialog_Grup_Stand.SafeFileName
 
             File_Grup_Stand_Select = True
-            If (File_Aktivn_Issl_Obr_Select And File_Grup_Stand_Select) Then B_calc_conc.Enabled = True
+            If (File_Aktivn_Issl_Obr_Select And File_Grup_Stand_Select) Then
+                B_calc_conc.Enabled = True
+            End If
             Dim first_File As System.IO.FileInfo
             first_File = My.Computer.FileSystem.GetFileInfo(OpenFileDialog_Grup_Stand.FileNames(0))
             OpenFileDialog_Grup_Stand.InitialDirectory = first_File.DirectoryName
@@ -2260,6 +2287,10 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         End Try
     End Sub
 
+
+    Public consSamp As List(Of Extensions.Sample)
+
+
     Private Sub OpenConcIsslObr_ToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenConcIsslObr_ToolStripMenuItem.Click
         Try
             If conDict.Keys.Count <> 0 Then
@@ -2312,8 +2343,10 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                         DataFromCON(fileName)
                     End If
                     fileNum += 1
+                    If IsNothing(consSamp) Then consSamp = New List(Of Extensions.Sample)
+                    consSamp.Add(New Extensions.Sample(fileName))
+                    Debug.WriteLine($"Sample {fileName} added to consSamp")
                 Next
-                ' End Sub)
 
                 L_Conc_Issl_Obr_CON.Text = filePath & "\" & fileString
 
@@ -2324,6 +2357,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             B_TablConcElemPromezh_CON.Enabled = True
             B_TablConcElemOkonchat_CON.Enabled = True
             ButtonShowWOConc.Enabled = True
+            ButtonConcEditor.Enabled = True
             OpenFileDialog_Conc_Issl_Obr_CON.FilterIndex = 1
             isFilters = False
 
@@ -2557,6 +2591,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         Try
             GroupBox_L_Aktivnosti.Focus()
             B_calc_conc.Enabled = False
+            ButtonConcEditor.Enabled = False
             File_Aktivn_Issl_Obr_Select = False
             File_Grup_Stand_Select = False
             File_Aktivn_Stand_Obr_Select = False
