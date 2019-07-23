@@ -25,7 +25,7 @@ namespace Extensions
         public string OriginalFileName { get; }
         public string NewFileName { get; }
 
-        private StringBuilder _fileHead;
+        public StringBuilder FileHead { get; private set; }
 
 
         public List<Element> Elements
@@ -50,7 +50,7 @@ namespace Extensions
         }
 
 
-        private Sample(string name, string type, string grs, double weight, bool isBlank, List<Element> elements, string originalDirectory, string originalFileName, string newFileName, StringBuilder headOfFile)
+        public Sample(string name, string type, string grs, double weight, bool isBlank, List<Element> elements, string originalDirectory, string originalFileName, string newFileName, StringBuilder headOfFile)
         {
             Name = name;
             Type = type;
@@ -61,14 +61,14 @@ namespace Extensions
             OriginalDirectory = originalDirectory;
             OriginalFileName = originalFileName;
             NewFileName = newFileName;
-            _fileHead = headOfFile;
+            FileHead = headOfFile;
         }
 
 
         public Sample(string path, bool isBlank=false)
         {
             bool isHeadOfFile = true;
-            _fileHead = new StringBuilder();
+            FileHead = new StringBuilder();
             OriginalFileName = Path.GetFileName(path);
             OriginalDirectory = Path.GetDirectoryName(path);
             NewFileName = $"{Path.GetFileNameWithoutExtension(OriginalFileName)}.mde";
@@ -129,7 +129,7 @@ namespace Extensions
                         }
 
                         if (isHeadOfFile)
-                            _fileHead.AppendLine(rLine);
+                            FileHead.AppendLine(rLine);
                     }
                     tr.Close();
                 }
@@ -154,7 +154,7 @@ namespace Extensions
         //TODO: how to avoid handling deep copy?
         public Sample Clone()
         {
-            return new Sample(Name, Type, GRSName, Weight, IsBlank, Elements, OriginalDirectory, OriginalFileName, NewFileName, _fileHead);
+            return new Sample(Name, Type, GRSName, Weight, IsBlank, Elements, OriginalDirectory, OriginalFileName, NewFileName, FileHead);
         }
 
         public Element this [ string NameOfElement ]
@@ -207,7 +207,7 @@ namespace Extensions
 
             using (TextWriter file = File.CreateText(path))
             {
-                file.Write(_fileHead.Replace("КОНЦЕНТРАЦИЙ  ","МАССОВЫХ ДОЛЕЙ").Replace("концентр.,","масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр","грамм   ").Replace("    ug/gr","gram")); // sorry :(
+                file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ","МАССОВЫХ ДОЛЕЙ").Replace("концентр.,","масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр","грамм   ").Replace("    ug/gr","gram")); // sorry :(
 
                 foreach (var el in Elements)
                 {
@@ -231,6 +231,7 @@ namespace Extensions
         private double _mda;
 
 
+        public Element() { }
         public Element(string name, double conc, double error, double mda)
         {
             _name = name;

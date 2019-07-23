@@ -511,7 +511,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
     Private Sub ButtonConcEditor_Click(sender As Object, e As EventArgs) Handles ButtonConcEditor.Click
 
         Dim frm As New Extensions.ConcEditor
-        frm.srcs = consSamp
+        frm.InputSamples = consSamp
         frm.Show()
     End Sub
 
