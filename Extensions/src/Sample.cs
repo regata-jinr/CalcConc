@@ -109,9 +109,10 @@ namespace Extensions
                         if (rLine.StartsWith("Вес") || rLine.StartsWith("Weight") || rLine.StartsWith("Mass"))
                             Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
 
-
+                        if (elemPattern.IsMatch(rLine)) rLine = rLine.Replace(",", ".");
                         if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine))
                         {
+                           
                             el = elemPattern.Match(rLine).Value;
 
 
@@ -197,7 +198,7 @@ namespace Extensions
 
 
 
-        public void Save(string path = "")
+        public void Save(string path = "", bool keepHead = false)
         {
             Debug.WriteLine($"Starts save sample to file");
 
@@ -207,12 +208,12 @@ namespace Extensions
 
             using (TextWriter file = File.CreateText(path))
             {
-                file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ","МАССОВЫХ ДОЛЕЙ").Replace("концентр.,","масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр","грамм   ").Replace("    ug/gr","gram")); // sorry :(
+                if (!keepHead)
+                    file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ", "МАССОВЫХ ДОЛЕЙ").Replace("концентр.,", "масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр", "грамм   ").Replace("    ug/gr", "gram")); // sorry :(
+                else file.Write(FileHead);
 
                 foreach (var el in Elements)
-                {
                     file.WriteLine(el.ToString());               
-                }
             }
 
             Debug.WriteLine($"File saved to {path}");
@@ -229,15 +230,17 @@ namespace Extensions
         private double _conc;
         private double _error;
         private double _mda;
+        private double _sdev;
 
 
         public Element() { }
-        public Element(string name, double conc, double error, double mda)
+        public Element(string name, double conc, double error, double mda, double sdev = 0.0)
         {
             _name = name;
             _conc = conc;
             _error = error;
             _mda = mda;
+            _sdev = sdev;
 
 
         }
@@ -285,6 +288,17 @@ namespace Extensions
             set
             {
                 _mda = value;
+                if (value < 0)
+                    throw new ArgumentException("Errors occured during the parsing of mda values");
+            }
+        }
+
+        public double StdDev
+        {
+            get { return _sdev; }
+            set
+            {
+                _sdev = value;
                 if (value < 0)
                     throw new ArgumentException("Errors occured during the parsing of mda values");
             }

@@ -33,27 +33,38 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConcEditor));
-            this.NumericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.NumericUpDownN = new System.Windows.Forms.NumericUpDown();
             this.LabelConcEditorResult = new System.Windows.Forms.Label();
             this.LabelConcEditorSource = new System.Windows.Forms.Label();
             this.DataGridViewConcValEditorResult = new System.Windows.Forms.DataGridView();
             this.ButtonConcEditorSave = new System.Windows.Forms.Button();
             this.ButtonConcEditorHighLight = new System.Windows.Forms.Button();
             this.DataGridViewConcValEditorSource = new System.Windows.Forms.DataGridView();
-            this.buttonExportToExcel = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown1)).BeginInit();
+            this.buttonRestore = new System.Windows.Forms.Button();
+            this.buttonDeleteRow = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewConcValEditorResult)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewConcValEditorSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // NumericUpDown1
+            // NumericUpDownN
             // 
-            this.NumericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.NumericUpDown1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumericUpDown1.Location = new System.Drawing.Point(335, 589);
-            this.NumericUpDown1.Name = "NumericUpDown1";
-            this.NumericUpDown1.Size = new System.Drawing.Size(39, 22);
-            this.NumericUpDown1.TabIndex = 13;
+            this.NumericUpDownN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.NumericUpDownN.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NumericUpDownN.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.NumericUpDownN.Location = new System.Drawing.Point(377, 591);
+            this.NumericUpDownN.Name = "NumericUpDownN";
+            this.NumericUpDownN.Size = new System.Drawing.Size(39, 22);
+            this.NumericUpDownN.TabIndex = 13;
+            this.NumericUpDownN.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // LabelConcEditorResult
             // 
@@ -105,17 +116,19 @@
             this.DataGridViewConcValEditorResult.DefaultCellStyle = dataGridViewCellStyle2;
             this.DataGridViewConcValEditorResult.Location = new System.Drawing.Point(881, 30);
             this.DataGridViewConcValEditorResult.Name = "DataGridViewConcValEditorResult";
+            this.DataGridViewConcValEditorResult.ReadOnly = true;
             this.DataGridViewConcValEditorResult.RowHeadersVisible = false;
-            this.DataGridViewConcValEditorResult.Size = new System.Drawing.Size(816, 550);
+            this.DataGridViewConcValEditorResult.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewConcValEditorResult.Size = new System.Drawing.Size(816, 544);
             this.DataGridViewConcValEditorResult.TabIndex = 10;
             // 
             // ButtonConcEditorSave
             // 
             this.ButtonConcEditorSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ButtonConcEditorSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonConcEditorSave.Location = new System.Drawing.Point(1536, 588);
+            this.ButtonConcEditorSave.Location = new System.Drawing.Point(1536, 580);
             this.ButtonConcEditorSave.Name = "ButtonConcEditorSave";
-            this.ButtonConcEditorSave.Size = new System.Drawing.Size(161, 23);
+            this.ButtonConcEditorSave.Size = new System.Drawing.Size(161, 41);
             this.ButtonConcEditorSave.TabIndex = 9;
             this.ButtonConcEditorSave.Text = "Button2";
             this.ButtonConcEditorSave.UseVisualStyleBackColor = true;
@@ -124,13 +137,15 @@
             // ButtonConcEditorHighLight
             // 
             this.ButtonConcEditorHighLight.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ButtonConcEditorHighLight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ButtonConcEditorHighLight.Location = new System.Drawing.Point(3, 588);
+            this.ButtonConcEditorHighLight.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ButtonConcEditorHighLight.Location = new System.Drawing.Point(3, 580);
             this.ButtonConcEditorHighLight.Name = "ButtonConcEditorHighLight";
-            this.ButtonConcEditorHighLight.Size = new System.Drawing.Size(326, 23);
+            this.ButtonConcEditorHighLight.Size = new System.Drawing.Size(368, 42);
             this.ButtonConcEditorHighLight.TabIndex = 8;
-            this.ButtonConcEditorHighLight.Text = "Показать значения превышающие n*sigma.  n = ";
+            this.ButtonConcEditorHighLight.Text = "Окрасить элементы у которых относительна\r\nпогрешность превышает";
+            this.ButtonConcEditorHighLight.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ButtonConcEditorHighLight.UseVisualStyleBackColor = true;
+            this.ButtonConcEditorHighLight.Click += new System.EventHandler(this.ButtonConcEditorHighLight_Click);
             // 
             // DataGridViewConcValEditorSource
             // 
@@ -160,28 +175,45 @@
             this.DataGridViewConcValEditorSource.DefaultCellStyle = dataGridViewCellStyle4;
             this.DataGridViewConcValEditorSource.Location = new System.Drawing.Point(3, 30);
             this.DataGridViewConcValEditorSource.Name = "DataGridViewConcValEditorSource";
+            this.DataGridViewConcValEditorSource.ReadOnly = true;
             this.DataGridViewConcValEditorSource.RowHeadersVisible = false;
-            this.DataGridViewConcValEditorSource.Size = new System.Drawing.Size(817, 550);
+            this.DataGridViewConcValEditorSource.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewConcValEditorSource.Size = new System.Drawing.Size(817, 544);
             this.DataGridViewConcValEditorSource.TabIndex = 7;
             // 
-            // buttonExportToExcel
+            // buttonRestore
             // 
-            this.buttonExportToExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonExportToExcel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonExportToExcel.Location = new System.Drawing.Point(392, 588);
-            this.buttonExportToExcel.Name = "buttonExportToExcel";
-            this.buttonExportToExcel.Size = new System.Drawing.Size(161, 23);
-            this.buttonExportToExcel.TabIndex = 14;
-            this.buttonExportToExcel.Text = "Button2";
-            this.buttonExportToExcel.UseVisualStyleBackColor = true;
+            this.buttonRestore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonRestore.Enabled = false;
+            this.buttonRestore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRestore.Location = new System.Drawing.Point(422, 580);
+            this.buttonRestore.Name = "buttonRestore";
+            this.buttonRestore.Size = new System.Drawing.Size(249, 42);
+            this.buttonRestore.TabIndex = 15;
+            this.buttonRestore.Text = "Button2";
+            this.buttonRestore.UseVisualStyleBackColor = true;
+            this.buttonRestore.Click += new System.EventHandler(this.buttonRestore_Click);
+            // 
+            // buttonDeleteRow
+            // 
+            this.buttonDeleteRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonDeleteRow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDeleteRow.Location = new System.Drawing.Point(677, 580);
+            this.buttonDeleteRow.Name = "buttonDeleteRow";
+            this.buttonDeleteRow.Size = new System.Drawing.Size(143, 42);
+            this.buttonDeleteRow.TabIndex = 14;
+            this.buttonDeleteRow.Text = "Button2";
+            this.buttonDeleteRow.UseVisualStyleBackColor = true;
+            this.buttonDeleteRow.Click += new System.EventHandler(this.buttonDeleteRow_Click);
             // 
             // ConcEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1706, 623);
-            this.Controls.Add(this.buttonExportToExcel);
-            this.Controls.Add(this.NumericUpDown1);
+            this.ClientSize = new System.Drawing.Size(1706, 633);
+            this.Controls.Add(this.buttonRestore);
+            this.Controls.Add(this.buttonDeleteRow);
+            this.Controls.Add(this.NumericUpDownN);
             this.Controls.Add(this.LabelConcEditorResult);
             this.Controls.Add(this.LabelConcEditorSource);
             this.Controls.Add(this.DataGridViewConcValEditorResult);
@@ -191,7 +223,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConcEditor";
             this.Shown += new System.EventHandler(this.ConcEditor_Shown);
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownN)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewConcValEditorResult)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewConcValEditorSource)).EndInit();
             this.ResumeLayout(false);
@@ -201,13 +233,14 @@
 
         #endregion
 
-        internal System.Windows.Forms.NumericUpDown NumericUpDown1;
+        internal System.Windows.Forms.NumericUpDown NumericUpDownN;
         internal System.Windows.Forms.Label LabelConcEditorResult;
         internal System.Windows.Forms.Label LabelConcEditorSource;
         internal System.Windows.Forms.DataGridView DataGridViewConcValEditorResult;
         internal System.Windows.Forms.Button ButtonConcEditorSave;
         internal System.Windows.Forms.Button ButtonConcEditorHighLight;
         internal System.Windows.Forms.DataGridView DataGridViewConcValEditorSource;
-        internal System.Windows.Forms.Button buttonExportToExcel;
+        internal System.Windows.Forms.Button buttonRestore;
+        internal System.Windows.Forms.Button buttonDeleteRow;
     }
 }
