@@ -54,7 +54,7 @@ namespace Extensions
                 LabelConcEditorResult.Text = "Усредненные значения";
                 LabelConcEditorSource.Text = "Исходные значения";
                 ButtonConcEditorHighLight.Text = "Окрасить элементы, у которых относительная погрешность превышает";
-                ButtonConcEditorSave.Text = "Сохранить как";
+                ButtonConcEditorSave.Text = "Сохранить";
                 buttonDeleteRow.Text = "Удалить выделенные строки";
                 buttonRestore.Text = "Восстановить удаленную строку(0)";
                 cols.Add("Файл", typeof(string));
@@ -81,7 +81,7 @@ namespace Extensions
                 ButtonConcEditorHighLight.Text = "Colorize elements with relative error more than";
                 buttonDeleteRow.Text = "Delete selected rows";
                 buttonRestore.Text = "Restore deleted row (0)";
-                ButtonConcEditorSave.Text = "Save as";
+                ButtonConcEditorSave.Text = "Save";
                 cols.Add("File", typeof(string));
                 cols.Add("Sample", typeof(string));
                 cols.Add("Weight, gr", typeof(double));

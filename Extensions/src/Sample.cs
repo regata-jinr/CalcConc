@@ -110,7 +110,7 @@ namespace Extensions
                             Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
 
                         if (elemPattern.IsMatch(rLine)) rLine = rLine.Replace(",", ".");
-                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine))
+                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine) && !rLine.Contains("E-00"))
                         {
                            
                             el = elemPattern.Match(rLine).Value;
