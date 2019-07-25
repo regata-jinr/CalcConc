@@ -91,6 +91,7 @@ namespace Extensions
                 {
                     while ((rLine = tr.ReadLine()) != null)
                     {
+                        rLine = rLine.Replace(",", ".");
                         Debug.WriteLine($"Current line:");
                         Debug.WriteLine($"{rLine}");
 
@@ -109,8 +110,7 @@ namespace Extensions
                         if (rLine.StartsWith("Вес") || rLine.StartsWith("Weight") || rLine.StartsWith("Mass"))
                             Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
 
-                        if (elemPattern.IsMatch(rLine)) rLine = rLine.Replace(",", ".");
-                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine) && !rLine.Contains("E-00"))
+                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine) && !rLine.Contains("Вес") && !rLine.Contains("gram") && !rLine.Contains("шт"))
                         {
                            
                             el = elemPattern.Match(rLine).Value;
