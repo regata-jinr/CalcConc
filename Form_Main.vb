@@ -5,15 +5,50 @@ Imports System.Text.RegularExpressions
 Imports Excel = Office
 Imports File = System.IO.File
 Imports StrPars = Microsoft.VisualBasic
-Imports System.Threading
+Imports System.Threading.Tasks
 Imports System.ComponentModel
 Imports System.Linq
-
-
+Imports Squirrel
+Imports System.Net
 
 
 Public Class Form_Main
+    Async Function GetUpdate() As Task
+        Try
+            Dim restart As Boolean = False
+            Dim latestExe As String = ""
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12
+            Using manager = Await UpdateManager.GitHubUpdateManager("https://github.com/regata-jinr/CalcConc")
+                Dim upd As UpdateInfo = Await manager.CheckForUpdate()
+
+                If upd.ReleasesToApply.Any() Then
+                    System.Diagnostics.Process.Start("https://github.com/regata-jinr/CalcConc/releases/latest")
+
+                    Dim LatestVersion = upd.ReleasesToApply.OrderBy(Function(x) x.Version).Last()
+                    Await manager.DownloadReleases(upd.ReleasesToApply)
+                    Await manager.ApplyReleases(upd)
+                    Await manager.UpdateApp()
+
+                    latestExe = Path.Combine(manager.RootAppDirectory, String.Concat("app-", LatestVersion.Version.Version.Major, ".", LatestVersion.Version.Version.Minor, ".", LatestVersion.Version.Version.Build, "."), "CalcConc.exe")
+                    restart = True
+                End If
+            End Using
+
+            If restart Then
+                UpdateManager.RestartApp(latestExe)
+            End If
+
+        Catch empty As InvalidOperationException
+            ' in case of updates files don't exist
+            'TODO: add handle running setup.exe from latest release page
+            MsgBox("Обновление не доступно. Пожалуйста, обратитесь к администратору", MsgBoxStyle.Critical)
+
+        Catch ex As Exception
+            MsgBox(ex.ToString, MsgBoxStyle.Critical)
+        End Try
+
+    End Function
     Dim nucl_array_Stand_Obr_GRS_1_sum(,) As String
 
     Dim nucl_array_Akt_Mon_Stand_MON(,) As String
@@ -2700,7 +2735,9 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
     Public TypeRuEng As New Dictionary(Of String, String)
     Public TypeEngRu As New Dictionary(Of String, String)
 
-    Private Sub Form_Main_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+    Private Async Sub Form_Main_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+
+        Await GetUpdate()
 
         For Each c As Control In Me.Controls
             Debug.WriteLine($"<Type key={Chr(34)}{c.Name}{Chr(34)} value={Chr(34)}{c.Text}{Chr(34)}/>")

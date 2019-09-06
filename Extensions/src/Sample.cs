@@ -11,7 +11,6 @@ namespace Extensions
 {
     public class Sample
     {
-
         public bool IsBlank { get; }
         public string Name { get; }
         private List<Element> _elements;
@@ -36,7 +35,6 @@ namespace Extensions
             }
         }
 
-
         private double ParseValue(string val, string word="unnamed")
         {
             double d;
@@ -48,7 +46,6 @@ namespace Extensions
 
             return d;
         }
-
 
         public Sample(string name, string type, string grs, double weight, bool isBlank, List<Element> elements, string originalDirectory, string originalFileName, string newFileName, StringBuilder headOfFile)
         {
@@ -63,7 +60,6 @@ namespace Extensions
             NewFileName = newFileName;
             FileHead = headOfFile;
         }
-
 
         public Sample(string path, bool isBlank=false)
         {
@@ -151,7 +147,6 @@ namespace Extensions
             }
         }
 
-
         //TODO: how to avoid handling deep copy?
         public Sample Clone()
         {
@@ -162,8 +157,6 @@ namespace Extensions
         {
             get { return _elements.Find(e => e.Name == NameOfElement); }
         }
-
-
 
         public static Sample operator -(Sample lhs, Sample rhs)
         {
@@ -180,11 +173,8 @@ namespace Extensions
                 Debug.WriteLine($"Element after substraction {newSample[el.Name].ToString()}");
 
             }
-
             return newSample;
-
         }
-
 
         public static Sample operator *(Sample lhs, double rhs)
         {
@@ -195,8 +185,6 @@ namespace Extensions
             }
             return lhs;
         }
-
-
 
         public void Save(string path = "", bool keepHead = false)
         {
@@ -218,10 +206,7 @@ namespace Extensions
 
             Debug.WriteLine($"File saved to {path}");
         }
-
-
     }
-
 
     //TODO: what happening in case array of structures inside the class?
     public class Element
@@ -241,11 +226,7 @@ namespace Extensions
             _error = error;
             _mda = mda;
             _sdev = sdev;
-
-
         }
-
-
 
         public string Name
         {
@@ -267,8 +248,6 @@ namespace Extensions
                 //    throw new ArgumentException("Errors occured during the parsing of concentration values");
             }
         }
-
-
 
         public double Error
         {
@@ -304,7 +283,6 @@ namespace Extensions
             }
         }
 
-
         public override string ToString()
         {
             var s1 = Name;
@@ -314,17 +292,12 @@ namespace Extensions
             return $"\t{s1,-7}\t{s2,-9}\t{s3,-5}\t{s4,-9}";
         }
 
-
         public static Element operator -(Element lhs, Element rhs)
         {
             if (string.Equals(lhs.Name, rhs.Name))
                 return new Element(lhs.Name, lhs.Concentration - rhs.Concentration, System.Math.Sqrt(lhs.Error*lhs.Error + rhs.Error*rhs.Error), lhs.MDA);
 
             throw new ArgumentException("Elements should be the same");
-
-
-
         }
-
     }
 }

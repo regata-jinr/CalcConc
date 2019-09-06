@@ -89,12 +89,12 @@ Partial Class Form_Main
         Me.GroupBox_L_Aktivnosti = New System.Windows.Forms.GroupBox()
         Me.GroupBox_GroupStandart = New System.Windows.Forms.GroupBox()
         Me.GroupBox_Concentration = New System.Windows.Forms.GroupBox()
+        Me.ButtonConcEditor = New System.Windows.Forms.Button()
         Me.ButtonShowWOConc = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TextBoxAcc = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog_ChooseBlankFile = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog_ChooseFilterForTables = New System.Windows.Forms.OpenFileDialog()
-        Me.ButtonConcEditor = New System.Windows.Forms.Button()
         Me.MenuStrip.SuspendLayout()
         Me.GroupBox_L_Aktivnosti.SuspendLayout()
         Me.GroupBox_GroupStandart.SuspendLayout()
@@ -202,19 +202,19 @@ Partial Class Form_Main
         'ChooseSamplesToolStripMenuItem
         '
         Me.ChooseSamplesToolStripMenuItem.Name = "ChooseSamplesToolStripMenuItem"
-        Me.ChooseSamplesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChooseSamplesToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.ChooseSamplesToolStripMenuItem.Text = "Choose samples"
         '
         'ChooseBlanksToolStripMenuItem
         '
         Me.ChooseBlanksToolStripMenuItem.Name = "ChooseBlanksToolStripMenuItem"
-        Me.ChooseBlanksToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ChooseBlanksToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.ChooseBlanksToolStripMenuItem.Text = "Choose blanks"
         '
         'LoadMDEFilesToolStripMenuItem
         '
         Me.LoadMDEFilesToolStripMenuItem.Name = "LoadMDEFilesToolStripMenuItem"
-        Me.LoadMDEFilesToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.LoadMDEFilesToolStripMenuItem.Size = New System.Drawing.Size(160, 22)
         Me.LoadMDEFilesToolStripMenuItem.Text = "Load MDE files"
         '
         'Table_Nuclides_ToolStripMenuItem
@@ -269,12 +269,12 @@ Partial Class Form_Main
         '
         'L_Coef
         '
-        Me.L_Coef.AutoSize = True
-        Me.L_Coef.Location = New System.Drawing.Point(453, 115)
+        Me.L_Coef.Location = New System.Drawing.Point(381, 115)
         Me.L_Coef.Name = "L_Coef"
-        Me.L_Coef.Size = New System.Drawing.Size(182, 13)
+        Me.L_Coef.Size = New System.Drawing.Size(254, 18)
         Me.L_Coef.TabIndex = 8
         Me.L_Coef.Text = "Coefficient of neutrons flow changing"
+        Me.L_Coef.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'TextBox_Coef
         '
@@ -329,12 +329,12 @@ Partial Class Form_Main
         '
         'L_Name_System_Pogr
         '
-        Me.L_Name_System_Pogr.AutoSize = True
-        Me.L_Name_System_Pogr.Location = New System.Drawing.Point(536, 141)
+        Me.L_Name_System_Pogr.Location = New System.Drawing.Point(384, 141)
         Me.L_Name_System_Pogr.Name = "L_Name_System_Pogr"
-        Me.L_Name_System_Pogr.Size = New System.Drawing.Size(99, 13)
+        Me.L_Name_System_Pogr.Size = New System.Drawing.Size(251, 13)
         Me.L_Name_System_Pogr.TabIndex = 17
         Me.L_Name_System_Pogr.Text = "Systematic error, %:"
+        Me.L_Name_System_Pogr.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'TextBox_system_Pogr
         '
@@ -570,6 +570,17 @@ Partial Class Form_Main
         Me.GroupBox_Concentration.TabStop = False
         Me.GroupBox_Concentration.Text = "Concentration"
         '
+        'ButtonConcEditor
+        '
+        Me.ButtonConcEditor.BackColor = System.Drawing.SystemColors.Control
+        Me.ButtonConcEditor.Enabled = False
+        Me.ButtonConcEditor.Location = New System.Drawing.Point(4, 256)
+        Me.ButtonConcEditor.Name = "ButtonConcEditor"
+        Me.ButtonConcEditor.Size = New System.Drawing.Size(684, 25)
+        Me.ButtonConcEditor.TabIndex = 25
+        Me.ButtonConcEditor.Text = "Edit concentration values"
+        Me.ButtonConcEditor.UseVisualStyleBackColor = False
+        '
         'ButtonShowWOConc
         '
         Me.ButtonShowWOConc.BackColor = System.Drawing.SystemColors.Control
@@ -582,12 +593,12 @@ Partial Class Form_Main
         '
         'Label1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(521, 233)
+        Me.Label1.Location = New System.Drawing.Point(423, 233)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(114, 13)
+        Me.Label1.Size = New System.Drawing.Size(212, 20)
         Me.Label1.TabIndex = 23
         Me.Label1.Text = "Rounding accuracy %:"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'TextBoxAcc
         '
@@ -610,17 +621,6 @@ Partial Class Form_Main
         Me.OpenFileDialog_ChooseFilterForTables.Filter = "Файлы фильтров (*.mde)|*.mde|Все файлы (*.*)|*.*"
         Me.OpenFileDialog_ChooseFilterForTables.Multiselect = True
         Me.OpenFileDialog_ChooseFilterForTables.RestoreDirectory = True
-        '
-        'ButtonConcEditor
-        '
-        Me.ButtonConcEditor.BackColor = System.Drawing.SystemColors.Control
-        Me.ButtonConcEditor.Enabled = False
-        Me.ButtonConcEditor.Location = New System.Drawing.Point(4, 256)
-        Me.ButtonConcEditor.Name = "ButtonConcEditor"
-        Me.ButtonConcEditor.Size = New System.Drawing.Size(684, 25)
-        Me.ButtonConcEditor.TabIndex = 25
-        Me.ButtonConcEditor.Text = "Edit concentration values"
-        Me.ButtonConcEditor.UseVisualStyleBackColor = False
         '
         'Form_Main
         '
