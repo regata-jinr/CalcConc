@@ -2736,9 +2736,9 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
     Public TypeEngRu As New Dictionary(Of String, String)
 
     Private Async Sub Form_Main_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-
+#If Not DEBUG Then
         Await GetUpdate()
-
+#End If
         For Each c As Control In Me.Controls
             Debug.WriteLine($"<Type key={Chr(34)}{c.Name}{Chr(34)} value={Chr(34)}{c.Text}{Chr(34)}/>")
         Next
@@ -2770,7 +2770,6 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
         excp.Add("CO-58", "NI")
         excp.Add("NP-239", "U")
         excp.Add("PA-233", "TH")
-        ShowMessage()
     End Sub
 
     Private Sub Form_Main_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

@@ -101,7 +101,10 @@ namespace Extensions
                             GRSName = rLine.Split(':')[1].Trim();
 
                         //if (rLine.ToLower().Contains("%") && (rLine.ToLower().Contains("обнаруж") || (rLine.ToLower().Contains("limit"))))
-                            //Unit = rLine.Split('%')[0].Trim();
+                        //Unit = rLine.Split('%')[0].Trim();
+
+                        if (rLine.Contains("activity"))
+                            break;
 
                         if (rLine.StartsWith("Вес") || rLine.StartsWith("Weight") || rLine.StartsWith("Mass"))
                             Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
@@ -111,14 +114,12 @@ namespace Extensions
                            
                             el = elemPattern.Match(rLine).Value;
 
-
-
-
                             _elements.Add(new Element(elemPattern.Match(rLine).Value,
                                                           ParseValue(concAncMDAPattern.Matches(rLine)[0].Value, "concentration"),
                                                           ParseValue(errPattern.Match(rLine, 13).Value, "error"),
                                                           ParseValue(concAncMDAPattern.Matches(rLine)[1].Value, "mda")));
 
+                            Debug.WriteLine($"Inserted element:");
                             Debug.WriteLine($"{_elements.Last().ToString()}");
 
 
@@ -128,7 +129,6 @@ namespace Extensions
                         if (isHeadOfFile)
                             FileHead.AppendLine(rLine);
                     }
-                    tr.Close();
                 }
 
                 Debug.WriteLine($"Parsed sample:   {path}");
