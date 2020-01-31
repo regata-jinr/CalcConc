@@ -61,15 +61,15 @@ namespace Extensions
                 cols.Add("Образец", typeof(string));
                 cols.Add("Вес, гр", typeof(double));
                 cols.Add("Элемент", typeof(string));
-                cols.Add("Концентранция, uг/гр", typeof(double));
+                cols.Add("Концентранция, μг/гр", typeof(double));
                 cols.Add("Погрешность, %", typeof(double));
-                cols.Add("МДА, uг/гр", typeof(double));
+                cols.Add("МДА, μг/гр", typeof(double));
                 cols.Add("Относительная ошибка, %", typeof(double));
                 cols.Add("NumSort", typeof(int));
                 resColumns.Add("Элемент", typeof(string));
-                resColumns.Add("Концентранция,uг/гр", typeof(double));
+                resColumns.Add("Концентранция,μг/гр", typeof(double));
                 resColumns.Add("Погрешность, %", typeof(double));
-                resColumns.Add("МДА, uг/гр", typeof(double));
+                resColumns.Add("МДА, μг/гр", typeof(double));
                 resColumns.Add("numSort", typeof(int));
 
             }
@@ -86,15 +86,15 @@ namespace Extensions
                 cols.Add("Sample", typeof(string));
                 cols.Add("Weight, gr", typeof(double));
                 cols.Add("Element", typeof(string));
-                cols.Add("Concentration, ug/gr", typeof(double));
+                cols.Add("Concentration, μg/gr", typeof(double));
                 cols.Add("Error, %", typeof(double));
-                cols.Add("MDC, ug/gr", typeof(double));
+                cols.Add("MDC, μg/gr", typeof(double));
                 cols.Add("Relative error, %", typeof(double));
                 cols.Add("NumSort", typeof(int));
                 resColumns.Add("Element", typeof(string));
-                resColumns.Add("Concentration, ug/gr", typeof(double));
+                resColumns.Add("Concentration, μg/gr", typeof(double));
                 resColumns.Add("Error, %", typeof(double));
-                resColumns.Add("MDC, ug/gr", typeof(double));
+                resColumns.Add("MDC, μg/gr", typeof(double));
                 resColumns.Add("numSort", typeof(int));
             };
         }

@@ -1124,8 +1124,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
                                 sw.WriteLine("     элемент	концентр.,	погр.,	предел")
-                                sw.WriteLine("                  uг/гр       %   обнаруж.,")
-                                sw.WriteLine("                                      uг/гр")
+                                sw.WriteLine("                  μг/гр       %   обнаруж.,")
+                                sw.WriteLine("                                      μг/гр")
                                 sw.WriteLine()
                             Else
                                 sw.WriteLine("*****            CALCULATION CONCENTRATIONS OF ELEMENTS             *****")
@@ -1145,8 +1145,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
                                 sw.WriteLine("		element	concentr.,	err.,	detection")
-                                sw.WriteLine("                  ug/gr      %      limit.,")
-                                sw.WriteLine("									    ug/gr")
+                                sw.WriteLine("                  μg/gr      %      limit.,")
+                                sw.WriteLine("									    μg/gr")
                                 sw.WriteLine()
                             End If
                             For i As Integer = 0 To conTable.Rows.Count - 1
@@ -1166,7 +1166,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("		element activity,	err.,	detection")
 
                                 sw.WriteLine("                uCi/gr       %    limit.,")
-                                sw.WriteLine("                                    ug/gr")
+                                sw.WriteLine("                                    μg/gr")
                             Else
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine("*****                ELEMENTS WITHOUT CONCENTRATIONS                *****")
@@ -1174,7 +1174,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine()
                                 sw.WriteLine("		element	activity.,	err.,	detection")
                                 sw.WriteLine("                  uCi/gr       %    limit.,")
-                                sw.WriteLine("                                      ug/gr")
+                                sw.WriteLine("                                      μg/gr")
                             End If
                             sw.WriteLine()
                             For i As Integer = 0 To actTable.Rows.Count - 1
@@ -1287,15 +1287,15 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Тип измерений  :  " + measurements_type + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Групповой стандарт  :  " + file_name_Grup_Stand_SafeFileName + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "элемент" + vbTab + "концентр.," + vbTab + "погр.," + vbTab + "предел" + vbCrLf, True)
-                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "uг/гр" + vbTab + vbTab + "%" + vbTab + "обнаруж.," + vbCrLf, True)
-                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + "uг/гр" + vbCrLf + vbCrLf, True)
+                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "μг/гр" + vbTab + vbTab + "%" + vbTab + "обнаруж.," + vbCrLf, True)
+                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + "μг/гр" + vbCrLf + vbCrLf, True)
                 Else
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Concentrations of elements in sample  :  " + sample_title_Issl_Obr + vbCrLf + vbCrLf, False) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Measuremnts type  :  " + measurements_type + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Group standard  :  " + file_name_Grup_Stand_SafeFileName + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "element" + vbTab + "concentr.," + vbTab + "uncer.," + vbTab + "detect." + vbCrLf, True)
-                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "ug/gr" + vbTab + vbTab + "%" + vbTab + "limit," + vbCrLf, True)
-                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + "ug/gr" + vbCrLf + vbCrLf, True)
+                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "μg/gr" + vbTab + vbTab + "%" + vbTab + "limit," + vbCrLf, True)
+                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + "μg/gr" + vbCrLf + vbCrLf, True)
                 End If
 
                 For i = 0 To arr_length_count_Conc - 1
@@ -2089,8 +2089,8 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
                 '    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Концентрации элементов в образце " + sample_title_Issl_Obr + "." + vbCrLf + vbCrLf, False) 'vbCrLf - символ перевода строки
                 '    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "элемент" + vbTab + "концентрация," + vbTab + "погрешность," + vbTab + "предел" + vbCrLf, True)
-                '    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "uг/гр" + vbTab + vbTab + "%" + vbTab + vbTab + "обнаружения," + vbCrLf, True)
-                '    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + vbTab + "uг/гр" + vbCrLf, True)
+                '    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "μг/гр" + vbTab + vbTab + "%" + vbTab + vbTab + "обнаружения," + vbCrLf, True)
+                '    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + vbTab + "μг/гр" + vbCrLf, True)
                 '    For i = 0 To arr_length_count_Conc - 1
                 '        My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, nucl(i) + vbTab + conc(i, 0).ToString("E2", CultureInfo.CreateSpecificCulture("en-US")) + vbTab + conc(i, 1).ToString("F2", CultureInfo.CreateSpecificCulture("en-US")) + vbCrLf, True)
                 '    Next

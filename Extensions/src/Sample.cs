@@ -107,9 +107,9 @@ namespace Extensions
                             break;
 
                         if (rLine.StartsWith("Вес") || rLine.StartsWith("Weight") || rLine.StartsWith("Mass"))
-                            Weight = ParseValue(rLine.Split(':')[1].Replace("gram", "").Replace("шт.", "").Trim(), "weight");
+                            Weight = ParseValue(rLine.Split(':')[1].Replace("μgram", "").Replace("шт.", "").Trim(), "weight");
 
-                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine) && !rLine.Contains("Вес") && !rLine.Contains("gram") && !rLine.Contains("шт"))
+                        if (elemPattern.IsMatch(rLine) && concAncMDAPattern.IsMatch(rLine) && errPattern.IsMatch(rLine) && !rLine.Contains("Вес") && !rLine.Contains("μgram") && !rLine.Contains("шт"))
                         {
                            
                             el = elemPattern.Match(rLine).Value;
@@ -197,7 +197,7 @@ namespace Extensions
             using (TextWriter file = File.CreateText(path))
             {
                 if (!keepHead)
-                    file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ", "МАССОВЫХ ДОЛЕЙ").Replace("концентр.,", "масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   uг/гр", "грамм   ").Replace("    ug/gr", "gram")); // sorry :(
+                    file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ", "МАССОВЫХ ДОЛЕЙ").Replace("концентр.,", "масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   μг/гр", "мк грамм   ").Replace("    μg/gr", "μgram")); // sorry :(
                 else file.Write(FileHead);
 
                 foreach (var el in Elements)

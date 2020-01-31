@@ -18,9 +18,9 @@ Public Class Form_Intermediate_Table_Concentration
         Try
             Dim unit As String = ""
             If Not Form_Main.isFilters Then
-                unit = "ug/g"
+                unit = "μg/g"
             Else
-                unit = "gram"
+                unit = "μgram"
             End If
             ConcForms.TableContentLoad(DataGridView_Intermediate_Table_Concentration, False, Form_Main.GlobalNuclidsForCon, Form_Main.conDict, $"Conc, {unit}", $"MDC, {unit}")
 
@@ -66,7 +66,7 @@ Public Class Form_Intermediate_Table_Concentration
 
             Dim valuesRange As New Dictionary(Of String, String())
             Dim unit As String = ""
-            unit = "Conc, ug/g"
+            unit = "Conc, μg/g"
             valuesRange = SaveToExcel(DataGridView_Intermediate_Table_Concentration, SaveInterTable, False, unit)
             If IsNothing(valuesRange) Then Exit Sub
 
