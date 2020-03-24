@@ -14,7 +14,7 @@
             Dim unit As String = ""
             unit = "uCi/gr"
 
-            ConcForms.TableContentLoad(DataGridView_WoConcElements, False, Form_Main.GlobalNuclidsForAct, Form_Main.actDict, $"Activity, {unit}", $"MDC, {unit}")
+            ConcForms.TableContentLoad(DataGridView_WoConcElements, False, Form_Main.GlobalNuclidsForAct, Form_Main.actDict, $"Activity, {unit}", $"MDA, {unit}")
             Form_Main.LocalizedForm()
             DataGridView_WoConcElements.ClearSelection()
         Catch ex As Exception

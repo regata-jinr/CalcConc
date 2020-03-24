@@ -185,7 +185,9 @@ namespace Extensions
             }
             return lhs;
         }
-
+        
+        // FIXME: change Conc to Mass for filters
+        // FIXME: finally fix auto update!
         public void Save(string path = "", bool keepHead = false)
         {
             Debug.WriteLine($"Starts save sample to file");
@@ -197,7 +199,7 @@ namespace Extensions
             using (TextWriter file = File.CreateText(path))
             {
                 if (!keepHead)
-                    file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ", "МАССОВЫХ ДОЛЕЙ").Replace("концентр.,", "масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   μг/гр", "мк грамм   ").Replace("    μg/gr", "μgram")); // sorry :(
+                    file.Write(FileHead.Replace("КОНЦЕНТРАЦИЙ  ", "МАССОВЫХ ДОЛЕЙ").Replace("концентр.,", "масса,   ").Replace("ОБРАЗЦЕ", "ФИЛЬТРЕ").Replace("OF ELEMENTS IN SAMPLE", "OF ELEMENTS IN FILTER").Replace("   μг/гр", "мк грамм   ").Replace("    μg/g", "μgram")); // sorry :(
                 else file.Write(FileHead);
 
                 foreach (var el in Elements)

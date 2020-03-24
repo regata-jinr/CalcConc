@@ -86,15 +86,15 @@ namespace Extensions
                 cols.Add("Sample", typeof(string));
                 cols.Add("Weight, gr", typeof(double));
                 cols.Add("Element", typeof(string));
-                cols.Add("Concentration, μg/gr", typeof(double));
+                cols.Add("Concentration, μg/g", typeof(double));
                 cols.Add("Error, %", typeof(double));
-                cols.Add("MDC, μg/gr", typeof(double));
+                cols.Add("MDC, μg/g", typeof(double));
                 cols.Add("Relative error, %", typeof(double));
                 cols.Add("NumSort", typeof(int));
                 resColumns.Add("Element", typeof(string));
-                resColumns.Add("Concentration, μg/gr", typeof(double));
+                resColumns.Add("Concentration, μg/g", typeof(double));
                 resColumns.Add("Error, %", typeof(double));
-                resColumns.Add("MDC, μg/gr", typeof(double));
+                resColumns.Add("MDC, μg/g", typeof(double));
                 resColumns.Add("numSort", typeof(int));
             };
         }

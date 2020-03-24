@@ -183,7 +183,7 @@
         For ci As Integer = 3 To DataGridViewForCheckGRS.Columns.Count - 1
             For Each row As DataGridViewRow In DataGridViewForCheckGRS.Rows
                 If (String.IsNullOrEmpty(row.Cells(ci).Value.ToString)) Then Continue For
-                If Math.Abs(Decimal.Parse(row.Cells(ci).Value.ToString)) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Относительная") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
+                If Math.Abs(Decimal.Parse(row.Cells(ci).Value.ToString, System.Globalization.NumberStyles.Float)) > NumericUpDownPerc.Value And DataGridViewForCheckGRS.Columns(ci).HeaderText.Contains("Относительная") Then HiddenElements.Add(DataGridViewForCheckGRS.Columns(ci).HeaderText.Split(vbCrLf)(0))
             Next
         Next
 

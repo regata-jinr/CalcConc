@@ -1145,8 +1145,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
                                 sw.WriteLine("		element	concentr.,	err.,	detection")
-                                sw.WriteLine("                  μg/gr      %      limit.,")
-                                sw.WriteLine("									    μg/gr")
+                                sw.WriteLine("                  μg/g      %      limit.,")
+                                sw.WriteLine("									    μg/g")
                                 sw.WriteLine()
                             End If
                             For i As Integer = 0 To conTable.Rows.Count - 1
@@ -1164,17 +1164,16 @@ a:                                  currentRow_copy = currentRow ' обход X 
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
                                 sw.WriteLine("		element activity,	err.,	detection")
-
-                                sw.WriteLine("                uCi/gr       %    limit.,")
-                                sw.WriteLine("                                    μg/gr")
+                                sw.WriteLine("                μCi/gr       %    limit.,")
+                                sw.WriteLine("                                    μCi/gr")
                             Else
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine("*****                ELEMENTS WITHOUT CONCENTRATIONS                *****")
                                 sw.WriteLine("*************************************************************************")
                                 sw.WriteLine()
                                 sw.WriteLine("		element	activity.,	err.,	detection")
-                                sw.WriteLine("                  uCi/gr       %    limit.,")
-                                sw.WriteLine("                                      μg/gr")
+                                sw.WriteLine("                  μCi/gr       %    limit.,")
+                                sw.WriteLine("                                      μCi/gr")
                             End If
                             sw.WriteLine()
                             For i As Integer = 0 To actTable.Rows.Count - 1
@@ -1294,8 +1293,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Measuremnts type  :  " + measurements_type + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "Group standard  :  " + file_name_Grup_Stand_SafeFileName + vbCrLf + vbCrLf, True) 'vbCrLf - символ перевода строки
                     My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, "element" + vbTab + "concentr.," + vbTab + "uncer.," + vbTab + "detect." + vbCrLf, True)
-                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "μg/gr" + vbTab + vbTab + "%" + vbTab + "limit," + vbCrLf, True)
-                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + "μg/gr" + vbCrLf + vbCrLf, True)
+                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + "μg/g" + vbTab + vbTab + "%" + vbTab + "limit," + vbCrLf, True)
+                    My.Computer.FileSystem.WriteAllText(SaveFileDialog_Conc_Elem.FileName, vbTab + vbTab + vbTab + vbTab + "μg/g" + vbCrLf + vbCrLf, True)
                 End If
 
                 For i = 0 To arr_length_count_Conc - 1
