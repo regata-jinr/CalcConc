@@ -230,7 +230,6 @@ Public Class Form_Main
             FormCheckGRS.BExportCheckTable.Text = "Сохранить в Excel"
             FormCheckGRS.CheckBoxPer.Text = "Показывать только расхождения более"
 
-            Label1.Text = "Точность округления%:"
 
         Else
 
@@ -302,8 +301,6 @@ Public Class Form_Main
             Me.GroupBox_L_Aktivnosti.Text = "Recalculation of standards activities"
             Me.GroupBox_GroupStandart.Text = "Group standard"
             Me.GroupBox_Concentration.Text = "Concentration"
-            Me.Label1.Text = "Rounding accuracy %:"
-            Me.TextBoxAcc.Text = "1"
             Me.Text = "Calculation of concentration "
             Me.SavePereschAktStand_MON_ToolStripMenuItem.Text = "Save counted file(s) of standards activity"
             Me.OpenFileGrupStand_ToolStripMenuItem.Text = "Open file of group standard"
@@ -367,7 +364,6 @@ Public Class Form_Main
             FormCheckGRS.BExportCheckTable.Text = "Export to Excel"
             FormCheckGRS.CheckBoxPer.Text = "Show only values exceeding"
 
-            Label1.Text = "Rounding accuracy %:"
         End If
 
         Me.Text += Application.ProductVersion
@@ -1023,7 +1019,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                             End If
                             Exit Sub
                         End If
-
+                        ' measurements_type <> "КЖИ" And measurements_type <> "SLI" And
                         If measurements_type <> "КЖИ-1" And measurements_type <> "SLI-1" And
                    measurements_type <> "КЖИ-2" And measurements_type <> "SLI-2" And
                    measurements_type <> "ДЖИ-1" And measurements_type <> "LLI-1" And
@@ -1446,7 +1442,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Dim relInd, meanAct, std As Double
                 Dim elem As Regex = New Regex("[A-Z]{1,2}[-]\d{2,3}[m]{0,1}")
                 Dim req As Regex = New Regex("\d[.]\d{3}")
-                Dim act As Regex = New Regex("\d[.]\d{6}E[+-]\d{3}")
+                Dim act As Regex = New Regex("\d[.]\d{6,7}E[+-]\d{2,3}")
                 Dim num As Regex = New Regex("\d{2,3}")
                 'ref
                 Dim PasConc, PassErr As Double
@@ -1456,8 +1452,8 @@ a:                                  currentRow_copy = currentRow ' обход X 
                 Dim energy, output, MdaNucl, MdaLine, Activity As Double
                 'Dim MdaNucl As String = ""
                 Dim enrg_otpt As Regex = New Regex("\d{1,5}[.]\d{2}")
-                Dim mdln_act As Regex = New Regex("\d[.]\d{4}E[+-]\d{3}")
-                Dim mdncl As Regex = New Regex("\d[.]\d{2}E[+-]\d{3}")
+                Dim mdln_act As Regex = New Regex("\d[.]\d{4,5}E[+-]\d{2,3}")
+                Dim mdncl As Regex = New Regex("\d[.]\d{2,3}E[+-]\d{2,3}")
                 Dim element As String = ""
                 Dim FileInfo As New ArrayList
                 Dim excp As New Dictionary(Of String, String)
@@ -1571,6 +1567,7 @@ a:                                  currentRow_copy = currentRow ' обход X 
                     Next
                 End If
                 If Not Split(GRSName, "-").Contains(NameSamp) Then GRSName += NameSamp & "-"
+                If Not mesType.Contains("-") Then mesType = String.Join("-", mesType, "2")
                 Return {NameSamp, mesType, experimentator, id, geometry, weight}
             Else
                 MsgBox("Неверный тип файла")
@@ -2470,7 +2467,7 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
                 If values(0) = "CE-141" Then xCE141LLI2.Add(sampleName, conc)
                 If values(0) = "SB-124" Then ySB124LLI2.Add(sampleName, conc)
                 If values(0) = "PA-233" Then yPA233LLI2.Add(sampleName, conc)
-            ElseIf Type = "SLI-2" Then
+            ElseIf Type.Contains("SLI") Then
                 If values(0) = "NA-24" Then xNA24SLI2.Add(sampleName, conc)
             End If
         Catch ex As NullReferenceException
@@ -2537,7 +2534,6 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
 
     Private Sub B_TablConcElemPromezh_CON_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles B_TablConcElemPromezh_CON.Click
         Try
-            My.Settings.acc = TextBoxAcc.Text
             Me.Enabled = False
             Debug.WriteLine("Show Intermediate Table Concentration:")
             Form_Intermediate_Table_Concentration.Show()
@@ -2742,12 +2738,14 @@ a:                                      data_ident_RPT(currentRow, nuclide, elem
             Debug.WriteLine($"<Type key={Chr(34)}{c.Name}{Chr(34)} value={Chr(34)}{c.Text}{Chr(34)}/>")
         Next
 
+        TypeEngRu.Add("SLI", "КЖИ")
         TypeEngRu.Add("SLI-1", "КЖИ-1")
         TypeEngRu.Add("SLI-2", "КЖИ-2")
         TypeEngRu.Add("LLI-1", "ДЖИ-1")
         TypeEngRu.Add("LLI-2", "ДЖИ-2")
         TypeEngRu.Add("-", "-")
 
+        TypeRuEng.Add("КЖИ", "SLI")
         TypeRuEng.Add("КЖИ-1", "SLI-1")
         TypeRuEng.Add("КЖИ-2", "SLI-2")
         TypeRuEng.Add("ДЖИ-1", "LLI-1")

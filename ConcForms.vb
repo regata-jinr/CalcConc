@@ -311,7 +311,7 @@ Module ConcForms
                 Try
                     DataGridViewTable(columnMap(type), rown).Value = System.IO.Path.GetFileName(conFileName)
                     If conc <> 0 Then
-                        DataGridViewTable(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type), rown).Value = Rounding(conc, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                        DataGridViewTable(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type), rown).Value = Rounding(conc, err)
                     Else
                         DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type)).Value = ""
                     End If
@@ -322,12 +322,12 @@ Module ConcForms
                         DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = ""
                     End If
                     If lim <> 0 Then
-                        DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                        DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, err)
                     Else
                         DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type)).Value = ""
                     End If
 
-                    DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, Convert.ToDecimal(Form_Main.TextBoxAcc.Text) / 100)
+                    DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, err)
                     'If (mark = "*" Or mark = "&") And Not FinalFlag Then
                     '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
                     '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.LightGray

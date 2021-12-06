@@ -91,8 +91,6 @@ Partial Class Form_Main
         Me.GroupBox_Concentration = New System.Windows.Forms.GroupBox()
         Me.ButtonConcEditor = New System.Windows.Forms.Button()
         Me.ButtonShowWOConc = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBoxAcc = New System.Windows.Forms.TextBox()
         Me.OpenFileDialog_ChooseBlankFile = New System.Windows.Forms.OpenFileDialog()
         Me.OpenFileDialog_ChooseFilterForTables = New System.Windows.Forms.OpenFileDialog()
         Me.MenuStrip.SuspendLayout()
@@ -545,8 +543,6 @@ Partial Class Form_Main
         Me.GroupBox_Concentration.BackColor = System.Drawing.Color.Lavender
         Me.GroupBox_Concentration.Controls.Add(Me.ButtonConcEditor)
         Me.GroupBox_Concentration.Controls.Add(Me.ButtonShowWOConc)
-        Me.GroupBox_Concentration.Controls.Add(Me.Label1)
-        Me.GroupBox_Concentration.Controls.Add(Me.TextBoxAcc)
         Me.GroupBox_Concentration.Controls.Add(Me.B_TablConcElemOkonchat_CON)
         Me.GroupBox_Concentration.Controls.Add(Me.L_SLI_Source)
         Me.GroupBox_Concentration.Controls.Add(Me.B_TablConcElemPromezh_CON)
@@ -590,24 +586,6 @@ Partial Class Form_Main
         Me.ButtonShowWOConc.TabIndex = 24
         Me.ButtonShowWOConc.Text = "label"
         Me.ButtonShowWOConc.UseVisualStyleBackColor = False
-        '
-        'Label1
-        '
-        Me.Label1.Location = New System.Drawing.Point(423, 233)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(212, 20)
-        Me.Label1.TabIndex = 23
-        Me.Label1.Text = "Rounding accuracy %:"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'TextBoxAcc
-        '
-        Me.TextBoxAcc.Location = New System.Drawing.Point(641, 230)
-        Me.TextBoxAcc.Name = "TextBoxAcc"
-        Me.TextBoxAcc.Size = New System.Drawing.Size(47, 20)
-        Me.TextBoxAcc.TabIndex = 22
-        Me.TextBoxAcc.Text = "1"
-        Me.TextBoxAcc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'OpenFileDialog_ChooseBlankFile
         '
@@ -709,8 +687,6 @@ Partial Class Form_Main
     Friend WithEvents GroupBox_L_Aktivnosti As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox_GroupStandart As System.Windows.Forms.GroupBox
     Friend WithEvents GroupBox_Concentration As System.Windows.Forms.GroupBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents TextBoxAcc As TextBox
     Friend WithEvents LangEngToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ButtonShowWOConc As Button
     Friend WithEvents FiltersToolStripMenuItem As ToolStripMenuItem

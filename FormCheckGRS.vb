@@ -1,4 +1,6 @@
-﻿Public Class FormCheckGRS
+﻿Imports Extensions.Numerics
+
+Public Class FormCheckGRS
     Public Nuclids As List(Of String) = New List(Of String)
     Public UniqElements As List(Of String) = New List(Of String)
     Public CheckGRSSrc As New DataTable
@@ -115,7 +117,8 @@
                             chiSq = (1 / pasConc) * (calcConc - pasConc) * (calcConc - pasConc)
                             If String.IsNullOrEmpty(CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "Паспортная концентрация, mg/kg")) Then chiSq = 0.0
                             If chiSq <> Double.NaN And chiSq <> Double.PositiveInfinity And chiSq <> Double.NegativeInfinity Then
-                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат") = ConcForms.Rounding(chiSq, 0.02)
+                                CheckGRSSrc.Rows.Find(grsCheckRow(0))(Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат") = Rounding(chiSq, 0.02)
+
                             End If
                             elementSum = Split(grsRow.Cells(0).Value, "_")(2) & vbCrLf & "хи квадрат"
                         Catch ex As Exception

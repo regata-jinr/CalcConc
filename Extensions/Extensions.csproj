@@ -49,6 +49,7 @@
     <Compile Include="src\ConcEditor.Designer.cs">
       <DependentUpon>ConcEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Numerics.cs" />
     <Compile Include="src\Sample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
