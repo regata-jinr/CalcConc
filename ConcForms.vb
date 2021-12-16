@@ -309,25 +309,24 @@ Module ConcForms
                     Exit Sub
                 End Try
                 Try
-                    DataGridViewTable(columnMap(type), rown).Value = System.IO.Path.GetFileName(conFileName)
+                    DataGridViewTable(columnMap(type), rown).Value = IO.Path.GetFileName(conFileName)
                     If conc <> 0 Then
-                        DataGridViewTable(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type), rown).Value = Rounding(conc, err)
+                        DataGridViewTable(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type), rown).Value = Extensions.Numerics.Rounding(conc, err)
                     Else
                         DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & MainUnit & vbCrLf & type)).Value = ""
                     End If
 
                     If err <> 0 Then
-                        DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = Math.Ceiling(err)
+                        DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = err
                     Else
                         DataGridViewTable(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type), rown).Value = ""
                     End If
                     If lim <> 0 Then
-                        DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, err)
+                        DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = lim
                     Else
                         DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type)).Value = ""
                     End If
 
-                    DataGridViewTable(columnMap(nucl & vbCrLf & MDAUnit & vbCrLf & type), rown).Value = Rounding(lim, err)
                     'If (mark = "*" Or mark = "&") And Not FinalFlag Then
                     '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Conc, mg/kg" & vbCrLf & type)).Style.BackColor = Color.LightGray
                     '    DataGridViewTable.Rows(rown).Cells(columnMap(nucl & vbCrLf & "Err, %" & vbCrLf & type)).Style.BackColor = Color.LightGray
@@ -570,7 +569,7 @@ Module ConcForms
             End While
 
             If num <> 0 Then
-                While Math.Abs(1 - (num / Math.Round(num, dig))) >= prec
+                While Math.Abs(1 - (num / Math.Round(num, dig))) >= prec * num / 100
                     dig += 1
                 End While
             End If
